@@ -42,7 +42,7 @@ const menuItems = [
   { icon: Zap, text: 'দ্রুত প্র্যাকটিস', href: '/dashboard/practice-exam' },
   { icon: Users, text: 'চর্চা কমিউনিটি', href: '/dashboard/feed' },
   { icon: Archive, text: 'আর্কাইভ', href: '/dashboard/question-bank' },
-  { icon: History, text: 'হিস্ট্রি', href: '#' },
+  { icon: History, text: 'হিস্ট্রি', href: '/dashboard/history' },
   { icon: Trophy, text: 'লিডারবোর্ড', href: '#' },
   { icon: User, text: 'প্রোফাইল', href: '#' },
 ];
