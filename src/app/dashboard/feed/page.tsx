@@ -118,7 +118,7 @@ export default function FeedPage() {
           <div className="p-4">
             <p className="text-sm text-muted-foreground mb-2">1 Like</p>
             <div className="border-t border-b border-border py-1 flex justify-around">
-                <Button variant="ghost" className="w-full text-muted-foreground hover:text-foreground">
+                <Button variant="ghost" className="w-full text-muted-foreground hover:text-foreground hover:bg-transparent">
                     <ThumbsUp className="h-5 w-5 mr-2"/>
                     Like
                 </Button>
