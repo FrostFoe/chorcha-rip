@@ -43,7 +43,7 @@ const menuItems = [
   { icon: Users, text: 'চর্চা কমিউনিটি', href: '/dashboard/feed' },
   { icon: Archive, text: 'আর্কাইভ', href: '/dashboard/question-bank' },
   { icon: History, text: 'হিস্ট্রি', href: '/dashboard/history' },
-  { icon: Trophy, text: 'লিডারবোর্ড', href: '#' },
+  { icon: Trophy, text: 'লিডারবোর্ড', href: '/dashboard/leaderboard' },
   { icon: User, text: 'প্রোফাইল', href: '#' },
 ];
 
