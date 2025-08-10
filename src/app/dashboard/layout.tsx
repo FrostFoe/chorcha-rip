@@ -35,20 +35,30 @@ import {
   Wallet,
   Zap,
 } from 'lucide-react';
-import React, { Children } from 'react';
+import React from 'react';
 import { Button } from '@/components/ui/button';
 import { DDIcon } from '@/components/icons';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 
 const menuItems = [
-  { icon: LayoutDashboard, text: 'ড্যাশবোর্ড', active: true },
-  { icon: ClipboardList, text: 'মক পরীক্ষা' },
-  { icon: Zap, text: 'দ্রুত প্র্যাকটিস' },
-  { icon: Users, text: 'চর্চা কমিউনিটি' },
-  { icon: Archive, text: 'আর্কাইভ' },
-  { icon: History, text: 'হিস্ট্রি' },
-  { icon: Trophy, text: 'লিডারবোর্ড' },
-  { icon: User, text: 'প্রোফাইল' },
+  { icon: LayoutDashboard, text: 'ড্যাশবোর্ড', href: '/dashboard', active: true },
+  { icon: ClipboardList, text: 'মক পরীক্ষা', href: '#' },
+  { icon: Zap, text: 'দ্রুত প্র্যাকটিস', href: '#' },
+  { icon: Users, text: 'চর্চা কমিউনিটি', href: '#' },
+  { icon: Archive, text: 'আর্কাইভ', href: '#' },
+  { icon: History, text: 'হিস্ট্রি', href: '#' },
+  { icon: Trophy, text: 'লিডারবোর্ড', href: '#' },
+  { icon: User, text: 'প্রোফাইল', href: '#' },
 ];
 
 export default function DashboardLayout({
@@ -56,43 +66,78 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const router = useRouter();
+
+  const handleLogout = () => {
+    // In a real app, you'd clear auth tokens here
+    router.push('/');
+  };
+
   return (
     <SidebarProvider>
       <Sidebar>
         <SidebarHeader className="p-4">
-          <div className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2">
             <DDIcon className="h-8 w-8 text-primary" />
             <span className="text-xl font-bold">চর্চা</span>
-          </div>
+          </Link>
         </SidebarHeader>
         <SidebarContent>
           <SidebarMenu>
             {menuItems.map((item, index) => (
               <SidebarMenuItem key={index}>
-                <SidebarMenuButton
-                  isActive={item.active}
-                  className="gap-4 font-body"
-                >
-                  <item.icon className="h-5 w-5" />
-                  <span>{item.text}</span>
-                </SidebarMenuButton>
+                <Link href={item.href}>
+                  <SidebarMenuButton
+                    isActive={item.active}
+                    className="gap-4 font-body"
+                  >
+                    <item.icon className="h-5 w-5" />
+                    <span>{item.text}</span>
+                  </SidebarMenuButton>
+                </Link>
               </SidebarMenuItem>
             ))}
           </SidebarMenu>
         </SidebarContent>
         <div className="mt-auto p-4">
-          <div className="flex items-center gap-3 p-2 rounded-lg hover:bg-muted">
-            <Avatar className="h-10 w-10">
-              <AvatarImage src="https://placehold.co/40x40.png" />
-              <AvatarFallback>SB</AvatarFallback>
-            </Avatar>
-            <div className="flex-1">
-              <p className="text-sm font-semibold">Sysmad BCF-19</p>
-            </div>
-          </div>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <div className="flex items-center gap-3 p-2 rounded-lg hover:bg-muted cursor-pointer">
+                <Avatar className="h-10 w-10">
+                  <AvatarImage
+                    src="https://placehold.co/40x40.png"
+                    alt="User avatar"
+                  />
+                  <AvatarFallback>SB</AvatarFallback>
+                </Avatar>
+                <div className="flex-1">
+                  <p className="text-sm font-semibold">Sysmad BCF-19</p>
+                </div>
+              </div>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-56" align="end" forceMount>
+              <DropdownMenuLabel className="font-normal">
+                <div className="flex flex-col space-y-1">
+                  <p className="text-sm font-medium leading-none">
+                    Sysmad BCF-19
+                  </p>
+                  <p className="text-xs leading-none text-muted-foreground">
+                    test@example.com
+                  </p>
+                </div>
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={handleLogout}>
+                <LogOut className="mr-2 h-4 w-4" />
+                <span>Log out</span>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </Sidebar>
       <SidebarInset>{children}</SidebarInset>
     </SidebarProvider>
   );
 }
+
+    

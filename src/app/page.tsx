@@ -17,6 +17,7 @@ import {
   Star,
   Youtube,
 } from 'lucide-react';
+import Link from 'next/link';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
@@ -30,9 +31,9 @@ import {
 } from '@/components/ui/sheet';
 
 const navLinks = [
-  { icon: Home, text: 'প্রচ্ছদ' },
-  { icon: BookOpen, text: 'মক পরীক্ষা' },
-  { icon: Star, text: 'লিডারবোর্ড' },
+  { icon: Home, text: 'প্রচ্ছদ', href: '/' },
+  { icon: BookOpen, text: 'মক পরীক্ষা', href: '#' },
+  { icon: Star, text: 'লিডারবোর্ড', href: '#' },
 ];
 
 const examCategories = [
@@ -156,25 +157,27 @@ export default function HomePage() {
   return (
     <div className="bg-background text-foreground">
       <header className="container mx-auto px-4 py-4 flex justify-between items-center">
-        <div className="flex items-center gap-2">
+        <Link href="/" className="flex items-center gap-2">
           <DDIcon className="h-8 w-8 text-primary" />
           <span className="text-xl font-bold">চর্চা</span>
-        </div>
+        </Link>
         <nav className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.text}
-              href="#"
+              href={link.href}
               className="flex items-center gap-2 text-sm text-gray-300 hover:text-white transition-colors"
             >
               <link.icon className="h-4 w-4" />
               {link.text}
-            </a>
+            </Link>
           ))}
         </nav>
         <div className="hidden md:block">
-          <Button>
-            লগইন/রেজিস্ট্রেশন <ArrowRight className="ml-2 h-4 w-4" />
+          <Button asChild>
+            <Link href="/sign-in">
+              লগইন/রেজিস্ট্রেশন <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
           </Button>
         </div>
         <div className="md:hidden">
@@ -186,24 +189,26 @@ export default function HomePage() {
             </SheetTrigger>
             <SheetContent side="left">
               <div className="flex flex-col gap-8 p-8">
-                <div className="flex items-center gap-2">
+                <Link href="/" className="flex items-center gap-2">
                   <DDIcon className="h-8 w-8 text-primary" />
                   <span className="text-xl font-bold">চর্চা</span>
-                </div>
+                </Link>
                 <nav className="flex flex-col gap-6">
                   {navLinks.map((link) => (
-                    <a
+                    <Link
                       key={link.text}
-                      href="#"
+                      href={link.href}
                       className="flex items-center gap-3 text-lg text-gray-300 hover:text-white"
                     >
                       <link.icon className="h-5 w-5" />
                       {link.text}
-                    </a>
+                    </Link>
                   ))}
                 </nav>
-                <Button>
-                  লগইন/রেজিস্ট্রেশন <ArrowRight className="ml-2 h-4 w-4" />
+                <Button asChild>
+                  <Link href="/sign-in">
+                    লগইন/রেজিস্ট্রেশন <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
                 </Button>
               </div>
             </SheetContent>
@@ -457,8 +462,10 @@ export default function HomePage() {
                 <h2 className="text-2xl font-semibold mb-2">এখনই যুক্ত হও বাংলাদেশের সবচেয়ে বড় প্র্যাকটিস প্ল্যাটফর্মে</h2>
                 <p className="text-muted-foreground">বাংলাদেশের প্রথম অ্যাপ্লিকেশন যেখানে তুমি পাবে তোমার প্রয়োজন অনুযায়ী সবকিছু।</p>
               </div>
-              <Button size="lg" className="flex-shrink-0">
-                জয়েন করো এখনই <ArrowRight className="ml-2 h-4 w-4" />
+              <Button size="lg" className="flex-shrink-0" asChild>
+                <Link href="/sign-in">
+                  জয়েন করো এখনই <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
               </Button>
            </div>
         </section>
@@ -468,10 +475,10 @@ export default function HomePage() {
         <div className="container mx-auto px-4 py-16">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
             <div className="col-span-2 lg:col-span-2">
-              <div className="flex items-center gap-2 mb-4">
+              <Link href="/" className="flex items-center gap-2 mb-4">
                 <DDIcon className="h-8 w-8 text-primary" />
                 <span className="text-xl font-bold">চর্চা</span>
-              </div>
+              </Link>
               <div className="flex gap-4 mb-4">
                 <a href="#" className="text-gray-400 hover:text-white"><Instagram /></a>
                 <a href="#" className="text-gray-400 hover:text-white"><Youtube /></a>
@@ -515,3 +522,4 @@ export default function HomePage() {
   );
 }
 
+    
