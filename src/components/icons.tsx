@@ -68,35 +68,121 @@ export const GoogleIcon = (props: SVGProps<SVGSVGElement>) => (
 
 
 // Institution Icons
-const createIcon = (href: string) => (props: SVGProps<SVGSVGElement>) => (
+const AfmcIcon = (props: SVGProps<SVGSVGElement>) => (
     <svg {...props} width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <image href={href} width="32" height="32" />
+        <image href="https://storage.googleapis.com/stey-assets/afmc.png" width="32" height="32" />
     </svg>
 );
-
-export const SatCollegeIcon = createIcon("https://placehold.co/32x32/ff6347/ff6347.png");
-export const BupIcon = createIcon("https://placehold.co/32x32/ffeb3b/ffeb3b.png");
-export const MaritimeIcon = createIcon("https://placehold.co/32x32/bdbdbd/bdbdbd.png");
-export const BuetIcon = createIcon("https://placehold.co/32x32/f44336/f44336.png");
-export const GucchoIcon = createIcon("https://placehold.co/32x32/2196f3/2196f3.png");
-export const RuetIcon = createIcon("https://placehold.co/32x32/ffc107/ffc107.png");
-export const KuetIcon = createIcon("https://placehold.co/32x32/4caf50/4caf50.png");
-export const CuetIcon = createIcon("https://placehold.co/32x32/00bcd4/00bcd4.png");
-export const IutIcon = createIcon("https://placehold.co/32x32/e91e63/e91e63.png");
-export const ButexIcon = createIcon("https://placehold.co/32x32/f06292/f06292.png");
-export const MistIcon = createIcon("https://placehold.co/32x32/9c27b0/9c27b0.png");
-export const MedicalIcon = createIcon("https://placehold.co/32x32/8bc34a/8bc34a.png");
-export const DentalIcon = createIcon("https://placehold.co/32x32/ff9800/ff9800.png");
-export const AfmcIcon = createIcon("https://placehold.co/32x32/cddc39/cddc39.png");
-export const IbaIcon = createIcon("https://placehold.co/32x32/3f51b5/3f51b5.png");
-export const NursingIcon = createIcon("https://placehold.co/32x32/ffb300/ffb300.png");
-export const DuIcon = createIcon("https://placehold.co/32x32/03a9f4/03a9f4.png");
-export const RuIcon = createIcon("https://placehold.co/32x32/26a69a/26a69a.png");
-export const JuIcon = createIcon("https://placehold.co/32x32/43a047/43a047.png");
-export const CuIcon = createIcon("https://placehold.co/32x32/00acc1/00acc1.png");
-export const JnuIcon = createIcon("https://placehold.co/32x32/c0ca33/c0ca33.png");
-export const AgriIcon = createIcon("https://placehold.co/32x32/fbc02d/fbc02d.png");
-export const BcsIcon = createIcon("https://placehold.co/32x32/f4511e/f4511e.png");
+const BupIcon = (props: SVGProps<SVGSVGElement>) => (
+    <svg {...props} width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <image href="https://storage.googleapis.com/stey-assets/bup.png" width="32" height="32" />
+    </svg>
+);
+const MaritimeIcon = (props: SVGProps<SVGSVGElement>) => (
+    <svg {...props} width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <image href="https://storage.googleapis.com/stey-assets/maritime.png" width="32" height="32" />
+    </svg>
+);
+const BuetIcon = (props: SVGProps<SVGSVGElement>) => (
+    <svg {...props} width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <image href="https://storage.googleapis.com/stey-assets/buet.png" width="32" height="32" />
+    </svg>
+);
+const GucchoIcon = (props: SVGProps<SVGSVGElement>) => (
+    <svg {...props} width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <image href="https://storage.googleapis.com/stey-assets/guccho.png" width="32" height="32" />
+    </svg>
+);
+const RuetIcon = (props: SVGProps<SVGSVGElement>) => (
+    <svg {...props} width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <image href="https://storage.googleapis.com/stey-assets/ruet.png" width="32" height="32" />
+    </svg>
+);
+const KuetIcon = (props: SVGProps<SVGSVGElement>) => (
+    <svg {...props} width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <image href="https://storage.googleapis.com/stey-assets/kuet.png" width="32" height="32" />
+    </svg>
+);
+const CuetIcon = (props: SVGProps<SVGSVGElement>) => (
+    <svg {...props} width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <image href="https://storage.googleapis.com/stey-assets/cuet.png" width="32" height="32" />
+    </svg>
+);
+const IutIcon = (props: SVGProps<SVGSVGElement>) => (
+    <svg {...props} width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <image href="https://storage.googleapis.com/stey-assets/iut.png" width="32" height="32" />
+    </svg>
+);
+const ButexIcon = (props: SVGProps<SVGSVGElement>) => (
+    <svg {...props} width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <image href="https://storage.googleapis.com/stey-assets/butex.png" width="32" height="32" />
+    </svg>
+);
+const MistIcon = (props: SVGProps<SVGSVGElement>) => (
+    <svg {...props} width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <image href="https://storage.googleapis.com/stey-assets/mist.png" width="32" height="32" />
+    </svg>
+);
+const MedicalIcon = (props: SVGProps<SVGSVGElement>) => (
+    <svg {...props} width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <image href="https://storage.googleapis.com/stey-assets/medical.png" width="32" height="32" />
+    </svg>
+);
+const DentalIcon = (props: SVGProps<SVGSVGElement>) => (
+    <svg {...props} width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <image href="https://storage.googleapis.com/stey-assets/dental.png" width="32" height="32" />
+    </svg>
+);
+const IbaIcon = (props: SVGProps<SVGSVGElement>) => (
+    <svg {...props} width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <image href="https://storage.googleapis.com/stey-assets/iba.png" width="32" height="32" />
+    </svg>
+);
+const NursingIcon = (props: SVGProps<SVGSVGElement>) => (
+    <svg {...props} width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <image href="https://storage.googleapis.com/stey-assets/nursing.png" width="32" height="32" />
+    </svg>
+);
+const DuIcon = (props: SVGProps<SVGSVGElement>) => (
+    <svg {...props} width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <image href="https://storage.googleapis.com/stey-assets/du.png" width="32" height="32" />
+    </svg>
+);
+const RuIcon = (props: SVGProps<SVGSVGElement>) => (
+    <svg {...props} width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <image href="https://storage.googleapis.com/stey-assets/ru.png" width="32" height="32" />
+    </svg>
+);
+const JuIcon = (props: SVGProps<SVGSVGElement>) => (
+    <svg {...props} width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <image href="https://storage.googleapis.com/stey-assets/ju.png" width="32" height="32" />
+    </svg>
+);
+const CuIcon = (props: SVGProps<SVGSVGElement>) => (
+    <svg {...props} width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <image href="https://storage.googleapis.com/stey-assets/cu.png" width="32" height="32" />
+    </svg>
+);
+const JnuIcon = (props: SVGProps<SVGSVGElement>) => (
+    <svg {...props} width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <image href="https://storage.googleapis.com/stey-assets/jnu.png" width="32" height="32" />
+    </svg>
+);
+const AgriIcon = (props: SVGProps<SVGSVGElement>) => (
+    <svg {...props} width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <image href="https://storage.googleapis.com/stey-assets/agri.png" width="32" height="32" />
+    </svg>
+);
+const BcsIcon = (props: SVGProps<SVGSVGElement>) => (
+    <svg {...props} width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <image href="https://storage.googleapis.com/stey-assets/bcs.png" width="32" height="32" />
+    </svg>
+);
+const SatCollegeIcon = (props: SVGProps<SVGSVGElement>) => (
+    <svg {...props} width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <image href="https://storage.googleapis.com/stey-assets/sust.png" width="32" height="32" />
+    </svg>
+);
 
 
 // Subject Icons
@@ -161,3 +247,31 @@ export const Stats2Icon = (props: SVGProps<SVGSVGElement>) => (
         <path d="M3 21h18M7 21V12M12 21V3M17 21V8"/>
     </svg>
 );
+
+export {
+    AfmcIcon,
+    BupIcon,
+    MaritimeIcon,
+    BuetIcon,
+    GucchoIcon,
+    RuetIcon,
+    KuetIcon,
+    CuetIcon,
+    IutIcon,
+    ButexIcon,
+    MistIcon,
+    MedicalIcon,
+    DentalIcon,
+    IbaIcon,
+    NursingIcon,
+    DuIcon,
+    RuIcon,
+    JuIcon,
+    CuIcon,
+    JnuIcon,
+    AgriIcon,
+    BcsIcon,
+    SatCollegeIcon
+};
+
+    
