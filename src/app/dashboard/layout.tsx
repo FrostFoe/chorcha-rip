@@ -39,7 +39,7 @@ import {
 const menuItems = [
   { icon: LayoutDashboard, text: 'ড্যাশবোর্ড', href: '/dashboard' },
   { icon: ClipboardList, text: 'মক পরীক্ষা', href: '/dashboard/mock-exam' },
-  { icon: Zap, text: 'দ্রুত প্র্যাকটিস', href: '#' },
+  { icon: Zap, text: 'দ্রুত প্র্যাকটিস', href: '/dashboard/practice-exam' },
   { icon: Users, text: 'চর্চা কমিউনিটি', href: '#' },
   { icon: Archive, text: 'আর্কাইভ', href: '/dashboard/question-bank' },
   { icon: History, text: 'হিস্ট্রি', href: '#' },
