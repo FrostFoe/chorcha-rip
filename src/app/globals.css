@@ -4,7 +4,7 @@
 @tailwind utilities;
 
 body {
-  font-family: 'Hind Siliguri', sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 @layer base {
@@ -17,9 +17,9 @@ body {
     --popover-foreground: 0 0% 98%;
     --primary: 151 68% 58%; /* #3dd579 */
     --primary-foreground: 151 68% 5%;
-    --secondary: 0 0% 25%;
+    --secondary: 0 0% 15%; /* #262626 */
     --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 25%;
+    --muted: 0 0% 25%; /* #404040 */
     --muted-foreground: 0 0% 63.9%;
     --accent: 88 38% 55%; /* #91ba5e */
     --accent-foreground: 88 38% 5%;
@@ -34,14 +34,6 @@ body {
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
     --radius: 0.5rem;
-    --sidebar-background: 0 0% 10%;
-    --sidebar-foreground: 0 0% 98%;
-    --sidebar-primary: 147 66% 54%;
-    --sidebar-primary-foreground: 0 0% 7%;
-    --sidebar-accent: 0 0% 15%;
-    --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 0 0% 14.9%;
-    --sidebar-ring: 147 66% 54%;
   }
 
   .dark {
@@ -53,9 +45,9 @@ body {
     --popover-foreground: 0 0% 98%;
     --primary: 151 68% 58%; /* #3dd579 */
     --primary-foreground: 151 68% 5%;
-    --secondary: 0 0% 25%;
+    --secondary: 0 0% 15%; /* #262626 */
     --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 25%;
+    --muted: 0 0% 25%; /* #404040 */
     --muted-foreground: 0 0% 63.9%;
     --accent: 88 38% 55%; /* #91ba5e */
     --accent-foreground: 88 38% 5%;
@@ -70,14 +62,6 @@ body {
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
     --radius: 0.5rem;
-    --sidebar-background: 0 0% 10%;
-    --sidebar-foreground: 0 0% 98%;
-    --sidebar-primary: 147 66% 54%;
-    --sidebar-primary-foreground: 0 0% 7%;
-    --sidebar-accent: 0 0% 15%;
-    --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 0 0% 14.9%;
-    --sidebar-ring: 147 66% 54%;
   }
 }
 
