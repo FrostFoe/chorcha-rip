@@ -26,7 +26,7 @@ import React from 'react';
 import { DDIcon } from '@/components/icons';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -37,11 +37,11 @@ import {
 } from '@/components/ui/dropdown-menu';
 
 const menuItems = [
-  { icon: LayoutDashboard, text: 'ড্যাশবোর্ড', href: '/dashboard', active: true },
+  { icon: LayoutDashboard, text: 'ড্যাশবোর্ড', href: '/dashboard' },
   { icon: ClipboardList, text: 'মক পরীক্ষা', href: '#' },
   { icon: Zap, text: 'দ্রুত প্র্যাকটিস', href: '#' },
   { icon: Users, text: 'চর্চা কমিউনিটি', href: '#' },
-  { icon: Archive, text: 'আর্কাইভ', href: '/question-bank' },
+  { icon: Archive, text: 'আর্কাইভ', href: '/dashboard/question-bank' },
   { icon: History, text: 'হিস্ট্রি', href: '#' },
   { icon: Trophy, text: 'লিডারবোর্ড', href: '#' },
   { icon: User, text: 'প্রোফাইল', href: '#' },
@@ -53,6 +53,7 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   const router = useRouter();
+  const pathname = usePathname();
 
   const handleLogout = () => {
     // In a real app, you'd clear auth tokens here
@@ -65,7 +66,9 @@ export default function DashboardLayout({
         <SidebarHeader className="p-4">
           <Link href="/" className="flex items-center gap-2">
             <DDIcon className="h-8 w-8 text-primary" />
-            <span className="text-xl font-bold">চর্চা</span>
+            <span className="text-xl font-bold group-data-[collapsible=icon]:hidden">
+              চর্চা
+            </span>
           </Link>
         </SidebarHeader>
         <SidebarContent>
@@ -74,11 +77,14 @@ export default function DashboardLayout({
               <SidebarMenuItem key={index}>
                 <Link href={item.href}>
                   <SidebarMenuButton
-                    isActive={item.active}
+                    isActive={pathname === item.href}
                     className="gap-4 font-body"
+                    tooltip={item.text}
                   >
                     <item.icon className="h-5 w-5" />
-                    <span>{item.text}</span>
+                    <span className="group-data-[collapsible=icon]:hidden">
+                      {item.text}
+                    </span>
                   </SidebarMenuButton>
                 </Link>
               </SidebarMenuItem>
@@ -96,7 +102,7 @@ export default function DashboardLayout({
                   />
                   <AvatarFallback>SB</AvatarFallback>
                 </Avatar>
-                <div className="flex-1">
+                <div className="flex-1 group-data-[collapsible=icon]:hidden">
                   <p className="text-sm font-semibold">Sysmad BCF-19</p>
                 </div>
               </div>

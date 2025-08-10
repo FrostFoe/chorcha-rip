@@ -31,7 +31,7 @@ import {
 } from '@/components/ui/sheet';
 
 const navLinks = [
-  { icon: Home, text: 'প্রশ্ন ব্যাংক', href: '/question-bank' },
+  { icon: Home, text: 'প্রশ্ন ব্যাংক', href: '/dashboard/question-bank' },
   { icon: BookOpen, text: 'মক পরীক্ষা', href: '#' },
   { icon: Star, text: 'লিডারবোর্ড', href: '#' },
 ];
