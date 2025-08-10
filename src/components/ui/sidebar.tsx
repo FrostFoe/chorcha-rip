@@ -133,6 +133,11 @@ const SidebarProvider = React.forwardRef<
       }),
       [state, open, setOpen, isMobile, openMobile, setOpenMobile, toggleSidebar]
     )
+    
+    // With this, we avoid hydration errors since the sidebar will only be rendered on the client.
+    if (!mounted) {
+      return null
+    }
 
     return (
       <SidebarContext.Provider value={contextValue}>
@@ -152,7 +157,7 @@ const SidebarProvider = React.forwardRef<
             ref={ref}
             {...props}
           >
-            {mounted ? children : null}
+            {children}
           </div>
         </TooltipProvider>
       </SidebarContext.Provider>
@@ -766,3 +771,5 @@ export {
   SidebarTrigger,
   useSidebar,
 }
+
+    
