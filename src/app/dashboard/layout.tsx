@@ -14,6 +14,7 @@ import {
 import {
   Archive,
   ClipboardList,
+  Crown,
   History,
   LayoutDashboard,
   LogOut,
@@ -44,7 +45,7 @@ const menuItems = [
   { icon: Archive, text: 'আর্কাইভ', href: '/dashboard/question-bank' },
   { icon: History, text: 'হিস্ট্রি', href: '/dashboard/history' },
   { icon: Trophy, text: 'লিডারবোর্ড', href: '/dashboard/leaderboard' },
-  { icon: User, text: 'প্রোফাইল', href: '#' },
+  { icon: User, text: 'প্রোফাইল', href: '/dashboard/profile' },
 ];
 
 export default function DashboardLayout({
