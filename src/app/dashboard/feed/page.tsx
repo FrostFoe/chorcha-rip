@@ -16,6 +16,7 @@ import {
   Bell,
   CheckCircle2,
   Image as ImageIcon,
+  MessageCircle,
   MoreHorizontal,
   Smile,
   ThumbsUp,
@@ -122,7 +123,7 @@ export default function FeedPage() {
                     Like
                 </Button>
                 <Button variant="ghost" className="w-full text-muted-foreground hover:text-foreground">
-                    <MoreHorizontal className="h-5 w-5 mr-2 transform rotate-90"/>
+                    <MessageCircle className="h-5 w-5 mr-2"/>
                     Comment
                 </Button>
             </div>
@@ -141,7 +142,7 @@ export default function FeedPage() {
             </div>
              <div className="flex items-start gap-3 mt-4">
                 <Avatar className="h-8 w-8">
-                    <AvatarImage src="https://placehold.co/40x40/3dd579/000000.png" alt="User avatar" />
+                    <AvatarImage src="https://placehold.co/40x40/3dd579/ffffff.png" alt="User avatar" />
                     <AvatarFallback>T</AvatarFallback>
                 </Avatar>
                 <div className="flex-1">

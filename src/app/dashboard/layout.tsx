@@ -13,11 +13,14 @@ import {
 } from '@/components/ui/sidebar';
 import {
   Archive,
+  Bell,
   ClipboardList,
   Crown,
   History,
   LayoutDashboard,
   LogOut,
+  MessageCircle,
+  MoreHorizontal,
   Settings,
   Trophy,
   User,
