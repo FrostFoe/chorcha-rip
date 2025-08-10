@@ -1,7 +1,6 @@
 
 'use client';
 
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -13,19 +12,14 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { DDIcon } from '@/components/icons';
+import { DDIcon, FacebookIcon, GoogleIcon } from '@/components/icons';
 import { useToast } from '@/hooks/use-toast';
 
 const formSchema = z.object({
-  name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
-  email: z.string().email({ message: 'Invalid email address.' }),
-  password: z
-    .string()
-    .min(8, { message: 'Password must be at least 8 characters.' }),
+  phone: z.string().min(1, { message: 'Mobile number is required.' }),
 });
 
 export default function SignUpPage() {
@@ -35,96 +29,97 @@ export default function SignUpPage() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: '',
-      email: '',
-      password: '',
+      phone: '',
     },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Mock registration
-    console.log('User registered:', values);
+    console.log('Registration attempt with phone:', values.phone);
     toast({
-      title: 'Registration Successful',
-      description: 'You can now sign in with your credentials.',
+      title: 'Registration Started',
+      description: 'Please check your phone to continue.',
     });
-    router.push('/sign-in');
+    // In a real app, you might navigate to an OTP verification page
+    // router.push('/verify-otp');
+  }
+  
+    // A mock handler for dashboard navigation for demo purposes
+  const handleTestSignIn = () => {
+    router.push('/dashboard');
   }
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-background px-4">
-      <div className="w-full max-w-md">
-        <div className="mb-8 flex flex-col items-center">
-          <Link href="/" className="mb-4 flex items-center gap-2">
-            <DDIcon className="h-10 w-10 text-primary" />
-            <span className="text-3xl font-bold">চর্চা</span>
-          </Link>
-          <h1 className="text-2xl font-semibold">Create an Account</h1>
-          <p className="text-muted-foreground">
-            Join the largest practice platform in Bangladesh.
-          </p>
+    <div className="flex min-h-screen flex-col items-center justify-center bg-[#1D1D1D] p-4 text-white">
+      <div className="w-full max-w-sm text-center">
+        <DDIcon className="mx-auto h-12 w-12 text-white" />
+        <h1 className="mt-4 text-xl font-medium">রেজিস্ট্রেশন/ লগ ইন</h1>
+
+        <div className="mt-12 text-left">
+          <label htmlFor="phone" className="text-sm font-medium">
+            মোবাইল নাম্বার
+          </label>
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="mt-2 flex items-start gap-2"
+            >
+              <FormField
+                control={form.control}
+                name="phone"
+                render={({ field }) => (
+                  <FormItem className="flex-grow">
+                    <FormControl>
+                      <Input
+                        id="phone"
+                        type="tel"
+                        placeholder="01XXXXXXXXX"
+                        className="h-12 rounded-lg border-none bg-white text-black placeholder:text-gray-400"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage className="mt-1 text-red-400" />
+                  </FormItem>
+                )}
+              />
+              <Button
+                type="submit"
+                className="h-12 flex-shrink-0 rounded-lg bg-[#2E2E2E] px-6 text-base font-medium text-white hover:bg-[#3f3f3f]"
+              >
+                শুরু করো
+              </Button>
+            </form>
+          </Form>
         </div>
-        <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-6 bg-card p-8 rounded-lg border border-border"
+
+        <div className="my-8 flex items-center gap-4">
+          <div className="h-px flex-grow bg-[#424242]"></div>
+          <span className="text-base text-[#B0B0B0]">অথবা,</span>
+          <div className="h-px flex-grow bg-[#424242]"></div>
+        </div>
+        
+         {/* This button is for demo purposes to allow navigation without full auth */}
+        <Button onClick={handleTestSignIn} variant="link" className="text-primary hover:text-primary/80">
+          (For Demo: Click to enter Dashboard)
+        </Button>
+
+        <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <Button
+            variant="outline"
+            className="h-12 w-full justify-center gap-3 rounded-lg border-none bg-[#2E2E2E] text-base font-medium text-white hover:bg-[#3f3f3f]"
           >
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Name</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Your Name" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input placeholder="you@example.com" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <FormControl>
-                    <Input type="password" placeholder="••••••••" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Button type="submit" className="w-full">
-              Create Account
-            </Button>
-          </form>
-        </Form>
-        <p className="mt-6 text-center text-sm text-muted-foreground">
-          Already have an account?{' '}
-          <Link
-            href="/sign-in"
-            className="font-medium text-primary hover:underline"
+            <FacebookIcon className="h-5 w-5 text-[#1877F2]" />
+            Facebook
+          </Button>
+          <Button
+            variant="outline"
+            className="h-12 w-full justify-center gap-3 rounded-lg border-none bg-[#2E2E2E] text-base font-medium text-white hover:bg-[#3f3f3f]"
           >
-            Sign in
-          </Link>
-        </p>
+            <GoogleIcon className="h-5 w-5" />
+            Google
+          </Button>
+        </div>
       </div>
     </div>
   );
 }
-
-    

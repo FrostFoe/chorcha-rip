@@ -13,16 +13,14 @@ import {
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { DDIcon } from '@/components/icons';
+import { DDIcon, FacebookIcon, GoogleIcon } from '@/components/icons';
 import { useToast } from '@/hooks/use-toast';
 
 const formSchema = z.object({
-  email: z.string().email({ message: 'Invalid email address.' }),
-  password: z.string().min(1, { message: 'Password is required.' }),
+  phone: z.string().min(1, { message: 'Mobile number is required.' }),
 });
 
 export default function SignInPage() {
@@ -32,89 +30,108 @@ export default function SignInPage() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: '',
-      password: '',
+      phone: '',
     },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Mock authentication
-    if (values.email === 'test' && values.password === 'test') {
+    // Mock authentication - in a real app, you'd verify the phone number
+    console.log('Login attempt with phone:', values.phone);
+    // Simple mock check
+    if (values.phone === 'test') {
       toast({
         title: 'Login Successful',
-        description: 'Welcome back!',
+        description: 'Navigating to dashboard.',
       });
       router.push('/dashboard');
     } else {
+      // Simulate OTP sending or other login flow
       toast({
-        variant: 'destructive',
-        title: 'Login Failed',
-        description: 'Invalid email or password.',
+        title: 'Proceeding with Login',
+        description: 'Please check your phone for next steps.',
       });
+      // In a real app, you might navigate to an OTP page
+      // router.push('/verify-otp');
     }
   }
+  
+  // A mock handler for dashboard navigation for demo purposes
+  const handleTestSignIn = () => {
+    router.push('/dashboard');
+  }
+
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-background px-4">
-      <div className="w-full max-w-md">
-        <div className="mb-8 flex flex-col items-center">
-          <Link href="/" className="mb-4 flex items-center gap-2">
-            <DDIcon className="h-10 w-10 text-primary" />
-            <span className="text-3xl font-bold">চর্চা</span>
-          </Link>
-          <h1 className="text-2xl font-semibold">Welcome Back</h1>
-          <p className="text-muted-foreground">
-            Enter your credentials to access your account.
-          </p>
+    <div className="flex min-h-screen flex-col items-center justify-center bg-[#1D1D1D] p-4 text-white">
+      <div className="w-full max-w-sm text-center">
+        <DDIcon className="mx-auto h-12 w-12 text-white" />
+        <h1 className="mt-4 text-xl font-medium">রেজিস্ট্রেশন/ লগ ইন</h1>
+
+        <div className="mt-12 text-left">
+          <label htmlFor="phone" className="text-sm font-medium">
+            মোবাইল নাম্বার
+          </label>
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="mt-2 flex items-start gap-2"
+            >
+              <FormField
+                control={form.control}
+                name="phone"
+                render={({ field }) => (
+                  <FormItem className="flex-grow">
+                    <FormControl>
+                      <Input
+                        id="phone"
+                        type="tel"
+                        placeholder="01XXXXXXXXX"
+                        className="h-12 rounded-lg border-none bg-white text-black placeholder:text-gray-400"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage className="mt-1 text-red-400" />
+                  </FormItem>
+                )}
+              />
+              <Button
+                type="submit"
+                className="h-12 flex-shrink-0 rounded-lg bg-[#2E2E2E] px-6 text-base font-medium text-white hover:bg-[#3f3f3f]"
+              >
+                শুরু করো
+              </Button>
+            </form>
+          </Form>
         </div>
-        <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-6 bg-card p-8 rounded-lg border border-border"
+
+        <div className="my-8 flex items-center gap-4">
+          <div className="h-px flex-grow bg-[#424242]"></div>
+          <span className="text-base text-[#B0B0B0]">অথবা,</span>
+          <div className="h-px flex-grow bg-[#424242]"></div>
+        </div>
+        
+         {/* This button is for demo purposes to allow navigation without full auth */}
+        <Button onClick={handleTestSignIn} variant="link" className="text-primary hover:text-primary/80">
+          (For Demo: Click to enter Dashboard)
+        </Button>
+
+        <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <Button
+            variant="outline"
+            className="h-12 w-full justify-center gap-3 rounded-lg border-none bg-[#2E2E2E] text-base font-medium text-white hover:bg-[#3f3f3f]"
           >
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input placeholder="you@example.com" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="password"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Password</FormLabel>
-                  <FormControl>
-                    <Input type="password" placeholder="••••••••" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Button type="submit" className="w-full">
-              Sign In
-            </Button>
-          </form>
-        </Form>
-        <p className="mt-6 text-center text-sm text-muted-foreground">
-          Don&apos;t have an account?{' '}
-          <Link
-            href="/sign-up"
-            className="font-medium text-primary hover:underline"
+            <FacebookIcon className="h-5 w-5 text-[#1877F2]" />
+            Facebook
+          </Button>
+          <Button
+            variant="outline"
+            className="h-12 w-full justify-center gap-3 rounded-lg border-none bg-[#2E2E2E] text-base font-medium text-white hover:bg-[#3f3f3f]"
           >
-            Sign up
-          </Link>
-        </p>
+            <GoogleIcon className="h-5 w-5" />
+            Google
+          </Button>
+        </div>
       </div>
     </div>
   );
 }
-
-    
