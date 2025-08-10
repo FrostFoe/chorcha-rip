@@ -1,175 +1,474 @@
 
-import {
-  ArrowUpRight,
-  BarChart2,
-  Bell,
-  FolderKanban,
-  LayoutGrid,
-  LifeBuoy,
-  PlusCircle,
-  Search,
-  Settings,
-  Users,
-} from 'lucide-react';
 import Image from 'next/image';
+import {
+  Apple,
+  ArrowRight,
+  BookOpen,
+  ChevronDown,
+  Home,
+  Instagram,
+  Linkedin,
+  Mail,
+  Phone,
+  Play,
+  Star,
+  Youtube,
+} from 'lucide-react';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Input } from '@/components/ui/input';
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarHeader,
-  SidebarInset,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarProvider,
-  SidebarTrigger,
-  SidebarFooter,
-  SidebarGroup,
-  SidebarGroupLabel,
-} from '@/components/ui/sidebar';
-import Overview from '@/components/dashboard/overview';
-import RecentProjects from '@/components/dashboard/recent-projects';
-import TeamMembers from '@/components/dashboard/team-members';
-import QuickActions from '@/components/dashboard/quick-actions';
 import { DDIcon } from '@/components/icons';
+import { Bar, BarChart, ResponsiveContainer } from 'recharts';
+import { Badge } from '@/components/ui/badge';
 
-export default function DashboardPage() {
+const navLinks = [
+  { icon: Home, text: 'প্রচ্ছদ' },
+  { icon: BookOpen, text: 'মক পরীক্ষা' },
+  { icon: Star, text: 'লিডারবোর্ড' },
+];
+
+const examCategories = [
+  'BUET Preli 2022',
+  'Medical 2022',
+  'IUT 2022',
+  'Dental 2022',
+  'BCS Preli 2022',
+  'Rajshahi University 2022',
+  'Rajshahi University 2022',
+  'Dhaka University A 2022',
+  'CKRUET 2022',
+];
+
+const analysisData = [
+  { year: '2017', value: 250 },
+  { year: '2018', value: 300 },
+  { year: '2019', value: 280 },
+  { year: '2020', value: 350 },
+  { year: '2021', value: 320 },
+  { year: '2022', value: 280 },
+];
+
+const leaderboard = [
+  {
+    rank: 1,
+    name: 'Shiwat Jaman',
+    institution: 'National University, Bangladesh',
+    avatar: 'https://placehold.co/40x40/FEF08A/000000.png',
+    fallback: 'SJ',
+  },
+  {
+    rank: 2,
+    name: 'Pretly Little Baby',
+    institution: 'Marienand College',
+    avatar: 'https://placehold.co/40x40/A7F3D0/000000.png',
+    fallback: 'PL',
+  },
+  {
+    rank: 3,
+    name: 'Moon',
+    institution: 'Sylhet Govt. Women’s College',
+    avatar: 'https://placehold.co/40x40/FBCFE8/000000.png',
+    fallback: 'M',
+  },
+  {
+    rank: 4,
+    name: 'Khadija',
+    institution: 'Saidpur government college, Nilphamari.',
+    avatar: 'https://placehold.co/40x40/BAE6FD/000000.png',
+    fallback: 'K',
+  },
+];
+
+const testimonials = [
+  {
+    name: "Kankhito's World",
+    avatar: 'https://placehold.co/40x40/DDD6FE/000000.png',
+    fallback: 'KW',
+    text: "This is a really great platform for the students of HSC and Admission candidates. The app design is outstanding ... and the main thing is ... a student won't need to buy any books for MCQ ... if he practices... from here.",
+    isFirst: true,
+  },
+  {
+    name: 'Mujib Mujib',
+    rating: 5,
+    avatar: 'https://placehold.co/40x40/A7F3D0/000000.png',
+    fallback: 'MM',
+    text: 'This is most useful educational app I have ever found. If a student wants he can practice most of all academic, medical engineering, versity, favourite subject by practicing mcq exam in this app. Thanks Chorcha❤.',
+  },
+  {
+    name: 'Mohammad Kanon',
+    rating: 5,
+    avatar: 'https://placehold.co/40x40/BAE6FD/000000.png',
+    fallback: 'MK',
+    text: "At the beginning, I want to say that it is a modern app I like this app because I can practice more. I request thee for giving us such a beautiful app. Please pray for me that I can fulfill my dreams and serve my parents' from shine.",
+  },
+  {
+    name: 'Nazifa Tasnim',
+    rating: 5,
+    avatar: 'https://placehold.co/40x40/FBCFE8/000000.png',
+    fallback: 'NT',
+    text: 'Best educational app ever... it’s really good for exam preparation 🙏',
+  },
+  {
+    name: 'Talha Sunit',
+    rating: 5,
+    avatar: 'https://placehold.co/40x40/DDD6FE/000000.png',
+    fallback: 'TS',
+    text: 'Kankhito app ... is a true ... candidate it is very helpful for student like us.. thank you 🙏',
+  },
+  {
+    name: 'MD Sagar khan',
+    rating: 5,
+    avatar: 'https://placehold.co/40x40/FEF08A/000000.png',
+    fallback: 'MS',
+    text: 'Chorcha is my favourite app because in this app has many questions for the students.',
+  },
+  {
+    name: 'Butterfly is Flying',
+    rating: 5,
+    avatar: 'https://placehold.co/40x40/A7F3D0/000000.png',
+    fallback: 'BF',
+    text: 'It was a very helpful app.. I can’t explain how helpful the app is. I was looking for this app for long time. Finally i found it. Thank you very much Chorcha team.',
+  },
+];
+
+const footerLinks = {
+  Features: ['Mock Exam', 'Question Bank', 'Leaderboard'],
+  Streams: ['SSC Science', 'HSC Science', 'HSC Arts', 'HSC Commerce', 'BCS/Job'],
+  Company: ['About', 'Affiliate', 'Jobs', 'FAQ'],
+  Legal: [
+    'Terms & Conditions',
+    'Privacy Policy',
+    'Refund Policy',
+    'A-TIN-MUSHOK-371817097050',
+    'Trade license No, TRAD/DNCC/011197/2023',
+  ],
+};
+
+export default function HomePage() {
   return (
-    <SidebarProvider>
-      <Sidebar>
-        <SidebarHeader>
-          <div className="flex items-center gap-2">
-            <DDIcon className="size-8 text-primary" />
-            <span className="text-lg font-semibold">DDI</span>
+    <div className="bg-background text-foreground">
+      <header className="container mx-auto px-4 py-4 flex justify-between items-center">
+        <div className="flex items-center gap-2">
+          <DDIcon className="h-8 w-8 text-primary" />
+          <span className="text-xl font-bold">চর্চা</span>
+        </div>
+        <nav className="hidden md:flex items-center gap-8">
+          {navLinks.map((link) => (
+            <a
+              key={link.text}
+              href="#"
+              className="flex items-center gap-2 text-sm text-gray-300 hover:text-white"
+            >
+              <link.icon className="h-4 w-4" />
+              {link.text}
+            </a>
+          ))}
+        </nav>
+        <Button>
+          লগইন/রেজিস্ট্রেশন <ArrowRight className="ml-2 h-4 w-4" />
+        </Button>
+      </header>
+
+      <main>
+        <section className="container mx-auto px-4 py-16 md:py-24">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="space-y-6">
+              <h1 className="text-5xl md:text-6xl font-bold text-primary">
+                চর্চা করো নিজের গতিতে
+              </h1>
+              <p className="text-gray-300">
+                নিজের প্রস্তুতির ধাপ গুলো محک করে নিন আমাদের সাথে। আন্তর্জাতিক
+                মানের পরীক্ষা পদ্ধতি এখন আপনার হাতের মুঠোয়। এছাড়া লাইভ পরীক্ষা
+                দেয়ার মাধ্যমে এখন দ্রুত প্রস্রুতি নেয়া সম্ভব।
+              </p>
+              <div className="flex items-center gap-4">
+                <Button variant="outline" size="lg">
+                  <Play className="mr-2 h-5 w-5 fill-white" />
+                  Google Play
+                </Button>
+                <Button variant="outline" size="lg">
+                  <Apple className="mr-2 h-5 w-5 fill-white" />
+                  App Store
+                </Button>
+              </div>
+            </div>
+            <div>
+              <Image
+                src="https://placehold.co/375x750.png"
+                alt="App screenshot"
+                width={375}
+                height={750}
+                className="mx-auto"
+                data-ai-hint="app screenshot"
+              />
+            </div>
           </div>
-        </SidebarHeader>
-        <SidebarContent>
-          <SidebarMenu>
-            <SidebarMenuItem>
-              <SidebarMenuButton isActive>
-                <LayoutGrid />
-                Dashboard
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-              <SidebarMenuButton>
-                <FolderKanban />
-                Projects
-                <Badge className="ml-auto" variant="secondary">
-                  6
-                </Badge>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-              <SidebarMenuButton>
-                <Users />
-                Team
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-              <SidebarMenuButton>
-                <BarChart2 />
-                Analytics
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          </SidebarMenu>
-        </SidebarContent>
-        <SidebarFooter>
-          <SidebarMenu>
-            <SidebarMenuItem>
-              <SidebarMenuButton>
-                <Settings />
-                Settings
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-            <SidebarMenuItem>
-              <SidebarMenuButton>
-                <LifeBuoy />
-                Support
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          </SidebarMenu>
-        </SidebarFooter>
-      </Sidebar>
-      <SidebarInset>
-        <header className="flex h-14 items-center gap-4 border-b bg-background/95 backdrop-blur-sm px-4 lg:px-6 sticky top-0 z-30">
-          <SidebarTrigger className="md:hidden" />
-          <div className="relative flex-1">
-            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input
-              type="search"
-              placeholder="Search projects..."
-              className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[320px]"
-            />
+        </section>
+
+        <section className="bg-card py-16">
+          <div className="container mx-auto px-4">
+            <div className="grid md:grid-cols-2 gap-8">
+              <div>
+                <h2 className="text-2xl font-semibold mb-6">
+                  সকল পরীক্ষার প্রশ্নব্যাংক
+                </h2>
+                <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+                  {examCategories.map((exam) => (
+                    <div
+                      key={exam}
+                      className="bg-gray-800 p-4 rounded-lg border border-gray-700 hover:border-primary transition-colors"
+                    >
+                      <h3 className="font-semibold">{exam}</h3>
+                      <p className="text-sm text-gray-400 mt-2">
+                        প্রশ্নঃ ১৪৩ <span className="mx-2">|</span> সময়ঃ ৪৫ মি.
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <div className="flex justify-between items-center mb-6">
+                  <h2 className="text-2xl font-semibold">প্রশ্নব্যাংক বিশ্লেষণ</h2>
+                  <Button variant="secondary" size="sm">
+                    আরো <ChevronDown className="ml-2 h-4 w-4" />
+                  </Button>
+                </div>
+                <div className="h-[250px]">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <BarChart data={analysisData}>
+                      <Bar dataKey="value" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
+              </div>
+            </div>
           </div>
-          <Button variant="ghost" size="icon" className="rounded-full">
-            <Bell className="h-5 w-5" />
-            <span className="sr-only">Toggle notifications</span>
-          </Button>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="rounded-full">
-                <Avatar className="h-8 w-8">
-                  <AvatarImage src="https://placehold.co/100x100.png" alt="@shadcn" data-ai-hint="woman smiling" />
-                  <AvatarFallback>JD</AvatarFallback>
-                </Avatar>
+        </section>
+
+        <section className="bg-card py-16">
+          <div className="container mx-auto px-4 grid md:grid-cols-3 gap-8">
+            <div className="bg-gray-800 p-6 rounded-xl border border-gray-700 flex flex-col items-center text-center">
+              <Image
+                src="https://placehold.co/300x600.png"
+                alt="Mock Test"
+                width={200}
+                height={400}
+                className="mb-4"
+                data-ai-hint="app screen"
+              />
+              <h3 className="text-xl font-semibold">মক পরীক্ষা</h3>
+              <p className="text-gray-400 mt-2 text-sm">
+                দেশের সেরা প্রশ্নদাতাদের দ্বারা তৈরি করা প্রশ্নপত্রে পরীক্ষা
+                দিয়ে নিজের প্রস্তুতিকে করো আরও নিখুঁত।
+              </p>
+            </div>
+            <div className="bg-gray-800 p-6 rounded-xl border border-gray-700 flex flex-col items-center text-center">
+               <Image
+                src="https://placehold.co/300x600.png"
+                alt="Result Analysis"
+                width={200}
+                height={400}
+                className="mb-4"
+                data-ai-hint="app screen analysis"
+              />
+              <h3 className="text-xl font-semibold">ফলাফল বিশ্লেষণ</h3>
+              <p className="text-gray-400 mt-2 text-sm">
+                প্রতিটি পরীক্ষার পর পেয়ে যাও পূর্ণাঙ্গ বিষয়ভিত্তিক ও
+                প্রশ্নভিত্তিক বিশ্লেষণ, যা তোমাকে সাহায্য করবে নিজের দুর্বলতা খুঁজে
+                বের করতে।
+              </p>
+            </div>
+            <div className="bg-gray-800 p-6 rounded-xl border border-gray-700 flex flex-col items-center text-center">
+              <Image
+                src="https://placehold.co/300x600.png"
+                alt="Analysis"
+                width={200}
+                height={400}
+                className="mb-4"
+                data-ai-hint="app screen leaderboard"
+              />
+              <h3 className="text-xl font-semibold">প্রশ্নব্যাংক বিশ্লেষণ</h3>
+              <p className="text-gray-400 mt-2 text-sm">
+                বিগত বছরের প্রশ্নপত্রে পরীক্ষা দিয়ে বুঝে নাও প্রশ্নের ধরন এবং
+                নিজের প্রস্তুতিকে করো আরও শক্তিশালী।
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-card py-16">
+          <div className="container mx-auto px-4 grid md:grid-cols-2 gap-8">
+            <div className="bg-gray-800 p-6 rounded-xl border border-gray-700">
+              <h3 className="text-xl font-semibold mb-4">দ্রুত প্র্যাকটিস</h3>
+              <div className="space-y-3">
+                <Button
+                  variant="outline"
+                  className="w-full justify-between"
+                  size="lg"
+                >
+                  বিষয় নির্বাচন করুন <ChevronDown />
+                </Button>
+                <Button
+                  variant="outline"
+                  className="w-full justify-between"
+                  size="lg"
+                >
+                  পত্র নির্বাচন করুন <ChevronDown />
+                </Button>
+                <Button
+                  variant="outline"
+                  className="w-full justify-between"
+                  size="lg"
+                >
+                  অধ্যায় নির্বাচন করুন <ChevronDown />
+                </Button>
+                <Button className="w-full" size="lg">
+                  প্র্যাকটিস শুরু করুন
+                </Button>
+              </div>
+            </div>
+            <div className="bg-gray-800 p-6 rounded-xl border border-gray-700">
+              <h3 className="text-xl font-semibold mb-4">লাইভ লিডারবোর্ড</h3>
+              <div className="space-y-3">
+                {leaderboard.map((player) => (
+                  <div
+                    key={player.rank}
+                    className="flex items-center gap-4 p-2 rounded-md bg-gray-900"
+                  >
+                    <Badge variant="secondary" className="text-lg">
+                      {player.rank}
+                    </Badge>
+                    <Avatar className="h-10 w-10">
+                      <AvatarImage src={player.avatar} />
+                      <AvatarFallback>{player.fallback}</AvatarFallback>
+                    </Avatar>
+                    <div className="flex-1">
+                      <p className="font-semibold">{player.name}</p>
+                      <p className="text-sm text-gray-400">
+                        {player.institution}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-16">
+          <div className="container mx-auto px-4">
+            <h2 className="text-2xl font-semibold text-center mb-2">
+              আমাদের শিক্ষার্থীরা চর্চা সম্পর্কে যা বলছে
+            </h2>
+            <p className="text-center text-gray-400 mb-8">
+              এরকম হাজারো শিক্ষার্থীর রিভিউ দেখতে পারেন আমাদের প্লে-স্টোর পেজে
+              গিয়ে।
+            </p>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {testimonials.map((testimonial, index) => (
+                <div
+                  key={index}
+                  className={`bg-card p-6 rounded-lg ${
+                    testimonial.isFirst ? 'md:col-span-2 lg:col-span-1' : ''
+                  }`}
+                >
+                  {testimonial.isFirst ? (
+                    <div className="aspect-video bg-black rounded-md flex items-center justify-center mb-4 relative">
+                      <Image
+                        src="https://placehold.co/600x400.png"
+                        layout="fill"
+                        objectFit="cover"
+                        alt="Youtube thumbnail"
+                        className="rounded-md"
+                        data-ai-hint="man presenting"
+                      />
+                      <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+                         <Play className="h-12 w-12 text-red-600 fill-current" />
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-3 mb-4">
+                      <Avatar className="h-10 w-10">
+                        <AvatarImage src={testimonial.avatar} />
+                        <AvatarFallback>{testimonial.fallback}</AvatarFallback>
+                      </Avatar>
+                      <div>
+                        <p className="font-semibold">{testimonial.name}</p>
+                        <div className="flex text-yellow-400">
+                          {testimonial.rating && [...Array(testimonial.rating)].map((_, i) => (
+                            <Star key={i} className="h-4 w-4 fill-current" />
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  <p className="text-sm text-gray-300">{testimonial.text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="container mx-auto px-4 py-16">
+           <div className="bg-gray-800 p-8 rounded-xl border border-gray-700 flex flex-col md:flex-row justify-between items-center gap-6">
+              <div>
+                <h2 className="text-2xl font-semibold mb-2">এখনই যুক্ত হও বাংলাদেশের সবচেয়ে বড় প্র্যাকটিস প্ল্যাটফর্মে</h2>
+                <p className="text-gray-400">বাংলাদেশের প্রথম অ্যাপ্লিকেশন যেখানে তুমি পাবে তোমার প্রয়োজন অনুযায়ী সবকিছু।</p>
+              </div>
+              <Button size="lg" className="flex-shrink-0">
+                জয়েন করো এখনই <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Profile</DropdownMenuItem>
-              <DropdownMenuItem>Billing</DropdownMenuItem>
-              <DropdownMenuItem>Settings</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Log out</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </header>
-        <main className="flex-1 p-4 sm:p-6">
-          <div className="flex items-center justify-between mb-6">
-            <h1 className="text-2xl font-semibold">Welcome Back, Jane!</h1>
-            <Button>
-              <PlusCircle className="mr-2 h-4 w-4" />
-              New Project
-            </Button>
+           </div>
+        </section>
+      </main>
+
+      <footer className="bg-card border-t border-gray-800">
+        <div className="container mx-auto px-4 py-16">
+          <div className="grid md:grid-cols-2 lg:grid-cols-6 gap-8">
+            <div className="lg:col-span-2">
+              <div className="flex items-center gap-2 mb-4">
+                <DDIcon className="h-8 w-8 text-primary" />
+                <span className="text-xl font-bold">চর্চা</span>
+              </div>
+              <div className="flex gap-4 mb-4">
+                <a href="#" className="text-gray-400 hover:text-white"><Instagram /></a>
+                <a href="#" className="text-gray-400 hover:text-white"><Youtube /></a>
+                <a href="#" className="text-gray-400 hover:text-white"><Linkedin /></a>
+              </div>
+              <div className="text-sm text-gray-400 space-y-2">
+                <p className="flex items-center gap-2"><Phone className="h-4 w-4" /> 01825-302379</p>
+                <p className="flex items-center gap-2"><Mail className="h-4 w-4" /> info.chorcha@gmail.com</p>
+                <p>Dhaka, House-969, Road-09, Avenue-11, Mirpur DOHS, 1216</p>
+              </div>
+            </div>
+            {Object.entries(footerLinks).map(([title, links]) => (
+              <div key={title}>
+                <h4 className="font-semibold mb-4">{title}</h4>
+                <ul className="space-y-3">
+                  {links.map(link => (
+                    <li key={link}>
+                      <a href="#" className="text-sm text-gray-400 hover:text-white">{link}</a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
-            <div className="md:col-span-2 xl:col-span-3">
-              <Overview />
-            </div>
-            <div className="md:col-span-2 xl:col-span-1">
-              <QuickActions />
-            </div>
-            <div className="md:col-span-2 xl:col-span-3">
-              <RecentProjects />
-            </div>
-            <div className="md:col-span-2 xl:col-span-1">
-              <TeamMembers />
+          <div className="flex flex-col md:flex-row justify-between items-center mt-16 pt-8 border-t border-gray-800">
+            <p className="text-sm text-gray-500">&copy; 2024 Chorcha. All rights reserved.</p>
+            <div className="flex items-center gap-4 mt-4 md:mt-0">
+               <Button variant="outline" size="lg">
+                  <Play className="mr-2 h-5 w-5 fill-white" />
+                  Google Play
+                </Button>
+                <Button variant="outline" size="lg">
+                  <Apple className="mr-2 h-5 w-5 fill-white" />
+                  App Store
+                </Button>
             </div>
           </div>
-        </main>
-      </SidebarInset>
-    </SidebarProvider>
+        </div>
+      </footer>
+    </div>
   );
 }
