@@ -9,34 +9,20 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarMenuSub,
-  SidebarMenuSubButton,
-  SidebarMenuSubItem,
   SidebarProvider,
-  SidebarTrigger,
-  useSidebar,
 } from '@/components/ui/sidebar';
 import {
   Archive,
-  Bell,
-  ChevronRight,
   ClipboardList,
-  Contact,
-  CreditCard,
   History,
-  Home,
   LayoutDashboard,
   LogOut,
-  Settings,
-  Shield,
   Trophy,
   User,
   Users,
-  Wallet,
   Zap,
 } from 'lucide-react';
 import React from 'react';
-import { Button } from '@/components/ui/button';
 import { DDIcon } from '@/components/icons';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import Link from 'next/link';
@@ -139,5 +125,3 @@ export default function DashboardLayout({
     </SidebarProvider>
   );
 }
-
-    

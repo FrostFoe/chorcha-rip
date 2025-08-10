@@ -8,13 +8,9 @@ import {
   BookOpen,
   Calendar,
   ChevronDown,
-  ChevronRight,
-  ClipboardList,
   Cpu,
-  Home,
   PenSquare,
   Shield,
-  Star,
   Zap,
 } from 'lucide-react';
 import React from 'react';
@@ -36,27 +32,27 @@ const featureCards = [
 ];
 
 const leaderboardData = [
-  {
-    rank: 1765,
-    xp: 28,
-    name: 'Khaleda Akhter',
-    avatar: 'https://placehold.co/40x40/4ade80/000000.png',
-    fallback: 'KA',
+    {
+    rank: 1084,
+    xp: 43,
+    name: 'MD Mustakim Ali Raju',
+    avatar: 'https://placehold.co/40x40/c084fc/000000.png',
+    fallback: 'MR',
   },
   {
-    rank: 1766,
-    xp: 28,
+    rank: 1085,
+    xp: 43,
     name: 'Sysmad BCF-19 (YOU)',
-    avatar: 'https://placehold.co/40x40/60a5fa/000000.png',
+    avatar: 'https://placehold.co/40x40/ffffff/000000.png',
     fallback: 'SB',
     isCurrentUser: true,
   },
   {
-    rank: 1767,
-    xp: 27.6,
-    name: 'Mohammad Sourov',
-    avatar: 'https://placehold.co/40x40/f87171/000000.png',
-    fallback: 'MS',
+    rank: 1086,
+    xp: 42.8,
+    name: 'Arpita Sarker',
+    avatar: 'https://placehold.co/40x40/d2b48c/000000.png',
+    fallback: 'AS',
   },
 ];
 
