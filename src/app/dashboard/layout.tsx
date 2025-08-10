@@ -18,6 +18,7 @@ import {
   History,
   LayoutDashboard,
   LogOut,
+  Settings,
   Trophy,
   User,
   Users,
@@ -46,6 +47,7 @@ const menuItems = [
   { icon: History, text: 'হিস্ট্রি', href: '/dashboard/history' },
   { icon: Trophy, text: 'লিডারবোর্ড', href: '/dashboard/leaderboard' },
   { icon: User, text: 'প্রোফাইল', href: '/dashboard/profile' },
+  { icon: Settings, text: 'সেটিংস', href: '/dashboard/settings' },
 ];
 
 export default function DashboardLayout({
