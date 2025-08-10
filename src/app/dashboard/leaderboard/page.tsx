@@ -98,7 +98,7 @@ export default function LeaderboardPage() {
                  <div
                     key={player.rank}
                     className={`flex items-center p-4 rounded-lg ${
-                    player.isYou ? 'bg-red-900/50' : 'bg-card'
+                    player.isYou ? 'bg-primary/20' : 'bg-card'
                     }`}
                 >
                     <p className="text-lg font-bold w-12 text-center text-muted-foreground">{player.rank}</p>
