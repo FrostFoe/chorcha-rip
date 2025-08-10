@@ -68,29 +68,35 @@ export const GoogleIcon = (props: SVGProps<SVGSVGElement>) => (
 
 
 // Institution Icons
-export const SatCollegeIcon = (props: SVGProps<SVGSVGElement>) => <image href="https://placehold.co/32x32/ff6347/ff6347.png" {...props} width="32" height="32" />;
-export const BupIcon = (props: SVGProps<SVGSVGElement>) => <image href="https://placehold.co/32x32/ffeb3b/ffeb3b.png" {...props} width="32" height="32" />;
-export const MaritimeIcon = (props: SVGProps<SVGSVGElement>) => <image href="https://placehold.co/32x32/bdbdbd/bdbdbd.png" {...props} width="32" height="32" />;
-export const BuetIcon = (props: SVGProps<SVGSVGElement>) => <image href="https://placehold.co/32x32/f44336/f44336.png" {...props} width="32" height="32" />;
-export const GucchoIcon = (props: SVGProps<SVGSVGElement>) => <image href="https://placehold.co/32x32/2196f3/2196f3.png" {...props} width="32" height="32" />;
-export const RuetIcon = (props: SVGProps<SVGSVGElement>) => <image href="https://placehold.co/32x32/ffc107/ffc107.png" {...props} width="32" height="32" />;
-export const KuetIcon = (props: SVGProps<SVGSVGElement>) => <image href="https://placehold.co/32x32/4caf50/4caf50.png" {...props} width="32" height="32" />;
-export const CuetIcon = (props: SVGProps<SVGSVGElement>) => <image href="https://placehold.co/32x32/00bcd4/00bcd4.png" {...props} width="32" height="32" />;
-export const IutIcon = (props: SVGProps<SVGSVGElement>) => <image href="https://placehold.co/32x32/e91e63/e91e63.png" {...props} width="32" height="32" />;
-export const ButexIcon = (props: SVGProps<SVGSVGElement>) => <image href="https://placehold.co/32x32/f06292/f06292.png" {...props} width="32" height="32" />;
-export const MistIcon = (props: SVGProps<SVGSVGElement>) => <image href="https://placehold.co/32x32/9c27b0/9c27b0.png" {...props} width="32" height="32" />;
-export const MedicalIcon = (props: SVGProps<SVGSVGElement>) => <image href="https://placehold.co/32x32/8bc34a/8bc34a.png" {...props} width="32" height="32" />;
-export const DentalIcon = (props: SVGProps<SVGSVGElement>) => <image href="https://placehold.co/32x32/ff9800/ff9800.png" {...props} width="32" height="32" />;
-export const AfmcIcon = (props: SVGProps<SVGSVGElement>) => <image href="https://placehold.co/32x32/cddc39/cddc39.png" {...props} width="32" height="32" />;
-export const IbaIcon = (props: SVGProps<SVGSVGElement>) => <image href="https://placehold.co/32x32/3f51b5/3f51b5.png" {...props} width="32" height="32" />;
-export const NursingIcon = (props: SVGProps<SVGSVGElement>) => <image href="https://placehold.co/32x32/ffb300/ffb300.png" {...props} width="32" height="32" />;
-export const DuIcon = (props: SVGProps<SVGSVGElement>) => <image href="https://placehold.co/32x32/03a9f4/03a9f4.png" {...props} width="32" height="32" />;
-export const RuIcon = (props: SVGProps<SVGSVGElement>) => <image href="https://placehold.co/32x32/26a69a/26a69a.png" {...props} width="32" height="32" />;
-export const JuIcon = (props: SVGProps<SVGSVGElement>) => <image href="https://placehold.co/32x32/43a047/43a047.png" {...props} width="32" height="32" />;
-export const CuIcon = (props: SVGProps<SVGSVGElement>) => <image href="https://placehold.co/32x32/00acc1/00acc1.png" {...props} width="32" height="32" />;
-export const JnuIcon = (props: SVGProps<SVGSVGElement>) => <image href="https://placehold.co/32x32/c0ca33/c0ca33.png" {...props} width="32" height="32" />;
-export const AgriIcon = (props: SVGProps<SVGSVGElement>) => <image href="https://placehold.co/32x32/fbc02d/fbc02d.png" {...props} width="32" height="32" />;
-export const BcsIcon = (props: SVGProps<SVGSVGElement>) => <image href="https://placehold.co/32x32/f4511e/f4511e.png" {...props} width="32" height="32" />;
+const createIcon = (href: string) => (props: SVGProps<SVGSVGElement>) => (
+    <svg {...props} width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <image href={href} width="32" height="32" />
+    </svg>
+);
+
+export const SatCollegeIcon = createIcon("https://placehold.co/32x32/ff6347/ff6347.png");
+export const BupIcon = createIcon("https://placehold.co/32x32/ffeb3b/ffeb3b.png");
+export const MaritimeIcon = createIcon("https://placehold.co/32x32/bdbdbd/bdbdbd.png");
+export const BuetIcon = createIcon("https://placehold.co/32x32/f44336/f44336.png");
+export const GucchoIcon = createIcon("https://placehold.co/32x32/2196f3/2196f3.png");
+export const RuetIcon = createIcon("https://placehold.co/32x32/ffc107/ffc107.png");
+export const KuetIcon = createIcon("https://placehold.co/32x32/4caf50/4caf50.png");
+export const CuetIcon = createIcon("https://placehold.co/32x32/00bcd4/00bcd4.png");
+export const IutIcon = createIcon("https://placehold.co/32x32/e91e63/e91e63.png");
+export const ButexIcon = createIcon("https://placehold.co/32x32/f06292/f06292.png");
+export const MistIcon = createIcon("https://placehold.co/32x32/9c27b0/9c27b0.png");
+export const MedicalIcon = createIcon("https://placehold.co/32x32/8bc34a/8bc34a.png");
+export const DentalIcon = createIcon("https://placehold.co/32x32/ff9800/ff9800.png");
+export const AfmcIcon = createIcon("https://placehold.co/32x32/cddc39/cddc39.png");
+export const IbaIcon = createIcon("https://placehold.co/32x32/3f51b5/3f51b5.png");
+export const NursingIcon = createIcon("https://placehold.co/32x32/ffb300/ffb300.png");
+export const DuIcon = createIcon("https://placehold.co/32x32/03a9f4/03a9f4.png");
+export const RuIcon = createIcon("https://placehold.co/32x32/26a69a/26a69a.png");
+export const JuIcon = createIcon("https://placehold.co/32x32/43a047/43a047.png");
+export const CuIcon = createIcon("https://placehold.co/32x32/00acc1/00acc1.png");
+export const JnuIcon = createIcon("https://placehold.co/32x32/c0ca33/c0ca33.png");
+export const AgriIcon = createIcon("https://placehold.co/32x32/fbc02d/fbc02d.png");
+export const BcsIcon = createIcon("https://placehold.co/32x32/f4511e/f4511e.png");
 
 
 // Subject Icons
