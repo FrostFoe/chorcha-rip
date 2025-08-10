@@ -6,33 +6,60 @@ import {
   Archive,
   ArrowRight,
   BookOpen,
-  Calendar,
-  ChevronDown,
   Cpu,
   PenSquare,
-  Shield,
+  Trophy,
   Zap,
 } from 'lucide-react';
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Progress } from '@/components/ui/progress';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import Link from 'next/link';
 
 const featureCards = [
-  { icon: Archive, text: 'আর্কাইভ', color: 'bg-yellow-400/20 text-yellow-400' },
-  { icon: Zap, text: 'দ্রুত প্র্যাকটিস', color: 'bg-blue-400/20 text-blue-400' },
+  {
+    icon: Archive,
+    text: 'আর্কাইভ',
+    color: 'bg-yellow-400/20 text-yellow-400',
+    href: '/dashboard/question-bank',
+  },
+  {
+    icon: Zap,
+    text: 'দ্রুত প্র্যাকটিস',
+    color: 'bg-blue-400/20 text-blue-400',
+    href: '/dashboard/practice-exam',
+  },
   {
     icon: PenSquare,
     text: 'মক পরীক্ষা',
     color: 'bg-pink-400/20 text-pink-400',
+    href: '/dashboard/mock-exam',
   },
-  { icon: Calendar, text: 'রুটিন', color: 'bg-red-400/20 text-red-400' },
-  { icon: Cpu, text: 'চর্চা AI', color: 'bg-purple-400/20 text-purple-400' },
-  { icon: Shield, text: 'লিডারবোর্ড', color: 'bg-orange-400/20 text-orange-400' },
+  {
+    icon: BookOpen,
+    text: 'রুটিন',
+    color: 'bg-red-400/20 text-red-400',
+    href: '#',
+  },
+  { icon: Cpu, text: 'চর্চা AI', color: 'bg-purple-400/20 text-purple-400', href: '#' },
+  {
+    icon: Trophy,
+    text: 'লিডারবোর্ড',
+    color: 'bg-green-400/20 text-green-400',
+    href: '/dashboard/leaderboard',
+  },
 ];
 
 const leaderboardData = [
-    {
+  {
     rank: 1084,
     xp: 43,
     name: 'MD Mustakim Ali Raju',
@@ -57,13 +84,13 @@ const leaderboardData = [
 ];
 
 const progressData = [
-    { subject: 'পদার্থবিজ্ঞান', percentage: 0 },
-    { subject: 'রসায়ন', percentage: 0 },
-    { subject: 'উচ্চতর গণিত', percentage: 0 },
-    { subject: 'জীববিজ্ঞান', percentage: 0 },
-    { subject: 'বাংলা', percentage: 0 },
-    { subject: 'English', percentage: 0 },
-    { subject: 'সাধারণ জ্ঞান', percentage: 0 },
+  { subject: 'পদার্থবিজ্ঞান', percentage: 0 },
+  { subject: 'রসায়ন', percentage: 0 },
+  { subject: 'উচ্চতর গণিত', percentage: 0 },
+  { subject: 'জীববিজ্ঞান', percentage: 0 },
+  { subject: 'বাংলা', percentage: 0 },
+  { subject: 'English', percentage: 0 },
+  { subject: 'সাধারণ জ্ঞান', percentage: 0 },
 ];
 
 export default function DashboardPage() {
@@ -87,80 +114,87 @@ export default function DashboardPage() {
       <main className="p-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-3 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
           {featureCards.map((card, index) => (
-            <div
-              key={index}
-              className="bg-card p-6 rounded-xl flex flex-col items-center justify-center gap-4 hover:bg-primary/10 transition-colors cursor-pointer"
-            >
+            <Link href={card.href} key={index}>
               <div
-                className={`w-16 h-16 rounded-full flex items-center justify-center ${card.color}`}
+                className="bg-card p-6 rounded-xl flex flex-col items-center justify-center gap-4 hover:bg-primary/10 transition-colors cursor-pointer h-full"
               >
-                <card.icon className="w-8 h-8" />
+                <div
+                  className={`w-16 h-16 rounded-full flex items-center justify-center ${card.color}`}
+                >
+                  <card.icon className="w-8 h-8" />
+                </div>
+                <p className="font-semibold font-body text-center">{card.text}</p>
               </div>
-              <p className="font-semibold font-body">{card.text}</p>
-            </div>
+            </Link>
           ))}
         </div>
 
-        <div className="lg:col-span-2 bg-card p-6 rounded-xl">
-          <div className="flex justify-between items-center mb-4">
-            <div>
-              <h2 className="text-lg font-semibold font-body">লিডারবোর্ড</h2>
-              <p className="text-sm text-muted-foreground font-body">আয়রন লীগ</p>
+        <Card className="lg:col-span-2">
+          <CardHeader>
+            <div className="flex justify-between items-center">
+              <div>
+                <CardTitle className="font-body">লিডারবোর্ড</CardTitle>
+                <CardDescription className="font-body">আয়রন লীগ</CardDescription>
+              </div>
+              <Link href="/dashboard/leaderboard">
+                <Button variant="ghost" size="icon">
+                  <ArrowRight className="h-5 w-5" />
+                </Button>
+              </Link>
             </div>
-            <Button variant="ghost" size="icon">
-              <ArrowRight className="h-5 w-5" />
-            </Button>
-          </div>
-          <div className="space-y-2">
-            {leaderboardData.map((item) => (
-              <div
-                key={item.rank}
-                className={`flex items-center p-2 rounded-lg ${
-                  item.isCurrentUser ? 'bg-primary/20' : ''
-                }`}
-              >
-                <Avatar className="h-10 w-10 mr-4">
-                  <AvatarImage src={item.avatar} />
-                  <AvatarFallback>{item.fallback}</AvatarFallback>
-                </Avatar>
-                <p
-                  className={`flex-1 font-semibold font-body ${
-                    item.isCurrentUser ? 'text-primary' : ''
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-2">
+              {leaderboardData.map((item) => (
+                <div
+                  key={item.rank}
+                  className={`flex items-center p-2 rounded-lg ${
+                    item.isCurrentUser ? 'bg-secondary' : ''
                   }`}
                 >
-                  {item.name}
-                </p>
-                <div className="text-right">
-                  <p className="font-semibold">{item.rank}</p>
-                  <p className="text-sm text-muted-foreground">
-                    {item.xp} XP
+                  <p className="text-lg font-bold w-12 text-center text-muted-foreground">{item.rank}</p>
+                  <Avatar className="h-10 w-10 mr-4">
+                    <AvatarImage src={item.avatar} />
+                    <AvatarFallback>{item.fallback}</AvatarFallback>
+                  </Avatar>
+                  <p
+                    className={`flex-1 font-semibold font-body ${
+                      item.isCurrentUser ? 'text-primary' : ''
+                    }`}
+                  >
+                    {item.name}
                   </p>
+                  <div className="text-right">
+                    <p className="font-semibold">{item.xp} XP</p>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="bg-card p-6 rounded-xl">
-          <h2 className="text-lg font-semibold mb-4 font-body">প্রোগ্রেস রিপোর্ট</h2>
-            <div className="space-y-4">
-                {progressData.map((item, index) => (
-                    <div key={index}>
-                        <div className="flex justify-between items-center mb-1">
-                            <p className="text-sm font-medium font-body">{item.subject}</p>
-                            <div className="flex items-center gap-2">
-                                <p className="text-sm font-medium text-primary">{item.percentage}%</p>
-                                <button className="text-muted-foreground hover:text-foreground">
-                                    <ChevronDown className="h-4 w-4"/>
-                                </button>
-                            </div>
-                        </div>
-                        <Progress value={item.percentage} className="h-2"/>
-                    </div>
-                ))}
+              ))}
             </div>
-        </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle className="font-body">প্রোগ্রেস রিপোর্ট</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              {progressData.map((item, index) => (
+                <div key={index}>
+                  <div className="flex justify-between items-center mb-1">
+                    <p className="text-sm font-medium font-body">{item.subject}</p>
+                    <p className="text-sm font-medium text-primary">
+                      {item.percentage}%
+                    </p>
+                  </div>
+                  <Progress value={item.percentage} className="h-2" />
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
       </main>
     </div>
   );
 }
+
