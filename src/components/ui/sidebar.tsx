@@ -137,6 +137,10 @@ const SidebarProvider = React.forwardRef<
     
     // With this, we avoid hydration errors since the sidebar will only be rendered on the client.
     if (!mounted) {
+      const insetChild = React.Children.toArray(children).find(
+        (child) => React.isValidElement(child) && (child.type as any).displayName === "SidebarInset"
+      );
+      
       return (
          <div
             style={
@@ -150,13 +154,7 @@ const SidebarProvider = React.forwardRef<
             ref={ref}
             {...props}
           >
-            {/* Render only the inset/main content on the server */}
-            {React.Children.map(children, child => {
-              if (React.isValidElement(child) && (child.type as any).displayName === "SidebarInset") {
-                return child;
-              }
-              return null;
-            })}
+            {insetChild || null}
         </div>
       )
     }
@@ -793,9 +791,3 @@ export {
   SidebarTrigger,
   useSidebar,
 }
-
-    
-
-    
-
-    
