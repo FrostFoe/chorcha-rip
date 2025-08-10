@@ -55,7 +55,7 @@ const menuItems = [
   { icon: ClipboardList, text: 'মক পরীক্ষা', href: '#' },
   { icon: Zap, text: 'দ্রুত প্র্যাকটিস', href: '#' },
   { icon: Users, text: 'চর্চা কমিউনিটি', href: '#' },
-  { icon: Archive, text: 'আর্কাইভ', href: '#' },
+  { icon: Archive, text: 'আর্কাইভ', href: '/question-bank' },
   { icon: History, text: 'হিস্ট্রি', href: '#' },
   { icon: Trophy, text: 'লিডারবোর্ড', href: '#' },
   { icon: User, text: 'প্রোফাইল', href: '#' },
@@ -139,3 +139,5 @@ export default function DashboardLayout({
     </SidebarProvider>
   );
 }
+
+    
