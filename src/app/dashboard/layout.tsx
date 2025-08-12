@@ -45,6 +45,7 @@ import { Button } from '@/components/ui/button';
 
 const menuItems = [
   { icon: LayoutGrid, text: 'ড্যাশবোর্ড', href: '/dashboard' },
+  { icon: Bot, text: 'চর্চা AI', href: '/dashboard/chorcha-ai' },
   { icon: Swords, text: 'মক পরীক্ষা', href: '/dashboard/mock-exam' },
   { icon: Zap, text: 'দ্রুত প্র্যাকটিস', href: '/dashboard/practice-exam' },
   { icon: Users, text: 'চর্চা কমিউনিটি', href: '/dashboard/feed' },
@@ -98,6 +99,7 @@ export default function DashboardLayout({
               <DDIcon className="h-8 w-8 text-primary" />
               <span className="text-xl font-bold">চর্চা</span>
             </Link>
+             <div className="flex-1" />
             <SidebarTrigger className="ml-auto hidden md:flex" />
           </SidebarHeader>
           <SidebarContent>
@@ -123,7 +125,7 @@ export default function DashboardLayout({
           <div className="mt-auto p-2">
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <div className="flex items-center gap-3 p-2 rounded-lg hover:bg-muted cursor-pointer group-data-[collapsed]:p-0 group-data-[collapsed]:justify-center">
+                <div className="flex items-center gap-3 p-2 rounded-lg hover:bg-muted cursor-pointer group-data-[collapsed]:justify-center">
                   <Avatar className="h-10 w-10">
                     <AvatarImage
                       src="https://placehold.co/40x40.png"

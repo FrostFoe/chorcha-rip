@@ -51,7 +51,7 @@ const featureCards = [
     color: 'bg-red-400/20 text-red-400',
     href: '#',
   },
-  { icon: Bot, text: 'চর্চা AI', color: 'bg-purple-400/20 text-purple-400', href: '#' },
+  { icon: Bot, text: 'চর্চা AI', color: 'bg-purple-400/20 text-purple-400', href: '/dashboard/chorcha-ai' },
   {
     icon: Trophy,
     text: 'লিডারবোর্ড',
