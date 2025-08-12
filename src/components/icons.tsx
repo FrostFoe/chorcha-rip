@@ -22,49 +22,56 @@ export const DDIcon = (props: SVGProps<SVGSVGElement>) => (
 );
 
 export const FacebookIcon = (props: SVGProps<SVGSVGElement>) => (
-  <svg
-    {...props}
-    xmlns="http://www.w3.org/2000/svg"
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="#1877F2"
-    stroke="#1877F2"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-  </svg>
+    <svg 
+        {...props}
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+    >
+      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+    </svg>
 );
 
 export const GoogleIcon = (props: SVGProps<SVGSVGElement>) => (
-  <svg
-    {...props}
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M22.56 12.25C22.56 11.45 22.49 10.68 22.36 9.92H12V14.45H18.42C18.13 15.99 17.22 17.32 15.82 18.23V21.09H20.03C22.04 19.21 22.56 16.05 22.56 12.25Z"
-      fill="#4285F4"
-    />
-    <path
-      d="M12 23C14.97 23 17.45 22.04 19.28 20.42L15.82 18.23C14.81 18.89 13.51 19.26 12 19.26C9.13 19.26 6.69 17.38 5.75 14.8H1.38V17.68C3.23 20.93 7.27 23 12 23Z"
-      fill="#34A853"
-    />
-    <path
-      d="M5.75 14.8C5.54 14.22 5.42 13.61 5.42 13C5.42 12.39 5.54 11.78 5.75 11.2L1.38 8.32C0.5 10.05 0 11.47 0 13C0 14.53 0.5 15.95 1.38 17.68L5.75 14.8Z"
-      fill="#FBBC05"
-    />
-    <path
-      d="M12 6.74C13.66 6.74 15.09 7.35 16.03 8.23L19.35 4.91C17.45 3.1 14.97 2 12 2C7.27 2 3.23 4.07 1.38 7.32L5.75 10.2C6.69 7.62 9.13 5.74 12 5.74Z"
-      fill="#EA4335"
-    />
-  </svg>
+    <svg 
+        {...props}
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+    >
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+    </svg>
 );
+
+export const AppleIcon = (props: SVGProps<SVGSVGElement>) => (
+    <svg
+        {...props}
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+    >
+        <path d="M12 20.94c1.5 0 2.75 1.06 4 1.06 3 0 6-8 6-12.22A4.91 4.91 0 0 0 17 5c-2.22 0-4 1.44-5 2-1-.56-2.78-2-5-2a4.9 4.9 0 0 0-5 4.78C2 14 5 22 12 22z" />
+        <path d="M12 2a4.9 4.9 0 0 0-3 1.39c-1.39 1.55-2.78 4.39-2.78 6.31 0 2.22 1.39 4 2.78 4s2.78-1.78 2.78-4c0-1.92-1.39-4.76-2.78-6.31A4.9 4.9 0 0 0 12 2z" />
+    </svg>
+)
 
 
 // Institution Icons
@@ -273,5 +280,3 @@ export {
     BcsIcon,
     SatCollegeIcon
 };
-
-    

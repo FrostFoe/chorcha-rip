@@ -6,8 +6,10 @@ import {
   Archive,
   ArrowRight,
   BookOpen,
-  Cpu,
+  Bot,
+  Library,
   PenSquare,
+  Swords,
   Trophy,
   Zap,
 } from 'lucide-react';
@@ -26,7 +28,7 @@ import Link from 'next/link';
 
 const featureCards = [
   {
-    icon: Archive,
+    icon: Library,
     text: 'আর্কাইভ',
     color: 'bg-yellow-400/20 text-yellow-400',
     href: '/dashboard/question-bank',
@@ -38,7 +40,7 @@ const featureCards = [
     href: '/dashboard/practice-exam',
   },
   {
-    icon: PenSquare,
+    icon: Swords,
     text: 'মক পরীক্ষা',
     color: 'bg-pink-400/20 text-pink-400',
     href: '/dashboard/mock-exam',
@@ -49,7 +51,7 @@ const featureCards = [
     color: 'bg-red-400/20 text-red-400',
     href: '#',
   },
-  { icon: Cpu, text: 'চর্চা AI', color: 'bg-purple-400/20 text-purple-400', href: '#' },
+  { icon: Bot, text: 'চর্চা AI', color: 'bg-purple-400/20 text-purple-400', href: '#' },
   {
     icon: Trophy,
     text: 'লিডারবোর্ড',

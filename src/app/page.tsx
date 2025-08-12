@@ -3,7 +3,6 @@
 
 import Image from 'next/image';
 import {
-  Apple,
   ArrowRight,
   BookOpen,
   ChevronDown,
@@ -16,23 +15,27 @@ import {
   Play,
   Star,
   Youtube,
+  BookMarked
 } from 'lucide-react';
 import Link from 'next/link';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
-import { DDIcon } from '@/components/icons';
+import { DDIcon, GoogleIcon, AppleIcon } from '@/components/icons';
 import { Bar, BarChart, ResponsiveContainer } from 'recharts';
 import { Badge } from '@/components/ui/badge';
 import {
   Sheet,
   SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
 
 const navLinks = [
   { icon: Home, text: 'প্রশ্ন ব্যাংক', href: '/dashboard/question-bank' },
-  { icon: BookOpen, text: 'মক পরীক্ষা', href: '#' },
+  { icon: BookMarked, text: 'মক পরীক্ষা', href: '#' },
   { icon: Star, text: 'লিডারবোর্ড', href: '#' },
 ];
 
@@ -188,6 +191,12 @@ export default function HomePage() {
               </Button>
             </SheetTrigger>
             <SheetContent side="left">
+               <SheetHeader className="sr-only">
+                <SheetTitle>Menu</SheetTitle>
+                <SheetDescription>
+                  Navigate to different parts of the application.
+                </SheetDescription>
+              </SheetHeader>
               <div className="flex flex-col gap-8 p-8">
                 <Link href="/" className="flex items-center gap-2">
                   <DDIcon className="h-8 w-8 text-primary" />
@@ -230,11 +239,11 @@ export default function HomePage() {
               </p>
               <div className="flex items-center justify-center md:justify-start gap-4">
                 <Button variant="outline" size="lg">
-                  <Play className="mr-2 h-5 w-5" />
+                  <GoogleIcon className="mr-2 h-5 w-5" />
                   Google Play
                 </Button>
                 <Button variant="outline" size="lg">
-                  <Apple className="mr-2 h-5 w-5" />
+                  <AppleIcon className="mr-2 h-5 w-5" />
                   App Store
                 </Button>
               </div>
@@ -507,11 +516,11 @@ export default function HomePage() {
             <p className="text-sm text-gray-500">&copy; 2024 Chorcha. All rights reserved.</p>
             <div className="flex items-center gap-4 mt-4 md:mt-0">
                <Button variant="outline" size="lg">
-                  <Play className="mr-2 h-5 w-5" />
+                  <GoogleIcon className="mr-2 h-5 w-5" />
                   Google Play
                 </Button>
                 <Button variant="outline" size="lg">
-                  <Apple className="mr-2 h-5 w-5" />
+                  <AppleIcon className="mr-2 h-5 w-5" />
                   App Store
                 </Button>
             </div>
