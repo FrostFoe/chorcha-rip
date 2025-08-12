@@ -33,9 +33,12 @@ const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 30 // 30 days
 export function SidebarProvider({ children }: { children: React.ReactNode }) {
   const isMobile = useMediaQuery("(max-width: 768px)")
   const [isCollapsed, setCollapsed] = React.useState(true)
+  const [isMounted, setIsMounted] = React.useState(false);
+
 
   // Load initial state from cookie
   React.useEffect(() => {
+    setIsMounted(true);
     if (isMobile) {
       setCollapsed(true)
       return
@@ -69,6 +72,11 @@ export function SidebarProvider({ children }: { children: React.ReactNode }) {
         setCollapsed(true)
       }
   }, [isMobile])
+
+  if (!isMounted) {
+    return null; // Don't render on the server to avoid hydration mismatch
+  }
+
 
   return (
     <SidebarContext.Provider value={{ isCollapsed, isMobile, toggle }}>
@@ -199,7 +207,22 @@ export function SidebarMenuButton({
 }
 
 export function SidebarTrigger({ className }: { className?: string }) {
-  const { toggle } = useSidebar()
+  const { toggle, isMobile } = useSidebar()
+
+  if (isMobile) {
+    return (
+       <Button
+        variant="ghost"
+        size="icon"
+        className={cn("h-8 w-8", className)}
+        onClick={toggle}
+        aria-label="Toggle sidebar"
+      >
+        <PanelLeft />
+      </Button>
+    )
+  }
+
   return (
     <Button
       variant="ghost"

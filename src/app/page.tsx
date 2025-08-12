@@ -233,11 +233,11 @@ export default function HomePage() {
               <h1 className="text-5xl md:text-6xl font-bold text-primary leading-tight">
                 চর্চা করো নিজের গতিতে
               </h1>
-              <p className="text-gray-300 max-w-lg mx-auto md:mx-0">
-                নিজের প্রস্তুতির ধাপ গুলো محک করে নিন আমাদের সাথে। আন্তর্জাতিক
+              <div className="text-gray-300 max-w-lg mx-auto md:mx-0">
+                <p>নিজের প্রস্তুতির ধাপ গুলো محک করে নিন আমাদের সাথে। আন্তর্জাতিক
                 মানের পরীক্ষা পদ্ধতি এখন আপনার হাতের মুঠোয়। এছাড়া লাইভ পরীক্ষা
-                দেয়ার মাধ্যমে এখন দ্রুত প্রস্রুতি নেয়া সম্ভব।
-              </p>
+                দেয়ার মাধ্যমে এখন দ্রুত প্রস্রুতি নেয়া সম্ভব।</p>
+              </div>
               <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
                 <Button variant="outline" size="lg" className='w-full sm:w-auto'>
                   <GoogleIcon className="mr-2 h-5 w-5" />
@@ -276,9 +276,9 @@ export default function HomePage() {
                       className="bg-background/50 p-4 rounded-lg border border-border hover:border-primary transition-colors cursor-pointer"
                     >
                       <h3 className="font-semibold">{exam}</h3>
-                      <p className="text-sm text-muted-foreground mt-2">
-                        প্রশ্নঃ ১৪৩ <span className="mx-2">|</span> সময়ঃ ৪৫ মি.
-                      </p>
+                      <div className="text-sm text-muted-foreground mt-2">
+                        <span>প্রশ্নঃ ১৪৩</span> <span className="mx-2">|</span> <span>সময়ঃ ৪৫ মি.</span>
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -314,10 +314,10 @@ export default function HomePage() {
                 data-ai-hint="app screen"
               />
               <h3 className="text-xl font-semibold mt-2">মক পরীক্ষা</h3>
-              <p className="text-muted-foreground mt-2 text-sm max-w-xs">
-                দেশের সেরা প্রশ্নদাতাদের দ্বারা তৈরি করা প্রশ্নপত্রে পরীক্ষা
-                দিয়ে নিজের প্রস্তুতিকে করো আরও নিখুঁত।
-              </p>
+              <div className="text-muted-foreground mt-2 text-sm max-w-xs">
+                <p>দেশের সেরা প্রশ্নদাতাদের দ্বারা তৈরি করা প্রশ্নপত্রে পরীক্ষা
+                দিয়ে নিজের প্রস্তুতিকে করো আরও নিখুঁত।</p>
+              </div>
             </div>
             <div className="bg-card p-6 rounded-xl border border-border flex flex-col items-center text-center">
                <Image
@@ -329,11 +329,11 @@ export default function HomePage() {
                 data-ai-hint="app screen analysis"
               />
               <h3 className="text-xl font-semibold mt-2">ফলাফল বিশ্লেষণ</h3>
-              <p className="text-muted-foreground mt-2 text-sm max-w-xs">
-                প্রতিটি পরীক্ষার পর পেয়ে যাও পূর্ণাঙ্গ বিষয়ভিত্তিক ও
+              <div className="text-muted-foreground mt-2 text-sm max-w-xs">
+                <p>প্রতিটি পরীক্ষার পর পেয়ে যাও পূর্ণাঙ্গ বিষয়ভিত্তিক ও
                 প্রশ্নভিত্তিক বিশ্লেষণ, যা তোমাকে সাহায্য করবে নিজের দুর্বলতা খুঁজে
-                বের করতে।
-              </p>
+                বের করতে।</p>
+              </div>
             </div>
             <div className="bg-card p-6 rounded-xl border border-border flex flex-col items-center text-center">
               <Image
@@ -345,10 +345,10 @@ export default function HomePage() {
                 data-ai-hint="app screen leaderboard"
               />
               <h3 className="text-xl font-semibold mt-2">প্রশ্নব্যাংক বিশ্লেষণ</h3>
-              <p className="text-muted-foreground mt-2 text-sm max-w-xs">
-                বিগত বছরের প্রশ্নপত্রে পরীক্ষা দিয়ে বুঝে নাও প্রশ্নের ধরন এবং
-                নিজের প্রস্তুতিকে করো আরও শক্তিশালী।
-              </p>
+              <div className="text-muted-foreground mt-2 text-sm max-w-xs">
+                <p>বিগত বছরের প্রশ্নপত্রে পরীক্ষা দিয়ে বুঝে নাও প্রশ্নের ধরন এবং
+                নিজের প্রস্তুতিকে করো আরও শক্তিশালী।</p>
+              </div>
             </div>
           </div>
         </section>
@@ -414,13 +414,15 @@ export default function HomePage() {
 
         <section className="py-16">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-center mb-2">
-              আমাদের শিক্ষার্থীরা চর্চা সম্পর্কে যা বলছে
-            </h2>
-            <p className="text-center text-muted-foreground mb-8">
-              এরকম হাজারো শিক্ষার্থীর রিভিউ দেখতে পারেন আমাদের প্লে-স্টোর পেজে
-              গিয়ে।
-            </p>
+            <div className="text-center mb-8">
+                <h2 className="text-3xl font-bold mb-2">
+                আমাদের শিক্ষার্থীরা চর্চা সম্পর্কে যা বলছে
+                </h2>
+                <p className="text-muted-foreground">
+                এরকম হাজারো শিক্ষার্থীর রিভিউ দেখতে পারেন আমাদের প্লে-স্টোর পেজে
+                গিয়ে।
+                </p>
+            </div>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {testimonials.map((testimonial, index) => (
                 <div
@@ -430,36 +432,41 @@ export default function HomePage() {
                   }`}
                 >
                   {testimonial.isFirst ? (
-                    <div className="aspect-video bg-black rounded-md flex items-center justify-center mb-4 relative overflow-hidden">
-                      <Image
-                        src="https://placehold.co/600x400.png"
-                        layout="fill"
-                        objectFit="cover"
-                        alt="Youtube thumbnail"
-                        className="rounded-md"
-                        data-ai-hint="man presenting"
-                      />
-                      <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                         <Play className="h-12 w-12 text-red-600 fill-current" />
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="flex items-center gap-3 mb-4">
-                      <Avatar className="h-10 w-10">
-                        <AvatarImage src={testimonial.avatar} />
-                        <AvatarFallback>{testimonial.fallback}</AvatarFallback>
-                      </Avatar>
-                      <div>
-                        <p className="font-semibold">{testimonial.name}</p>
-                        <div className="flex text-yellow-400">
-                          {testimonial.rating && [...Array(testimonial.rating)].map((_, i) => (
-                            <Star key={i} className="h-4 w-4 fill-current" />
-                          ))}
+                    <div>
+                      <div className="aspect-video bg-black rounded-md flex items-center justify-center mb-4 relative overflow-hidden">
+                        <Image
+                          src="https://placehold.co/600x400.png"
+                          layout="fill"
+                          objectFit="cover"
+                          alt="Youtube thumbnail"
+                          className="rounded-md"
+                          data-ai-hint="man presenting"
+                        />
+                        <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                           <Play className="h-12 w-12 text-red-600 fill-current" />
                         </div>
                       </div>
+                       <p className="text-sm text-muted-foreground">{testimonial.text}</p>
+                    </div>
+                  ) : (
+                    <div>
+                      <div className="flex items-center gap-3 mb-4">
+                        <Avatar className="h-10 w-10">
+                          <AvatarImage src={testimonial.avatar} />
+                          <AvatarFallback>{testimonial.fallback}</AvatarFallback>
+                        </Avatar>
+                        <div>
+                          <p className="font-semibold">{testimonial.name}</p>
+                          <div className="flex text-yellow-400">
+                            {testimonial.rating && [...Array(testimonial.rating)].map((_, i) => (
+                              <Star key={i} className="h-4 w-4 fill-current" />
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                      <p className="text-sm text-muted-foreground">{testimonial.text}</p>
                     </div>
                   )}
-                  <p className="text-sm text-muted-foreground">{testimonial.text}</p>
                 </div>
               ))}
             </div>
@@ -495,8 +502,8 @@ export default function HomePage() {
                 <a href="#" className="text-gray-400 hover:text-white flex items-center justify-center"><Linkedin /></a>
               </div>
               <div className="text-sm text-muted-foreground space-y-2">
-                <p className="flex items-center gap-2"><Phone className="h-4 w-4" /> 01825-302379</p>
-                <p className="flex items-center gap-2"><Mail className="h-4 w-4" /> info.chorcha@gmail.com</p>
+                <div className="flex items-center gap-2"><Phone className="h-4 w-4" /> 01825-302379</div>
+                <div className="flex items-center gap-2"><Mail className="h-4 w-4" /> info.chorcha@gmail.com</div>
                 <p>Dhaka, House-969, Road-09, Avenue-11, Mirpur DOHS, 1216</p>
               </div>
             </div>

@@ -28,6 +28,7 @@ import {
 } from 'lucide-react';
 import { Calendar } from '@/components/ui/calendar';
 import { Button } from '@/components/ui/button';
+import { useEffect, useState } from 'react';
 
 const weeklyPointsData = [
   { day: 'S', points: 50 },
@@ -52,6 +53,14 @@ const progressData = [
 ];
 
 export default function ProfilePage() {
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
+
+  useEffect(() => {
+    // Set the selected date only on the client-side to avoid hydration mismatch
+    setSelectedDate(new Date(2025, 7, 10));
+  }, []);
+
+
   return (
     <div className="bg-background min-h-screen text-foreground p-6">
       <header className="flex justify-between items-center mb-6">
@@ -163,7 +172,8 @@ export default function ProfilePage() {
           <div className="bg-card p-4 rounded-lg">
             <Calendar
               mode="single"
-              selected={new Date(2025, 7, 10)}
+              selected={selectedDate}
+              onSelect={setSelectedDate}
               className="w-full"
               classNames={{
                 head_cell: 'w-full text-muted-foreground text-xs',

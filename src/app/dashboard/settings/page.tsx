@@ -76,9 +76,9 @@ export default function SettingsPage() {
               </div>
             </div>
             <h2 className="mt-4 text-lg font-semibold">Sysmad BCF-19</h2>
-            <p className="text-sm text-muted-foreground">
+            <div className="text-sm text-muted-foreground">
               zhour1060@gmail.com
-            </p>
+            </div>
             <Badge
               variant="destructive"
               className="mt-2 bg-red-500/20 text-red-400 border border-red-500/30"
