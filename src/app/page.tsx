@@ -234,8 +234,7 @@ export default function HomePage() {
               </h1>
               <p className="text-gray-300 max-w-lg mx-auto md:mx-0">
                 নিজের প্রস্তুতির ধাপ গুলো যাচাই করে নাও আমাদের সাথে। আন্তর্জাতিক
-                মানের পরীক্ষা পদ্ধতি এখন তোমার হাতের মুঠোয়। এছাড়া লাইভ পরীক্ষা
-                দেয়ার মাধ্যমে এখন দ্রুত প্রস্তুতি নেয়া সম্ভব।
+                মানের পরীক্ষা পদ্ধতি এখন তোমার হাতের মুঠোয়।
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
                 <Button variant="outline" size="lg" className='w-full sm:w-auto'>
@@ -284,7 +283,7 @@ export default function HomePage() {
               </div>
               <div className="lg:col-span-2">
                 <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-2xl font-semibold">প্রশ্নব্যাংক বিশ্লেষণ</h2>
+                  <h2 className="text-2xl font-semibold">প্রশ্নব্যাংক এনালাইসিস</h2>
                   <Button variant="secondary" size="sm">
                     আরো <ChevronDown className="ml-2 h-4 w-4" />
                   </Button>
@@ -343,7 +342,7 @@ export default function HomePage() {
                 className="mb-4 rounded-2xl"
                 data-ai-hint="app screen leaderboard"
               />
-              <h3 className="text-xl font-semibold mt-2">প্রশ্নব্যাংক বিশ্লেষণ</h3>
+              <h3 className="text-xl font-semibold mt-2">প্রশ্নব্যাংক এনালাইসিস</h3>
               <p className="text-muted-foreground mt-2 text-sm max-w-xs">
                 বিগত বছরের প্রশ্নপত্রে পরীক্ষা দিয়ে বুঝে নাও প্রশ্নের ধরন এবং
                 নিজের প্রস্তুতিকে করো আরও শক্তিশালী।

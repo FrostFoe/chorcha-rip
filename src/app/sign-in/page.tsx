@@ -65,7 +65,7 @@ export default function SignInPage() {
     <div className="flex min-h-screen flex-col items-center justify-center bg-[#1D1D1D] p-4 text-white">
       <div className="w-full max-w-sm text-center">
         <DDIcon className="mx-auto h-12 w-12 text-white" />
-        <h1 className="mt-4 text-xl font-medium">রেজিস্ট্রেশন/ লগ ইন</h1>
+        <h1 className="mt-4 text-xl font-medium">রেজিস্ট্রেশন / লগইন</h1>
 
         <div className="mt-12 text-left">
           <label htmlFor="phone" className="text-sm font-medium">

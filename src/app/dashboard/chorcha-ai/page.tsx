@@ -28,7 +28,7 @@ export default function ChorchaAIPage() {
             <div className="bg-muted p-4 rounded-lg max-w-2xl">
               <p className="font-semibold mb-2">Chorcha AI</p>
               <p>
-                Hello! I am Chorcha AI, your personal academic assistant. How can I help you with your studies today? You can ask me to explain a concept, solve a problem, or quiz you on a topic.
+                হ্যালো! আমি চর্চা AI, তোমার পার্সোনাল একাডেমিক অ্যাসিস্ট্যান্ট। তোমার পড়াশোনা সংক্রান্ত যেকোনো প্রয়োজনে আমি সাহায্য করতে পারি। তুমি আমাকে যেকোনো টপিক বুঝিয়ে দিতে বলতে পারো, কোনো সমস্যার সমাধান চাইতে পারো, অথবা কোনো বিষয়ে তোমার পরীক্ষা নিতে বলতে পারো।
               </p>
             </div>
           </div>

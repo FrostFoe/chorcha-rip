@@ -94,7 +94,7 @@ export default function FeedPage() {
               </Button>
             </div>
             <p className="mb-4 font-body">
-              Kokhon Cathode agay Bose ar kokhon anode agay Bose?
+              কখন ক্যাথাোড আগে বসে আর কখন অ্যানোড আগে বসে?
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2">

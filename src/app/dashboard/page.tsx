@@ -129,7 +129,7 @@ export default function DashboardPage() {
           <CardHeader>
             <div className="flex justify-between items-center">
               <div>
-                <CardTitle className="font-body">লিডারবোর্ড</CardTitle>
+                <CardTitle className="font-body">লিডারবোর্ড - আয়রন লীগ</CardTitle>
                 <CardDescription className="font-body">আয়রন লীগ</CardDescription>
               </div>
               <Link href="/dashboard/leaderboard">
