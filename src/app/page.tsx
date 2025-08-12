@@ -1,4 +1,3 @@
-
 'use client';
 
 import Image from 'next/image';
@@ -146,7 +145,13 @@ const testimonials = [
 
 const footerLinks = {
   Features: ['Mock Exam', 'Question Bank', 'Leaderboard'],
-  Streams: ['SSC Science', 'HSC Science', 'HSC Arts', 'HSC Commerce', 'BCS/Job'],
+  Streams: [
+    'SSC Science',
+    'HSC Science',
+    'HSC Arts',
+    'HSC Commerce',
+    'BCS/Job',
+  ],
   Company: ['About', 'Affiliate', 'Jobs', 'FAQ'],
   Legal: [
     'Terms & Conditions',
@@ -157,20 +162,29 @@ const footerLinks = {
   ],
 };
 
-const DynamicFeaturesSection = dynamic(() => import('@/components/landing/features-section'), {
-  loading: () => <Skeleton className="h-[400px] w-full" />,
-});
-
-const DynamicPracticeSection = dynamic(() => import('@/components/landing/practice-section'), {
+const DynamicFeaturesSection = dynamic(
+  () => import('@/components/landing/features-section'),
+  {
     loading: () => <Skeleton className="h-[400px] w-full" />,
-});
+  }
+);
 
-const DynamicTestimonialsSection = dynamic(() => import('@/components/landing/testimonials-section'), {
+const DynamicPracticeSection = dynamic(
+  () => import('@/components/landing/practice-section'),
+  {
     loading: () => <Skeleton className="h-[400px] w-full" />,
-});
+  }
+);
+
+const DynamicTestimonialsSection = dynamic(
+  () => import('@/components/landing/testimonials-section'),
+  {
+    loading: () => <Skeleton className="h-[400px] w-full" />,
+  }
+);
 
 const DynamicFooter = dynamic(() => import('@/components/landing/footer'), {
-    loading: () => <Skeleton className="h-[400px] w-full" />,
+  loading: () => <Skeleton className="h-[400px] w-full" />,
 });
 
 export default function HomePage() {
@@ -254,11 +268,19 @@ export default function HomePage() {
                 মানের পরীক্ষা পদ্ধতি এখন তোমার হাতের মুঠোয়।
               </p>
               <div className="flex flex-col items-center justify-center gap-4 sm:flex-row md:justify-start">
-                <Button variant="outline" size="lg" className="w-full sm:w-auto">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="w-full sm:w-auto"
+                >
                   <GoogleIcon className="mr-2 h-5 w-5" />
                   Google Play
                 </Button>
-                <Button variant="outline" size="lg" className="w-full sm:w-auto">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="w-full sm:w-auto"
+                >
                   <AppleIcon className="mr-2 h-5 w-5" />
                   App Store
                 </Button>
@@ -287,9 +309,7 @@ export default function HomePage() {
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
                   {examCategories.map((exam, index) => (
                     <AnimatedCard key={index}>
-                      <div
-                        className="cursor-pointer rounded-lg border border-border bg-background/50 p-4 transition-colors hover:border-primary h-full"
-                      >
+                      <div className="cursor-pointer rounded-lg border border-border bg-background/50 p-4 transition-colors hover:border-primary h-full">
                         <h3 className="font-semibold">{exam}</h3>
                         <div className="mt-2 text-sm text-muted-foreground">
                           <span>প্রশ্নঃ ১৪৩</span>{' '}
@@ -325,7 +345,7 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-        
+
         <DynamicFeaturesSection />
         <DynamicPracticeSection />
         <DynamicTestimonialsSection />

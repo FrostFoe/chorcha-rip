@@ -1,4 +1,3 @@
-
 'use client';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -7,11 +6,9 @@ import { Input } from '@/components/ui/input';
 import { Paperclip, Send, Sparkles } from 'lucide-react';
 
 export default function ChorchaAIPage() {
-
   const handleNewChat = () => {
     // In a real app, this would clear the chat state
   };
-
 
   return (
     <div className="flex flex-col h-full bg-background text-foreground p-6">
@@ -47,32 +44,29 @@ export default function ChorchaAIPage() {
         </div>
 
         <div className="mt-auto">
-            <form
-              onSubmit={(e) => e.preventDefault()}
-              className="relative"
-            >
-               <Input
-                placeholder="Ask me anything about your studies..."
-                className="bg-background border-border h-14 pl-12 pr-24"
-              />
+          <form onSubmit={(e) => e.preventDefault()} className="relative">
+            <Input
+              placeholder="Ask me anything about your studies..."
+              className="bg-background border-border h-14 pl-12 pr-24"
+            />
 
-              <div className="absolute left-4 top-1/2 -translate-y-1/2">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="text-muted-foreground"
-                  type="button"
-                  disabled
-                >
-                  <Paperclip className="h-5 w-5" />
-                </Button>
-              </div>
-              <div className="absolute right-4 top-1/2 -translate-y-1/2">
-                <Button size="icon" className="h-10 w-10" type="submit">
-                  <Send className="h-5 w-5" />
-                </Button>
-              </div>
-            </form>
+            <div className="absolute left-4 top-1/2 -translate-y-1/2">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="text-muted-foreground"
+                type="button"
+                disabled
+              >
+                <Paperclip className="h-5 w-5" />
+              </Button>
+            </div>
+            <div className="absolute right-4 top-1/2 -translate-y-1/2">
+              <Button size="icon" className="h-10 w-10" type="submit">
+                <Send className="h-5 w-5" />
+              </Button>
+            </div>
+          </form>
 
           <p className="text-xs text-muted-foreground mt-2 text-center">
             Chorcha AI can make mistakes. Consider checking important

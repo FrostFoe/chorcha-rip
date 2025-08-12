@@ -1,4 +1,3 @@
-
 'use client';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -76,7 +75,12 @@ export default function FeedPage() {
                 <SelectItem value="chapter5">অধ্যায় ৫</SelectItem>
               </SelectContent>
             </Select>
-            <Button variant="ghost" className="text-muted-foreground self-end sm:self-center">Next</Button>
+            <Button
+              variant="ghost"
+              className="text-muted-foreground self-end sm:self-center"
+            >
+              Next
+            </Button>
           </div>
         </div>
 
@@ -85,7 +89,10 @@ export default function FeedPage() {
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-3">
                 <Avatar>
-                  <AvatarImage src="https://placehold.co/40x40/22c55e/ffffff.png" alt="Ëndý Rozario" />
+                  <AvatarImage
+                    src="https://placehold.co/40x40/22c55e/ffffff.png"
+                    alt="Ëndý Rozario"
+                  />
                   <AvatarFallback>ER</AvatarFallback>
                 </Avatar>
                 <div>
@@ -93,7 +100,9 @@ export default function FeedPage() {
                     <p className="font-semibold">Ëndý Rozario</p>
                     <CheckCircle2 className="h-4 w-4 text-primary" />
                   </div>
-                  <p className="text-xs text-muted-foreground">25 minutes ago</p>
+                  <p className="text-xs text-muted-foreground">
+                    25 minutes ago
+                  </p>
                 </div>
               </div>
               <Button variant="ghost" size="icon">
@@ -105,62 +114,95 @@ export default function FeedPage() {
             </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2">
-             <Image
-                src="https://placehold.co/600x400.png"
-                alt="Feed image 1"
-                width={300}
-                height={200}
-                className="w-full h-auto"
-                data-ai-hint="handwritten notes"
-              />
-               <Image
-                src="https://placehold.co/600x400.png"
-                alt="Feed image 2"
-                width={300}
-                height={200}
-                className="w-full h-auto"
-                data-ai-hint="handwritten notes"
-              />
+            <Image
+              src="https://placehold.co/600x400.png"
+              alt="Feed image 1"
+              width={300}
+              height={200}
+              className="w-full h-auto"
+              data-ai-hint="handwritten notes"
+            />
+            <Image
+              src="https://placehold.co/600x400.png"
+              alt="Feed image 2"
+              width={300}
+              height={200}
+              className="w-full h-auto"
+              data-ai-hint="handwritten notes"
+            />
           </div>
           <div className="p-4">
             <p className="text-sm text-muted-foreground mb-2">1 Like</p>
             <div className="border-t border-b border-border py-1 flex justify-around">
-                <Button variant="ghost" className="w-full text-muted-foreground hover:text-foreground hover:bg-transparent">
-                    <ThumbsUp className="h-5 w-5 mr-2"/>
-                    Like
-                </Button>
-                <Button variant="ghost" className="w-full text-muted-foreground hover:text-foreground">
-                    <MessageCircle className="h-5 w-5 mr-2"/>
-                    Comment
-                </Button>
+              <Button
+                variant="ghost"
+                className="w-full text-muted-foreground hover:text-foreground hover:bg-transparent"
+              >
+                <ThumbsUp className="h-5 w-5 mr-2" />
+                Like
+              </Button>
+              <Button
+                variant="ghost"
+                className="w-full text-muted-foreground hover:text-foreground"
+              >
+                <MessageCircle className="h-5 w-5 mr-2" />
+                Comment
+              </Button>
             </div>
             <div className="flex items-center gap-3 mt-4">
-                <Avatar className="h-8 w-8">
-                    <AvatarImage src="https://placehold.co/40x40.png" alt="User avatar" />
-                    <AvatarFallback>SB</AvatarFallback>
-                </Avatar>
-                <div className="relative flex-1">
-                    <Input placeholder="Write your answer" className="bg-background border-border rounded-full pr-16"/>
-                    <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-2">
-                        <Button variant="ghost" size="icon" className="h-7 w-7 rounded-full text-muted-foreground"><Smile className="h-5 w-5"/></Button>
-                        <Button variant="ghost" size="icon" className="h-7 w-7 rounded-full text-muted-foreground"><ImageIcon className="h-5 w-5"/></Button>
-                    </div>
+              <Avatar className="h-8 w-8">
+                <AvatarImage
+                  src="https://placehold.co/40x40.png"
+                  alt="User avatar"
+                />
+                <AvatarFallback>SB</AvatarFallback>
+              </Avatar>
+              <div className="relative flex-1">
+                <Input
+                  placeholder="Write your answer"
+                  className="bg-background border-border rounded-full pr-16"
+                />
+                <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-2">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-7 w-7 rounded-full text-muted-foreground"
+                  >
+                    <Smile className="h-5 w-5" />
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-7 w-7 rounded-full text-muted-foreground"
+                  >
+                    <ImageIcon className="h-5 w-5" />
+                  </Button>
                 </div>
+              </div>
             </div>
-             <div className="flex items-start gap-3 mt-4">
-                <Avatar className="h-8 w-8">
-                    <AvatarImage src="https://placehold.co/40x40/3dd579/ffffff.png" alt="User avatar" />
-                    <AvatarFallback>T</AvatarFallback>
-                </Avatar>
-                <div className="flex-1">
-                    <div className="flex items-center justify-between">
-                         <div className="flex items-center gap-1">
-                            <p className="font-semibold">Tanvir</p>
-                            <CheckCircle2 className="h-4 w-4 text-primary" />
-                        </div>
-                         <Button variant="ghost" size="icon" className="h-7 w-7 rounded-full text-muted-foreground"><MoreHorizontal className="h-5 w-5"/></Button>
-                    </div>
+            <div className="flex items-start gap-3 mt-4">
+              <Avatar className="h-8 w-8">
+                <AvatarImage
+                  src="https://placehold.co/40x40/3dd579/ffffff.png"
+                  alt="User avatar"
+                />
+                <AvatarFallback>T</AvatarFallback>
+              </Avatar>
+              <div className="flex-1">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-1">
+                    <p className="font-semibold">Tanvir</p>
+                    <CheckCircle2 className="h-4 w-4 text-primary" />
+                  </div>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-7 w-7 rounded-full text-muted-foreground"
+                  >
+                    <MoreHorizontal className="h-5 w-5" />
+                  </Button>
                 </div>
+              </div>
             </div>
           </div>
         </div>

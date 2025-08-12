@@ -1,4 +1,3 @@
-
 'use client';
 
 import { Button } from '@/components/ui/button';
@@ -13,7 +12,12 @@ interface SettingsLinkProps {
   badge?: number;
 }
 
-export const SettingsLink: React.FC<SettingsLinkProps> = ({ icon: Icon, text, color, badge }) => {
+export const SettingsLink: React.FC<SettingsLinkProps> = ({
+  icon: Icon,
+  text,
+  color,
+  badge,
+}) => {
   return (
     <Button
       variant="ghost"
@@ -26,8 +30,11 @@ export const SettingsLink: React.FC<SettingsLinkProps> = ({ icon: Icon, text, co
       </div>
       <span className="flex-1 text-left">{text}</span>
       {badge !== undefined && (
-        <Badge variant="secondary" className={`${badge > 0 ? 'bg-blue-500/20 text-blue-300' : ''} rounded-full`}>
-            {badge}
+        <Badge
+          variant="secondary"
+          className={`${badge > 0 ? 'bg-blue-500/20 text-blue-300' : ''} rounded-full`}
+        >
+          {badge}
         </Badge>
       )}
       <ChevronRight className="h-5 w-5 text-muted-foreground" />

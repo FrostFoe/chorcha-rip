@@ -1,4 +1,3 @@
-
 'use client';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -68,7 +67,10 @@ export default function SettingsPage() {
           <div className="flex flex-col items-center text-center">
             <div className="relative">
               <Avatar className="w-24 h-24">
-                <AvatarImage src="https://placehold.co/96x96/ffffff/000000.png" alt="Sysmad BCF-19" />
+                <AvatarImage
+                  src="https://placehold.co/96x96/ffffff/000000.png"
+                  alt="Sysmad BCF-19"
+                />
                 <AvatarFallback>SB</AvatarFallback>
               </Avatar>
               <div className="absolute bottom-0 right-0 bg-green-500 p-1.5 rounded-full border-2 border-background">
@@ -76,9 +78,7 @@ export default function SettingsPage() {
               </div>
             </div>
             <h2 className="mt-4 text-lg font-semibold">Sysmad BCF-19</h2>
-            <p className="text-sm text-muted-foreground">
-              test@example.com
-            </p>
+            <p className="text-sm text-muted-foreground">test@example.com</p>
             <Badge
               variant="destructive"
               className="mt-2 bg-red-500/20 text-red-400 border border-red-500/30"
@@ -102,7 +102,7 @@ export default function SettingsPage() {
             </h3>
             <div className="space-y-1">
               {contentLinks.map((link) => (
-                 <SettingsLink key={link.text} {...link} />
+                <SettingsLink key={link.text} {...link} />
               ))}
             </div>
           </div>
@@ -113,12 +113,12 @@ export default function SettingsPage() {
             </h3>
             <div className="space-y-1">
               {infoLinks.map((link) => (
-                 <SettingsLink key={link.text} {...link} />
+                <SettingsLink key={link.text} {...link} />
               ))}
             </div>
           </div>
 
-           <div>
+          <div>
             <h3 className="text-xs text-muted-foreground font-semibold uppercase tracking-wider mb-2 px-4">
               Actions
             </h3>
@@ -134,15 +134,38 @@ export default function SettingsPage() {
           <h2 className="text-lg font-semibold mb-6">ব্যক্তিগত তথ্য</h2>
           <form className="space-y-6">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-muted-foreground mb-1">নাম</label>
-              <Input id="name" defaultValue="Sysmad BCF-19" className="bg-background" />
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-muted-foreground mb-1"
+              >
+                নাম
+              </label>
+              <Input
+                id="name"
+                defaultValue="Sysmad BCF-19"
+                className="bg-background"
+              />
             </div>
             <div>
-              <label htmlFor="institution" className="block text-sm font-medium text-muted-foreground mb-1">শিক্ষা প্রতিষ্ঠানের নাম</label>
-              <Input id="institution" placeholder="তোমার শিক্ষা প্রতিষ্ঠানের নাম লিখো..." className="bg-background" />
+              <label
+                htmlFor="institution"
+                className="block text-sm font-medium text-muted-foreground mb-1"
+              >
+                শিক্ষা প্রতিষ্ঠানের নাম
+              </label>
+              <Input
+                id="institution"
+                placeholder="তোমার শিক্ষা প্রতিষ্ঠানের নাম লিখো..."
+                className="bg-background"
+              />
             </div>
             <div>
-              <label htmlFor="type" className="block text-sm font-medium text-muted-foreground mb-1">Type</label>
+              <label
+                htmlFor="type"
+                className="block text-sm font-medium text-muted-foreground mb-1"
+              >
+                Type
+              </label>
               <Select defaultValue="hsc-science">
                 <SelectTrigger id="type" className="bg-background">
                   <SelectValue />
@@ -155,33 +178,77 @@ export default function SettingsPage() {
               </Select>
             </div>
             <div>
-              <label htmlFor="phone" className="block text-sm font-medium text-muted-foreground mb-1">Phone</label>
+              <label
+                htmlFor="phone"
+                className="block text-sm font-medium text-muted-foreground mb-1"
+              >
+                Phone
+              </label>
               <div className="relative">
-                <Input id="phone" defaultValue="test@example.com" readOnly className="bg-background pr-10" />
+                <Input
+                  id="phone"
+                  defaultValue="test@example.com"
+                  readOnly
+                  className="bg-background pr-10"
+                />
                 <div className="absolute inset-y-0 right-0 flex items-center pr-3">
-                   <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center">
-                     <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
-                   </div>
+                  <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="12"
+                      height="12"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="white"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path d="M20 6 9 17l-5-5" />
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
 
             <div className="border-t border-border pt-6">
-                 <h2 className="text-lg font-semibold">পাসওয়ার্ড</h2>
-                 <p className="text-sm text-muted-foreground mb-4">পরিবর্তন করতে না চাইলে খালি রাখো</p>
-                 <div className="space-y-6">
-                    <div>
-                        <label htmlFor="new-password" className="block text-sm font-medium text-muted-foreground mb-1">New Password</label>
-                        <Input id="new-password" type="password" className="bg-background"/>
-                    </div>
-                     <div>
-                        <label htmlFor="confirm-password" className="block text-sm font-medium text-muted-foreground mb-1">Confirm New Password</label>
-                        <Input id="confirm-password" type="password" className="bg-background"/>
-                    </div>
-                 </div>
+              <h2 className="text-lg font-semibold">পাসওয়ার্ড</h2>
+              <p className="text-sm text-muted-foreground mb-4">
+                পরিবর্তন করতে না চাইলে খালি রাখো
+              </p>
+              <div className="space-y-6">
+                <div>
+                  <label
+                    htmlFor="new-password"
+                    className="block text-sm font-medium text-muted-foreground mb-1"
+                  >
+                    New Password
+                  </label>
+                  <Input
+                    id="new-password"
+                    type="password"
+                    className="bg-background"
+                  />
+                </div>
+                <div>
+                  <label
+                    htmlFor="confirm-password"
+                    className="block text-sm font-medium text-muted-foreground mb-1"
+                  >
+                    Confirm New Password
+                  </label>
+                  <Input
+                    id="confirm-password"
+                    type="password"
+                    className="bg-background"
+                  />
+                </div>
+              </div>
             </div>
 
-            <Button type="submit" className="bg-primary hover:bg-primary/90">Submit</Button>
+            <Button type="submit" className="bg-primary hover:bg-primary/90">
+              Submit
+            </Button>
           </form>
         </div>
       </main>

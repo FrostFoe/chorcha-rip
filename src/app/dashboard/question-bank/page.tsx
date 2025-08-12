@@ -1,4 +1,3 @@
-
 'use client';
 
 import { Button } from '@/components/ui/button';
@@ -136,30 +135,30 @@ const subjectCards = [
 ];
 
 const institutionCards = [
-    { name: 'বিইউপি', icon: <BupIcon />, color: '#B3A533' },
-    { name: 'মেরিটাইম', icon: <MaritimeIcon />, color: '#5597B3' },
-    { name: 'বুয়েট', icon: <BuetIcon />, color: '#B32A2F' },
-    { name: 'গুচ্ছ ইঞ্জিঃ', icon: <GucchoIcon />, color: '#277AB3' },
-    { name: 'রুয়েট', icon: <RuetIcon />, color: '#B39127' },
-    { name: 'কুয়েট', icon: <KuetIcon />, color: '#3FB344' },
-    { name: 'চুয়েট', icon: <CuetIcon />, color: '#27ABB3' },
-    { name: 'আইইউটি', icon: <IutIcon />, color: '#B3275B' },
-    { name: 'বুটেক্স', icon: <ButexIcon />, color: '#B3275B' },
-    { name: 'এমআইএসটি', icon: <MistIcon />, color: '#7727B3' },
-    { name: 'মেডিকেল', icon: <MedicalIcon />, color: '#68B327' },
-    { name: 'ডেন্টাল', icon: <DentalIcon />, color: '#B36E27' },
-    { name: 'এএফএমসি', icon: <AfmcIcon />, color: '#97B327' },
-    { name: 'আইবিএ', icon: <IbaIcon />, color: '#2736B3' },
-    { name: 'নার্সিং', icon: <NursingIcon />, color: '#B39127' },
-    { name: 'গুচ্ছ', icon: <GucchoIcon />, color: '#B3277A' },
-    { name: 'ঢাবি', icon: <DuIcon />, color: '#2797B3' },
-    { name: 'রাবি', icon: <RuIcon />, color: '#27B38F' },
-    { name: 'জাবি', icon: <JuIcon />, color: '#27B336' },
-    { name: 'চবি', icon: <CuIcon />, color: '#27B3AF' },
-    { name: 'জবি', icon: <JnuIcon />, color: '#97B327' },
-    { name: 'কৃষি গুচ্ছ', icon: <AgriIcon />, color: '#B39127' },
-    { name: 'বিসিএস', icon: <BcsIcon />, color: '#B32A2F' },
-    { name: 'শাবিপ্রবি', icon: <SatCollegeIcon />, color: '#B3A533' },
+  { name: 'বিইউপি', icon: <BupIcon />, color: '#B3A533' },
+  { name: 'মেরিটাইম', icon: <MaritimeIcon />, color: '#5597B3' },
+  { name: 'বুয়েট', icon: <BuetIcon />, color: '#B32A2F' },
+  { name: 'গুচ্ছ ইঞ্জিঃ', icon: <GucchoIcon />, color: '#277AB3' },
+  { name: 'রুয়েট', icon: <RuetIcon />, color: '#B39127' },
+  { name: 'কুয়েট', icon: <KuetIcon />, color: '#3FB344' },
+  { name: 'চুয়েট', icon: <CuetIcon />, color: '#27ABB3' },
+  { name: 'আইইউটি', icon: <IutIcon />, color: '#B3275B' },
+  { name: 'বুটেক্স', icon: <ButexIcon />, color: '#B3275B' },
+  { name: 'এমআইএসটি', icon: <MistIcon />, color: '#7727B3' },
+  { name: 'মেডিকেল', icon: <MedicalIcon />, color: '#68B327' },
+  { name: 'ডেন্টাল', icon: <DentalIcon />, color: '#B36E27' },
+  { name: 'এএফএমসি', icon: <AfmcIcon />, color: '#97B327' },
+  { name: 'আইবিএ', icon: <IbaIcon />, color: '#2736B3' },
+  { name: 'নার্সিং', icon: <NursingIcon />, color: '#B39127' },
+  { name: 'গুচ্ছ', icon: <GucchoIcon />, color: '#B3277A' },
+  { name: 'ঢাবি', icon: <DuIcon />, color: '#2797B3' },
+  { name: 'রাবি', icon: <RuIcon />, color: '#27B38F' },
+  { name: 'জাবি', icon: <JuIcon />, color: '#27B336' },
+  { name: 'চবি', icon: <CuIcon />, color: '#27B3AF' },
+  { name: 'জবি', icon: <JnuIcon />, color: '#97B327' },
+  { name: 'কৃষি গুচ্ছ', icon: <AgriIcon />, color: '#B39127' },
+  { name: 'বিসিএস', icon: <BcsIcon />, color: '#B32A2F' },
+  { name: 'শাবিপ্রবি', icon: <SatCollegeIcon />, color: '#B3A533' },
 ];
 
 export default function QuestionBankPage() {
@@ -185,9 +184,15 @@ export default function QuestionBankPage() {
       </header>
       <main className="p-6 space-y-10">
         <div className="flex items-center gap-2">
-            <Button variant="secondary" size="sm">বিষয় ভিত্তিক</Button>
-            <Button variant="ghost" size="sm">প্রতিষ্ঠান ভিত্তিক</Button>
-            <Button variant="ghost" size="sm">মডেল টেস্ট</Button>
+          <Button variant="secondary" size="sm">
+            বিষয় ভিত্তিক
+          </Button>
+          <Button variant="ghost" size="sm">
+            প্রতিষ্ঠান ভিত্তিক
+          </Button>
+          <Button variant="ghost" size="sm">
+            মডেল টেস্ট
+          </Button>
         </div>
 
         <section>
@@ -204,7 +209,7 @@ export default function QuestionBankPage() {
                   className={`relative rounded-xl aspect-square flex flex-col items-center justify-end p-4 text-center bg-gradient-to-br ${card.color} text-white overflow-hidden cursor-pointer h-full`}
                 >
                   <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                      {card.icon}
+                    {card.icon}
                   </div>
                   <div className="z-10 text-left w-full">
                     <h3 className="font-bold text-lg">{card.title}</h3>
@@ -221,15 +226,15 @@ export default function QuestionBankPage() {
         <section>
           <div className="flex justify-between items-center mb-4">
             <div>
-                <h2 className="text-xl font-semibold">প্রতিষ্ঠান ভিত্তিক</h2>
-                <p className="text-sm text-muted-foreground">
+              <h2 className="text-xl font-semibold">প্রতিষ্ঠান ভিত্তিক</h2>
+              <p className="text-sm text-muted-foreground">
                 সকল ভর্তি পরীক্ষার প্রশ্ন
-                </p>
+              </p>
             </div>
           </div>
           <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-4">
             {institutionCards.map((card, index) => (
-               <AnimatedCard key={index}>
+              <AnimatedCard key={index}>
                 <div
                   className="rounded-xl aspect-square flex flex-col items-center justify-center gap-2 p-2 text-center cursor-pointer h-full"
                   style={{ backgroundColor: card.color }}

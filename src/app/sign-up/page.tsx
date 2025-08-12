@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useRouter } from 'next/navigation';
@@ -43,11 +42,11 @@ export default function SignUpPage() {
     // In a real app, you might navigate to an OTP verification page
     // router.push('/verify-otp');
   }
-  
-    // A mock handler for dashboard navigation for demo purposes
+
+  // A mock handler for dashboard navigation for demo purposes
   const handleTestSignIn = () => {
     router.push('/dashboard');
-  }
+  };
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-[#1D1D1D] p-4 text-white">
@@ -97,9 +96,13 @@ export default function SignUpPage() {
           <span className="text-base text-[#B0B0B0]">অথবা,</span>
           <div className="h-px flex-grow bg-[#424242]"></div>
         </div>
-        
-         {/* This button is for demo purposes to allow navigation without full auth */}
-        <Button onClick={handleTestSignIn} variant="link" className="text-primary hover:text-primary/80">
+
+        {/* This button is for demo purposes to allow navigation without full auth */}
+        <Button
+          onClick={handleTestSignIn}
+          variant="link"
+          className="text-primary hover:text-primary/80"
+        >
           (For Demo: Click to enter Dashboard)
         </Button>
 

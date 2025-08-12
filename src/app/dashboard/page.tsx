@@ -1,4 +1,3 @@
-
 'use client';
 
 import { DDIcon } from '@/components/icons';
@@ -50,7 +49,12 @@ const featureCards = [
     color: 'bg-red-400/20 text-red-400',
     href: '#',
   },
-  { icon: Bot, text: 'চর্চা AI', color: 'bg-purple-400/20 text-purple-400', href: '/dashboard/chorcha-ai' },
+  {
+    icon: Bot,
+    text: 'চর্চা AI',
+    color: 'bg-purple-400/20 text-purple-400',
+    href: '/dashboard/chorcha-ai',
+  },
   {
     icon: Trophy,
     text: 'লিডারবোর্ড',
@@ -111,20 +115,20 @@ export default function DashboardPage() {
       <main className="p-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-3 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
           {featureCards.map((card, index) => (
-             <Link href={card.href} key={index}>
+            <Link href={card.href} key={index}>
               <AnimatedCard className="h-full">
-                <div
-                  className="bg-card p-4 rounded-xl flex flex-col items-center justify-center gap-3 hover:bg-primary/10 transition-colors cursor-pointer h-full"
-                >
+                <div className="bg-card p-4 rounded-xl flex flex-col items-center justify-center gap-3 hover:bg-primary/10 transition-colors cursor-pointer h-full">
                   <div
                     className={`w-14 h-14 rounded-full flex items-center justify-center ${card.color}`}
                   >
                     <card.icon className="w-7 h-7" />
                   </div>
-                  <p className="font-semibold font-body text-center text-sm">{card.text}</p>
+                  <p className="font-semibold font-body text-center text-sm">
+                    {card.text}
+                  </p>
                 </div>
               </AnimatedCard>
-             </Link>
+            </Link>
           ))}
         </div>
 
@@ -132,8 +136,12 @@ export default function DashboardPage() {
           <CardHeader>
             <div className="flex justify-between items-center">
               <div>
-                <CardTitle className="font-body">লিডারবোর্ড - আয়রন লীগ</CardTitle>
-                <CardDescription className="font-body">আয়রন লীগ</CardDescription>
+                <CardTitle className="font-body">
+                  লিডারবোর্ড - আয়রন লীগ
+                </CardTitle>
+                <CardDescription className="font-body">
+                  আয়রন লীগ
+                </CardDescription>
               </div>
               <Link href="/dashboard/leaderboard">
                 <Button variant="ghost" size="icon">
@@ -151,7 +159,9 @@ export default function DashboardPage() {
                     item.isCurrentUser ? 'bg-secondary' : ''
                   }`}
                 >
-                  <p className="text-lg font-bold w-12 text-center text-muted-foreground">{item.rank}</p>
+                  <p className="text-lg font-bold w-12 text-center text-muted-foreground">
+                    {item.rank}
+                  </p>
                   <Avatar className="h-10 w-10 mr-4">
                     <AvatarImage src={item.avatar} />
                     <AvatarFallback>{item.fallback}</AvatarFallback>
@@ -181,7 +191,9 @@ export default function DashboardPage() {
               {progressData.map((item, index) => (
                 <div key={index}>
                   <div className="flex justify-between items-center mb-1">
-                    <p className="text-sm font-medium font-body">{item.subject}</p>
+                    <p className="text-sm font-medium font-body">
+                      {item.subject}
+                    </p>
                     <p className="text-sm font-medium text-primary">
                       {item.percentage}%
                     </p>

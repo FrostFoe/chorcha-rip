@@ -1,7 +1,6 @@
-
-import type {Metadata} from 'next';
+import type { Metadata } from 'next';
 import './globals.css';
-import { Toaster } from "@/components/ui/toaster";
+import { Toaster } from '@/components/ui/toaster';
 import { Inter, Hind_Siliguri } from 'next/font/google';
 
 const inter = Inter({
@@ -17,7 +16,8 @@ const hindSiliguri = Hind_Siliguri({
 
 export const metadata: Metadata = {
   title: 'চর্চা - বাংলাদেশের সবচেয়ে বড় প্র্যাকটিস প্ল্যাটফর্ম',
-  description: 'নিজের প্রস্তুতির ধাপ গুলো যাচাই করে নাও আমাদের সাথে। আন্তর্জাতিক মানের পরীক্ষা পদ্ধতি এখন তোমার হাতের মুঠোয়।',
+  description:
+    'নিজের প্রস্তুতির ধাপ গুলো যাচাই করে নাও আমাদের সাথে। আন্তর্জাতিক মানের পরীক্ষা পদ্ধতি এখন তোমার হাতের মুঠোয়।',
   openGraph: {
     title: 'চর্চা - বাংলাদেশের সবচেয়ে বড় প্র্যাকটিস প্ল্যাটফর্ম',
     description: 'আন্তর্জাতিক মানের পরীক্ষা পদ্ধতি এখন আপনার হাতের মুঠোয়।',
@@ -50,7 +50,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`dark ${inter.variable} ${hindSiliguri.variable}`}>
+    <html
+      lang="en"
+      className={`dark ${inter.variable} ${hindSiliguri.variable}`}
+    >
       <body className="font-body antialiased">
         {children}
         <Toaster />

@@ -1,10 +1,9 @@
-
 'use client';
 
 import * as React from 'react';
 import { Slot } from '@radix-ui/react-slot';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { motion } from 'framer-motion';
+import { motion, HTMLMotionProps, MotionProps } from 'framer-motion';
 
 import { cn } from '@/lib/utils';
 
@@ -37,36 +36,38 @@ const buttonVariants = cva(
   }
 );
 
+// Create a type that merges MotionProps with React button props, resolving conflicts
+type MergedMotionButtonProps = Omit<HTMLMotionProps<'button'>, keyof React.ButtonHTMLAttributes<HTMLButtonElement>> & 
+  React.ButtonHTMLAttributes<HTMLButtonElement> & 
+  MotionProps;
+
 export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+  extends VariantProps<typeof buttonVariants>,
+    MergedMotionButtonProps {
   asChild?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : 'button';
-
     if (asChild) {
       return (
         <Slot
           className={cn(buttonVariants({ variant, size, className }))}
           ref={ref}
-          {...props}
         />
       );
     }
-    
-    const MotionButton = motion.button;
+
+    const { whileHover, whileTap, transition, ...rest } = props;
 
     return (
-      <MotionButton
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-        transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+      <motion.button
+        whileHover={whileHover}
+        whileTap={whileTap}
+        transition={transition}
         className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
-        {...props}
+        {...rest}
       />
     );
   }

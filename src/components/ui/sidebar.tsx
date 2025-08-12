@@ -1,118 +1,124 @@
+'use client';
 
-"use client"
-
-import * as React from "react"
-import { AnimatePresence, motion, type Transition } from "framer-motion"
-import { PanelLeft } from "lucide-react"
-import { useMediaQuery } from "@/hooks/use-media-query"
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import * as React from 'react';
+import { AnimatePresence, motion, type Transition } from 'framer-motion';
+import { PanelLeft } from 'lucide-react';
+import { useMediaQuery } from '@/hooks/use-media-query';
+import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 
 // --- Context ---
 type SidebarContextValue = {
-  isCollapsed: boolean
-  isMobile: boolean
-  toggle: () => void
-}
+  isCollapsed: boolean;
+  isMobile: boolean;
+  toggle: () => void;
+};
 
-const SidebarContext = React.createContext<SidebarContextValue | null>(null)
+const SidebarContext = React.createContext<SidebarContextValue | null>(null);
 
 export function useSidebar() {
-  const context = React.useContext(SidebarContext)
+  const context = React.useContext(SidebarContext);
   if (!context) {
-    throw new Error("useSidebar must be used within a SidebarProvider")
+    throw new Error('useSidebar must be used within a SidebarProvider');
   }
-  return context
+  return context;
 }
 
 // --- Provider ---
-const SIDEBAR_COOKIE_NAME = "sidebar_collapsed"
-const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 30 // 30 days
+const SIDEBAR_COOKIE_NAME = 'sidebar_collapsed';
+const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 30; // 30 days
 
 export function SidebarProvider({ children }: { children: React.ReactNode }) {
-  const isMobile = useMediaQuery("(max-width: 768px)")
-  const [isCollapsed, setCollapsed] = React.useState(true)
+  const isMobile = useMediaQuery('(max-width: 768px)');
+  const [isCollapsed, setCollapsed] = React.useState(true);
   const [isMounted, setIsMounted] = React.useState(false);
 
   React.useEffect(() => {
     setIsMounted(true);
     if (isMobile) {
-      setCollapsed(true)
-      return
+      setCollapsed(true);
+      return;
     }
     const cookieValue = document.cookie
-      .split("; ")
+      .split('; ')
       .find((row) => row.startsWith(`${SIDEBAR_COOKIE_NAME}=`))
-      ?.split("=")[1]
+      ?.split('=')[1];
 
     if (cookieValue) {
-      setCollapsed(cookieValue === "true")
+      setCollapsed(cookieValue === 'true');
     } else {
-        setCollapsed(false) // Default to open on desktop
+      setCollapsed(false); // Default to open on desktop
     }
-  }, [isMobile])
+  }, [isMobile]);
 
   const toggle = React.useCallback(() => {
     setCollapsed((prev) => {
-      const newState = !prev
+      const newState = !prev;
       if (!isMobile) {
-        document.cookie = `${SIDEBAR_COOKIE_NAME}=${newState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`
+        document.cookie = `${SIDEBAR_COOKIE_NAME}=${newState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`;
       }
-      return newState
-    })
-  }, [isMobile])
+      return newState;
+    });
+  }, [isMobile]);
 
   if (!isMounted) {
     return null; // Don't render on the server to avoid hydration mismatch
   }
 
-
   return (
     <SidebarContext.Provider value={{ isCollapsed, isMobile, toggle }}>
-        <TooltipProvider delayDuration={0}>
-         {children}
-        </TooltipProvider>
+      <TooltipProvider delayDuration={0}>{children}</TooltipProvider>
     </SidebarContext.Provider>
-  )
+  );
 }
 
 // --- Layout Components ---
 
 const TRANSITION: Transition = {
-  ease: "easeInOut",
+  ease: 'easeInOut',
   duration: 0.2,
-}
+};
 
 const menuVariants = {
-    open: {
-        transition: { staggerChildren: 0.07, delayChildren: 0.2 },
-    },
-    closed: {
-        transition: { staggerChildren: 0.05, staggerDirection: -1 },
-    },
+  open: {
+    transition: { staggerChildren: 0.07, delayChildren: 0.2 },
+  },
+  closed: {
+    transition: { staggerChildren: 0.05, staggerDirection: -1 },
+  },
 };
 
 const menuItemVariants = {
-    open: {
-        y: 0,
-        opacity: 1,
-        transition: {
-            y: { stiffness: 1000, velocity: -100 },
-        },
+  open: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      y: { stiffness: 1000, velocity: -100 },
     },
-    closed: {
-        y: 50,
-        opacity: 0,
-        transition: {
-            y: { stiffness: 1000 },
-        },
+  },
+  closed: {
+    y: 50,
+    opacity: 0,
+    transition: {
+      y: { stiffness: 1000 },
     },
+  },
 };
 
-
-export function Sidebar({ children, className }: { children: React.ReactNode; className?: string }) {
-  const { isCollapsed, isMobile, toggle } = useSidebar()
+export function Sidebar({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  const { isCollapsed, isMobile, toggle } = useSidebar();
 
   return (
     <>
@@ -120,11 +126,11 @@ export function Sidebar({ children, className }: { children: React.ReactNode; cl
       <motion.aside
         data-collapsed={isCollapsed}
         className={cn(
-          "hidden md:flex flex-col border-r bg-card text-card-foreground group",
+          'hidden md:flex flex-col border-r bg-card text-card-foreground group',
           className
         )}
         initial={false}
-        animate={{ width: isCollapsed ? "3.75rem" : "16rem" }}
+        animate={{ width: isCollapsed ? '3.75rem' : '16rem' }}
         transition={TRANSITION}
       >
         {children}
@@ -143,10 +149,13 @@ export function Sidebar({ children, className }: { children: React.ReactNode; cl
               onClick={toggle}
             />
             <motion.aside
-              className={cn("fixed left-0 top-0 z-50 flex h-full w-64 flex-col border-r bg-card text-card-foreground", className)}
-              initial={{ x: "-100%" }}
+              className={cn(
+                'fixed left-0 top-0 z-50 flex h-full w-64 flex-col border-r bg-card text-card-foreground',
+                className
+              )}
+              initial={{ x: '-100%' }}
               animate={{ x: 0 }}
-              exit={{ x: "-100%" }}
+              exit={{ x: '-100%' }}
               transition={TRANSITION}
             >
               {children}
@@ -155,96 +164,142 @@ export function Sidebar({ children, className }: { children: React.ReactNode; cl
         )}
       </AnimatePresence>
     </>
-  )
+  );
 }
 
-export function SidebarHeader({ children, className }: { children: React.ReactNode; className?: string }) {
-  const { isCollapsed } = useSidebar()
+export function SidebarHeader({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  const { isCollapsed } = useSidebar();
   return (
     <div
       data-collapsed={isCollapsed}
-      className={cn("flex h-14 items-center border-b p-2", className)}
+      className={cn('flex h-14 items-center border-b p-2', className)}
     >
       {children}
     </div>
-  )
+  );
 }
 
-export function SidebarContent({ children, className }: { children: React.ReactNode; className?: string }) {
+export function SidebarContent({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
   return (
-    <div className={cn("flex-1 overflow-y-auto overflow-x-hidden", className)}>
+    <div className={cn('flex-1 overflow-y-auto overflow-x-hidden', className)}>
       {children}
     </div>
-  )
+  );
 }
 
-export function SidebarMenu({ children, className }: { children: React.ReactNode; className?: string }) {
-    const { isCollapsed } = useSidebar();
-    return <motion.ul variants={!isCollapsed ? menuVariants : undefined} initial="closed" animate="open" className={cn("flex flex-col gap-1 p-2", className)}>{children}</motion.ul>
+export function SidebarMenu({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  const { isCollapsed } = useSidebar();
+  return (
+    <motion.ul
+      variants={!isCollapsed ? menuVariants : undefined}
+      initial="closed"
+      animate="open"
+      className={cn('flex flex-col gap-1 p-2', className)}
+    >
+      {children}
+    </motion.ul>
+  );
 }
 
-export function SidebarMenuItem({ children, className }: { children: React.ReactNode; className?: string }) {
-    const { isCollapsed } = useSidebar();
-    return <motion.li variants={!isCollapsed ? menuItemVariants : undefined} className={cn("relative", className)}>{children}</motion.li>
+export function SidebarMenuItem({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  const { isCollapsed } = useSidebar();
+  return (
+    <motion.li
+      variants={!isCollapsed ? menuItemVariants : undefined}
+      className={cn('relative', className)}
+    >
+      {children}
+    </motion.li>
+  );
 }
 
 export function SidebarMenuButton({
-    children,
-    className,
-    isActive,
-    tooltip,
+  children,
+  className,
+  isActive,
+  tooltip,
 }: {
-    children: React.ReactNode
-    className?: string
-    isActive?: boolean
-    tooltip?: string
+  children: React.ReactNode;
+  className?: string;
+  isActive?: boolean;
+  tooltip?: string;
 }) {
-    const { isCollapsed } = useSidebar()
+  const { isCollapsed } = useSidebar();
 
-    const buttonContent = (
-        <Button
-          variant={isActive ? 'secondary' : 'ghost'}
-          className={cn('h-10 w-full justify-start', className, isCollapsed && "justify-center px-2")}
-          aria-current={isActive ? 'page' : undefined}
-        >
-            {children}
-        </Button>
-    )
+  const buttonContent = (
+    <Button
+      variant={isActive ? 'secondary' : 'ghost'}
+      className={cn(
+        'h-10 w-full justify-start',
+        className,
+        isCollapsed && 'justify-center px-2'
+      )}
+      aria-current={isActive ? 'page' : undefined}
+    >
+      {children}
+    </Button>
+  );
 
-    if (isCollapsed && tooltip) {
-        return (
-            <Tooltip>
-                <TooltipTrigger asChild>{buttonContent}</TooltipTrigger>
-                <TooltipContent side="right" align="center">
-                    {tooltip}
-                </TooltipContent>
-            </Tooltip>
-        )
-    }
+  if (isCollapsed && tooltip) {
+    return (
+      <Tooltip>
+        <TooltipTrigger asChild>{buttonContent}</TooltipTrigger>
+        <TooltipContent side="right" align="center">
+          {tooltip}
+        </TooltipContent>
+      </Tooltip>
+    );
+  }
 
-    return buttonContent
+  return buttonContent;
 }
 
 export function SidebarTrigger({ className }: { className?: string }) {
-  const { toggle, isMobile, isCollapsed } = useSidebar()
+  const { toggle, isMobile, isCollapsed } = useSidebar();
 
   return (
-       <Button
-        variant="ghost"
-        size="icon"
-        className={cn("h-8 w-8 shrink-0", isMobile ? "" : "hidden md:flex", className)}
-        onClick={toggle}
-        aria-label="Toggle sidebar"
-      >
-        <PanelLeft className={cn(!isCollapsed && "rotate-180")} />
-      </Button>
-  )
+    <Button
+      variant="ghost"
+      size="icon"
+      className={cn(
+        'h-8 w-8 shrink-0',
+        isMobile ? '' : 'hidden md:flex',
+        className
+      )}
+      onClick={toggle}
+      aria-label="Toggle sidebar"
+    >
+      <PanelLeft className={cn(!isCollapsed && 'rotate-180')} />
+    </Button>
+  );
 }
 
 export function SidebarInset({ children }: { children: React.ReactNode }) {
-    return (
-        <main className="flex-1 overflow-y-auto overflow-x-hidden">
-            {children}
-        </main>
-    )
+  return (
+    <main className="flex-1 overflow-y-auto overflow-x-hidden">{children}</main>
+  );
 }
