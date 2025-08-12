@@ -10,17 +10,14 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarProvider,
+  SidebarTrigger,
 } from '@/components/ui/sidebar';
 import {
-  Archive,
-  Bell,
-  Bot,
   Crown,
   History,
   LayoutGrid,
   Library,
   LogOut,
-  MoreHorizontal,
   Settings,
   Swords,
   Trophy,
@@ -54,6 +51,27 @@ const menuItems = [
   { icon: Settings, text: 'সেটিংস', href: '/dashboard/settings' },
 ];
 
+function MobileHeader() {
+  return (
+    <header className="flex h-14 items-center justify-between gap-4 border-b bg-card px-4 md:hidden">
+      <div className="flex items-center gap-2">
+        <SidebarTrigger className="h-8 w-8" />
+        <Link href="/" className="flex items-center gap-2">
+            <DDIcon className="h-8 w-8 text-primary" />
+            <span className="text-xl font-bold">
+              চর্চা
+            </span>
+          </Link>
+      </div>
+       <Avatar className="h-8 w-8">
+            <AvatarImage src="https://placehold.co/40x40.png" />
+            <AvatarFallback>SB</AvatarFallback>
+        </Avatar>
+    </header>
+  );
+}
+
+
 export default function DashboardLayout({
   children,
 }: {
@@ -69,72 +87,77 @@ export default function DashboardLayout({
 
   return (
     <SidebarProvider>
-      <Sidebar>
-        <SidebarHeader className="p-4">
-          <Link href="/" className="flex items-center gap-2">
-            <DDIcon className="h-8 w-8 text-primary" />
-            <span className="text-xl font-bold group-data-[collapsible=icon]:hidden">
-              চর্চা
-            </span>
-          </Link>
-        </SidebarHeader>
-        <SidebarContent>
-          <SidebarMenu>
-            {menuItems.map((item, index) => (
-              <SidebarMenuItem key={index}>
-                <Link href={item.href}>
-                  <SidebarMenuButton
-                    isActive={pathname === item.href}
-                    className="gap-4 font-body"
-                    tooltip={item.text}
-                  >
-                    <item.icon className="h-5 w-5" />
-                    <span className="group-data-[collapsible=icon]:hidden">
-                      {item.text}
-                    </span>
-                  </SidebarMenuButton>
-                </Link>
-              </SidebarMenuItem>
-            ))}
-          </SidebarMenu>
-        </SidebarContent>
-        <div className="mt-auto p-4">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <div className="flex items-center gap-3 p-2 rounded-lg hover:bg-muted cursor-pointer">
-                <Avatar className="h-10 w-10">
-                  <AvatarImage
-                    src="https://placehold.co/40x40.png"
-                    alt="User avatar"
-                  />
-                  <AvatarFallback>SB</AvatarFallback>
-                </Avatar>
-                <div className="flex-1 group-data-[collapsible=icon]:hidden">
-                  <p className="text-sm font-semibold">Sysmad BCF-19</p>
+      <div className="flex min-h-screen w-full">
+        <Sidebar>
+          <SidebarHeader>
+             <Link href="/" className="flex items-center gap-2">
+                <DDIcon className="h-8 w-8 text-primary" />
+                <span className="text-xl font-bold group-data-[collapsed]:hidden">
+                  চর্চা
+                </span>
+              </Link>
+          </SidebarHeader>
+          <SidebarContent>
+            <SidebarMenu>
+              {menuItems.map((item, index) => (
+                <SidebarMenuItem key={index}>
+                  <Link href={item.href} className="w-full">
+                    <SidebarMenuButton
+                      isActive={pathname === item.href}
+                      className="gap-3"
+                      tooltip={item.text}
+                    >
+                      <item.icon className="h-5 w-5" />
+                      <span className="group-data-[collapsed]:hidden">
+                        {item.text}
+                      </span>
+                    </SidebarMenuButton>
+                  </Link>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarContent>
+          <div className="mt-auto p-2">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <div className="flex items-center gap-3 p-2 rounded-lg hover:bg-muted cursor-pointer group-data-[collapsed]:p-0 group-data-[collapsed]:justify-center">
+                  <Avatar className="h-10 w-10">
+                    <AvatarImage
+                      src="https://placehold.co/40x40.png"
+                      alt="User avatar"
+                    />
+                    <AvatarFallback>SB</AvatarFallback>
+                  </Avatar>
+                  <div className="flex-1 group-data-[collapsed]:hidden">
+                    <p className="text-sm font-semibold">Sysmad BCF-19</p>
+                  </div>
                 </div>
-              </div>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56" align="end" forceMount>
-              <DropdownMenuLabel className="font-normal">
-                <div className="flex flex-col space-y-1">
-                  <p className="text-sm font-medium leading-none">
-                    Sysmad BCF-19
-                  </p>
-                  <p className="text-xs leading-none text-muted-foreground">
-                    test@example.com
-                  </p>
-                </div>
-              </DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={handleLogout}>
-                <LogOut className="mr-2 h-4 w-4" />
-                <span>Log out</span>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56 mb-2 ml-2" align="start" side="right" forceMount>
+                <DropdownMenuLabel className="font-normal">
+                  <div className="flex flex-col space-y-1">
+                    <p className="text-sm font-medium leading-none">
+                      Sysmad BCF-19
+                    </p>
+                    <p className="text-xs leading-none text-muted-foreground">
+                      test@example.com
+                    </p>
+                  </div>
+                </DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={handleLogout}>
+                  <LogOut className="mr-2 h-4 w-4" />
+                  <span>Log out</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+        </Sidebar>
+         <div className="flex flex-1 flex-col">
+            <MobileHeader />
+            <SidebarInset>{children}</SidebarInset>
         </div>
-      </Sidebar>
-      <SidebarInset>{children}</SidebarInset>
+      </div>
     </SidebarProvider>
   );
 }
