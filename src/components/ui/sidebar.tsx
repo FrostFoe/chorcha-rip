@@ -84,6 +84,33 @@ const TRANSITION: Transition = {
   duration: 0.2,
 }
 
+const menuVariants = {
+    open: {
+        transition: { staggerChildren: 0.07, delayChildren: 0.2 },
+    },
+    closed: {
+        transition: { staggerChildren: 0.05, staggerDirection: -1 },
+    },
+};
+
+const menuItemVariants = {
+    open: {
+        y: 0,
+        opacity: 1,
+        transition: {
+            y: { stiffness: 1000, velocity: -100 },
+        },
+    },
+    closed: {
+        y: 50,
+        opacity: 0,
+        transition: {
+            y: { stiffness: 1000 },
+        },
+    },
+};
+
+
 export function Sidebar({ children, className }: { children: React.ReactNode; className?: string }) {
   const { isCollapsed, isMobile, toggle } = useSidebar()
 
@@ -152,11 +179,13 @@ export function SidebarContent({ children, className }: { children: React.ReactN
 }
 
 export function SidebarMenu({ children, className }: { children: React.ReactNode; className?: string }) {
-    return <ul className={cn("flex flex-col gap-1 p-2", className)}>{children}</ul>
+    const { isCollapsed } = useSidebar();
+    return <motion.ul variants={!isCollapsed ? menuVariants : undefined} initial="closed" animate="open" className={cn("flex flex-col gap-1 p-2", className)}>{children}</motion.ul>
 }
 
 export function SidebarMenuItem({ children, className }: { children: React.ReactNode; className?: string }) {
-    return <li className={cn("relative", className)}>{children}</li>
+    const { isCollapsed } = useSidebar();
+    return <motion.li variants={!isCollapsed ? menuItemVariants : undefined} className={cn("relative", className)}>{children}</motion.li>
 }
 
 export function SidebarMenuButton({
