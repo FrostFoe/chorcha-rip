@@ -233,9 +233,9 @@ export default function HomePage() {
                 চর্চা করো নিজের গতিতে
               </h1>
               <p className="text-gray-300 max-w-lg mx-auto md:mx-0">
-                নিজের প্রস্তুতির ধাপ গুলো محک করে নিন আমাদের সাথে। আন্তর্জাতিক
-                মানের পরীক্ষা পদ্ধতি এখন আপনার হাতের মুঠোয়। এছাড়া লাইভ পরীক্ষা
-                দেয়ার মাধ্যমে এখন দ্রুত প্রস্রুতি নেয়া সম্ভব।
+                নিজের প্রস্তুতির ধাপ গুলো যাচাই করে নাও আমাদের সাথে। আন্তর্জাতিক
+                মানের পরীক্ষা পদ্ধতি এখন তোমার হাতের মুঠোয়। এছাড়া লাইভ পরীক্ষা
+                দেয়ার মাধ্যমে এখন দ্রুত প্রস্তুতি নেয়া সম্ভব।
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
                 <Button variant="outline" size="lg" className='w-full sm:w-auto'>

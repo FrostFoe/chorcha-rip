@@ -46,7 +46,7 @@ export default function FeedPage() {
         <div className="bg-card p-4 rounded-lg mb-6">
           <p className="font-semibold mb-3 font-body">যা ইচ্ছে লিখে ফেলো</p>
           <Textarea
-            placeholder="আপনার প্রশ্ন লিখুন..."
+            placeholder="তোমার প্রশ্নটি এখানে লিখো..."
             className="bg-background border-border min-h-[80px] mb-4"
           />
           <div className="flex items-center gap-4">
