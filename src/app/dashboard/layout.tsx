@@ -19,6 +19,7 @@ import {
   LayoutGrid,
   Library,
   LogOut,
+  PanelLeft,
   PenSquare,
   Settings,
   Swords,
@@ -40,6 +41,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { Button } from '@/components/ui/button';
 
 const menuItems = [
   { icon: LayoutGrid, text: 'ড্যাশবোর্ড', href: '/dashboard' },
@@ -59,20 +61,17 @@ function MobileHeader() {
       <div className="flex items-center gap-2">
         <SidebarTrigger className="h-8 w-8" />
         <Link href="/" className="flex items-center gap-2">
-            <DDIcon className="h-8 w-8 text-primary" />
-            <span className="text-xl font-bold">
-              চর্চা
-            </span>
-          </Link>
+          <DDIcon className="h-8 w-8 text-primary" />
+          <span className="text-xl font-bold">চর্চা</span>
+        </Link>
       </div>
-       <Avatar className="h-8 w-8">
-            <AvatarImage src="https://placehold.co/40x40.png" />
-            <AvatarFallback>SB</AvatarFallback>
-        </Avatar>
+      <Avatar className="h-8 w-8">
+        <AvatarImage src="https://placehold.co/40x40.png" />
+        <AvatarFallback>SB</AvatarFallback>
+      </Avatar>
     </header>
   );
 }
-
 
 export default function DashboardLayout({
   children,
@@ -92,12 +91,14 @@ export default function DashboardLayout({
       <div className="flex min-h-screen w-full">
         <Sidebar>
           <SidebarHeader>
-             <Link href="/" className="flex items-center gap-2">
-                <DDIcon className="h-8 w-8 text-primary" />
-                <span className="text-xl font-bold group-data-[collapsed]:hidden">
-                  চর্চা
-                </span>
-              </Link>
+            <Link
+              href="/"
+              className="flex items-center gap-2 group-data-[collapsed=true]:hidden"
+            >
+              <DDIcon className="h-8 w-8 text-primary" />
+              <span className="text-xl font-bold">চর্চা</span>
+            </Link>
+            <SidebarTrigger className="ml-auto hidden md:flex" />
           </SidebarHeader>
           <SidebarContent>
             <SidebarMenu>
@@ -110,7 +111,7 @@ export default function DashboardLayout({
                       tooltip={item.text}
                     >
                       <item.icon className="h-5 w-5" />
-                      <span className="group-data-[collapsed]:hidden">
+                      <span className="group-data-[collapsed=true]:hidden">
                         {item.text}
                       </span>
                     </SidebarMenuButton>
@@ -130,12 +131,17 @@ export default function DashboardLayout({
                     />
                     <AvatarFallback>SB</AvatarFallback>
                   </Avatar>
-                  <div className="flex-1 group-data-[collapsed]:hidden">
+                  <div className="flex-1 group-data-[collapsed=true]:hidden">
                     <p className="text-sm font-semibold">Sysmad BCF-19</p>
                   </div>
                 </div>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56 mb-2 ml-2" align="start" side="right" forceMount>
+              <DropdownMenuContent
+                className="w-56 mb-2 ml-2"
+                align="start"
+                side="right"
+                forceMount
+              >
                 <DropdownMenuLabel className="font-normal">
                   <div className="flex flex-col space-y-1">
                     <p className="text-sm font-medium leading-none">
@@ -155,9 +161,9 @@ export default function DashboardLayout({
             </DropdownMenu>
           </div>
         </Sidebar>
-         <div className="flex flex-1 flex-col">
-            <MobileHeader />
-            <SidebarInset>{children}</SidebarInset>
+        <div className="flex flex-1 flex-col">
+          <MobileHeader />
+          <SidebarInset>{children}</SidebarInset>
         </div>
       </div>
     </SidebarProvider>

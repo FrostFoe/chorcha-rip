@@ -36,6 +36,10 @@ export function SidebarProvider({ children }: { children: React.ReactNode }) {
 
   // Load initial state from cookie
   React.useEffect(() => {
+    if (isMobile) {
+      setCollapsed(true)
+      return
+    }
     const cookieValue = document.cookie
       .split("; ")
       .find((row) => row.startsWith(`${SIDEBAR_COOKIE_NAME}=`))
@@ -44,7 +48,7 @@ export function SidebarProvider({ children }: { children: React.ReactNode }) {
     if (cookieValue) {
       setCollapsed(cookieValue === "true")
     } else {
-        setCollapsed(isMobile)
+        setCollapsed(false) // Default to open on desktop
     }
   }, [isMobile])
   
@@ -52,14 +56,18 @@ export function SidebarProvider({ children }: { children: React.ReactNode }) {
   const toggle = React.useCallback(() => {
     setCollapsed((prev) => {
       const newState = !prev
-      document.cookie = `${SIDEBAR_COOKIE_NAME}=${newState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`
+      if (!isMobile) {
+        document.cookie = `${SIDEBAR_COOKIE_NAME}=${newState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`
+      }
       return newState
     })
-  }, [])
+  }, [isMobile])
   
   // Collapse on mobile
   React.useEffect(() => {
-      setCollapsed(isMobile)
+      if (isMobile) {
+        setCollapsed(true)
+      }
   }, [isMobile])
 
   return (
@@ -91,7 +99,7 @@ export function Sidebar({ children, className }: { children: React.ReactNode; cl
           className
         )}
         initial={false}
-        animate={{ width: isCollapsed ? "3.5rem" : "16rem" }}
+        animate={{ width: isCollapsed ? "3.75rem" : "16rem" }}
         transition={TRANSITION}
       >
         {children}
@@ -130,7 +138,7 @@ export function SidebarHeader({ children, className }: { children: React.ReactNo
   return (
     <div
       data-collapsed={isCollapsed}
-      className={cn("flex h-14 items-center border-b p-2 group-data-[collapsed]:justify-center", className)}
+      className={cn("flex h-14 items-center border-b p-2", className)}
     >
       {children}
     </div>
@@ -196,7 +204,7 @@ export function SidebarTrigger({ className }: { className?: string }) {
     <Button
       variant="ghost"
       size="icon"
-      className={cn("md:flex", className)}
+      className={cn(className)}
       onClick={toggle}
       aria-label="Toggle sidebar"
     >
