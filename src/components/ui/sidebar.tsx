@@ -87,7 +87,7 @@ export function Sidebar({ children, className }: { children: React.ReactNode; cl
       <motion.aside
         data-collapsed={isCollapsed}
         className={cn(
-          "hidden md:flex flex-col border-r bg-card text-card-foreground",
+          "hidden md:flex flex-col border-r bg-card text-card-foreground group",
           className
         )}
         initial={false}
@@ -110,7 +110,7 @@ export function Sidebar({ children, className }: { children: React.ReactNode; cl
               onClick={toggle}
             />
             <motion.aside
-              className={cn("fixed left-0 top-0 z-50 flex h-full flex-col border-r bg-card text-card-foreground", className)}
+              className={cn("fixed left-0 top-0 z-50 flex h-full w-64 flex-col border-r bg-card text-card-foreground", className)}
               initial={{ x: "-100%" }}
               animate={{ x: 0 }}
               exit={{ x: "-100%" }}

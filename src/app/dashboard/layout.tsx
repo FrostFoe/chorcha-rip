@@ -13,11 +13,13 @@ import {
   SidebarTrigger,
 } from '@/components/ui/sidebar';
 import {
+  Bot,
   Crown,
   History,
   LayoutGrid,
   Library,
   LogOut,
+  PenSquare,
   Settings,
   Swords,
   Trophy,
