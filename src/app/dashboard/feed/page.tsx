@@ -97,7 +97,7 @@ export default function FeedPage() {
               Kokhon Cathode agay Bose ar kokhon anode agay Bose?
             </p>
           </div>
-          <div className="grid grid-cols-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2">
              <Image
                 src="https://placehold.co/600x400.png"
                 alt="Feed image 1"

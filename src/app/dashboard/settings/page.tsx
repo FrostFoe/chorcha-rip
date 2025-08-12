@@ -64,8 +64,8 @@ export default function SettingsPage() {
         <Switch />
       </header>
 
-      <main className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div className="md:col-span-1 space-y-8">
+      <main className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="lg:col-span-1 space-y-8">
           <div className="flex flex-col items-center text-center">
             <div className="relative">
               <Avatar className="w-24 h-24">
@@ -185,7 +185,7 @@ export default function SettingsPage() {
           </div>
         </div>
 
-        <div className="md:col-span-2 bg-card p-8 rounded-lg">
+        <div className="lg:col-span-2 bg-card p-8 rounded-lg">
           <h2 className="text-lg font-semibold mb-6">ব্যক্তিগত তথ্য</h2>
           <form className="space-y-6">
             <div>

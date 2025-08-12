@@ -190,18 +190,19 @@ export default function HomePage() {
                 <Menu />
               </Button>
             </SheetTrigger>
-            <SheetContent side="left">
-               <SheetHeader className="sr-only">
-                <SheetTitle>Menu</SheetTitle>
-                <SheetDescription>
+            <SheetContent side="left" className="p-0">
+               <SheetHeader className="p-8 pb-0">
+                <SheetTitle className="sr-only">Menu</SheetTitle>
+                <SheetDescription className="sr-only">
                   Navigate to different parts of the application.
                 </SheetDescription>
-              </SheetHeader>
-              <div className="flex flex-col gap-8 p-8">
                 <Link href="/" className="flex items-center gap-2">
                   <DDIcon className="h-8 w-8 text-primary" />
                   <span className="text-xl font-bold">চর্চা</span>
                 </Link>
+              </SheetHeader>
+              <div className="flex flex-col gap-8 p-8">
+                
                 <nav className="flex flex-col gap-6">
                   {navLinks.map((link) => (
                     <Link
@@ -489,9 +490,9 @@ export default function HomePage() {
                 <span className="text-xl font-bold">চর্চা</span>
               </Link>
               <div className="flex gap-4 mb-4">
-                <a href="#" className="text-gray-400 hover:text-white"><Instagram /></a>
-                <a href="#" className="text-gray-400 hover:text-white"><Youtube /></a>
-                <a href="#" className="text-gray-400 hover:text-white"><Linkedin /></a>
+                <a href="#" className="text-gray-400 hover:text-white flex items-center justify-center"><Instagram /></a>
+                <a href="#" className="text-gray-400 hover:text-white flex items-center justify-center"><Youtube /></a>
+                <a href="#" className="text-gray-400 hover:text-white flex items-center justify-center"><Linkedin /></a>
               </div>
               <div className="text-sm text-muted-foreground space-y-2">
                 <p className="flex items-center gap-2"><Phone className="h-4 w-4" /> 01825-302379</p>

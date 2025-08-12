@@ -38,7 +38,7 @@ export default function MockExamPage() {
       <main className="space-y-10">
         <section>
           <h2 className="text-lg font-semibold font-body mb-4">কোন বিষয়ে পরীক্ষা দিতে চাও?</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {subjectCategories.map((subject, index) => (
               <Button 
                 key={index}
