@@ -9,8 +9,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
-import { ChevronLeft, ChevronRight, Eye, Lock } from 'lucide-react';
-import React from 'react';
+import { Eye, Lock } from 'lucide-react';
 
 const subjects = [
   'পদার্থবিজ্ঞান',

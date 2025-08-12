@@ -16,7 +16,6 @@ import { Switch } from '@/components/ui/switch';
 import {
   Bell,
   BookText,
-  ChevronRight,
   CreditCard,
   Flag,
   History,
@@ -30,6 +29,7 @@ import {
   Crown,
 } from 'lucide-react';
 import React from 'react';
+import { SettingsLink } from '@/components/dashboard/settings-link';
 
 const accountLinks = [
   { icon: User, text: 'ব্যক্তিগত তথ্য', color: 'bg-red-500' },
@@ -76,9 +76,9 @@ export default function SettingsPage() {
               </div>
             </div>
             <h2 className="mt-4 text-lg font-semibold">Sysmad BCF-19</h2>
-            <div className="text-sm text-muted-foreground">
+            <p className="text-sm text-muted-foreground">
               zhour1060@gmail.com
-            </div>
+            </p>
             <Badge
               variant="destructive"
               className="mt-2 bg-red-500/20 text-red-400 border border-red-500/30"
@@ -91,20 +91,8 @@ export default function SettingsPage() {
               Account
             </h3>
             <div className="space-y-1">
-              {accountLinks.map((link, index) => (
-                <Button
-                  key={index}
-                  variant="ghost"
-                  className="w-full justify-start items-center gap-4 px-4 py-6 text-base"
-                >
-                  <div
-                    className={`p-2 rounded-lg flex items-center justify-center ${link.color}`}
-                  >
-                    <link.icon className="h-5 w-5 text-white" />
-                  </div>
-                  <span className="flex-1 text-left">{link.text}</span>
-                  <ChevronRight className="h-5 w-5 text-muted-foreground" />
-                </Button>
+              {accountLinks.map((link) => (
+                <SettingsLink key={link.text} {...link} />
               ))}
             </div>
           </div>
@@ -113,26 +101,8 @@ export default function SettingsPage() {
               Content
             </h3>
             <div className="space-y-1">
-              {contentLinks.map((link, index) => (
-                <Button
-                  key={index}
-                  variant="ghost"
-                  className="w-full justify-start items-center gap-4 px-4 py-6 text-base"
-                >
-                  <div
-                    className={`p-2 rounded-lg flex items-center justify-center ${link.color}`}
-                  >
-                    <link.icon className="h-5 w-5 text-white" />
-                  </div>
-                  <span className="flex-1 text-left">{link.text}</span>
-                  {link.badge > 0 && (
-                    <Badge variant="secondary" className="bg-blue-500/20 text-blue-300 rounded-full">{link.badge}</Badge>
-                  )}
-                  {link.badge === 0 && (
-                    <span className="text-muted-foreground text-sm">0</span>
-                  )}
-                  <ChevronRight className="h-5 w-5 text-muted-foreground" />
-                </Button>
+              {contentLinks.map((link) => (
+                 <SettingsLink key={link.text} {...link} />
               ))}
             </div>
           </div>
@@ -142,20 +112,8 @@ export default function SettingsPage() {
               Info
             </h3>
             <div className="space-y-1">
-              {infoLinks.map((link, index) => (
-                <Button
-                  key={index}
-                  variant="ghost"
-                  className="w-full justify-start items-center gap-4 px-4 py-6 text-base"
-                >
-                  <div
-                    className={`p-2 rounded-lg flex items-center justify-center ${link.color}`}
-                  >
-                    <link.icon className="h-5 w-5 text-white" />
-                  </div>
-                  <span className="flex-1 text-left">{link.text}</span>
-                  <ChevronRight className="h-5 w-5 text-muted-foreground" />
-                </Button>
+              {infoLinks.map((link) => (
+                 <SettingsLink key={link.text} {...link} />
               ))}
             </div>
           </div>
@@ -165,20 +123,8 @@ export default function SettingsPage() {
               Actions
             </h3>
             <div className="space-y-1">
-              {actionLinks.map((link, index) => (
-                <Button
-                  key={index}
-                  variant="ghost"
-                  className="w-full justify-start items-center gap-4 px-4 py-6 text-base"
-                >
-                  <div
-                    className={`p-2 rounded-lg flex items-center justify-center ${link.color}`}
-                  >
-                    <link.icon className="h-5 w-5 text-white" />
-                  </div>
-                  <span className="flex-1 text-left">{link.text}</span>
-                  <ChevronRight className="h-5 w-5 text-muted-foreground" />
-                </Button>
+              {actionLinks.map((link) => (
+                <SettingsLink key={link.text} {...link} />
               ))}
             </div>
           </div>
