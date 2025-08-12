@@ -56,6 +56,7 @@ export default function ProfilePage() {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>();
   
   useEffect(() => {
+    // Set the date only on the client side to avoid hydration mismatch
     setSelectedDate(new Date(2025, 7, 10));
   }, [])
 
