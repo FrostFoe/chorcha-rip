@@ -97,7 +97,7 @@ export default function DashboardLayout({
               <span className="text-xl font-bold">চর্চা</span>
             </Link>
              <div className="flex-1" />
-            <SidebarTrigger className="ml-auto hidden md:flex" />
+            <SidebarTrigger className="ml-auto" />
           </SidebarHeader>
           <SidebarContent>
             <SidebarMenu>
@@ -109,7 +109,7 @@ export default function DashboardLayout({
                       className="gap-3"
                       tooltip={item.text}
                     >
-                      <item.icon className="h-5 w-5" />
+                      <item.icon className="h-5 w-5 flex-shrink-0" />
                       <span className="group-data-[collapsed=true]:hidden">
                         {item.text}
                       </span>

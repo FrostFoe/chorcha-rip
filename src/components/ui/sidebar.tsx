@@ -35,8 +35,6 @@ export function SidebarProvider({ children }: { children: React.ReactNode }) {
   const [isCollapsed, setCollapsed] = React.useState(true)
   const [isMounted, setIsMounted] = React.useState(false);
 
-
-  // Load initial state from cookie
   React.useEffect(() => {
     setIsMounted(true);
     if (isMobile) {
@@ -54,8 +52,7 @@ export function SidebarProvider({ children }: { children: React.ReactNode }) {
         setCollapsed(false) // Default to open on desktop
     }
   }, [isMobile])
-  
-  // Update cookie on change
+
   const toggle = React.useCallback(() => {
     setCollapsed((prev) => {
       const newState = !prev
@@ -64,13 +61,6 @@ export function SidebarProvider({ children }: { children: React.ReactNode }) {
       }
       return newState
     })
-  }, [isMobile])
-  
-  // Collapse on mobile
-  React.useEffect(() => {
-      if (isMobile) {
-        setCollapsed(true)
-      }
   }, [isMobile])
 
   if (!isMounted) {
@@ -185,7 +175,7 @@ export function SidebarMenuButton({
     const buttonContent = (
         <Button
           variant={isActive ? 'secondary' : 'ghost'}
-          className={cn('h-10 w-full justify-start', className)}
+          className={cn('h-10 w-full justify-start', className, isCollapsed && "justify-center px-2")}
           aria-current={isActive ? 'page' : undefined}
         >
             {children}
@@ -207,32 +197,18 @@ export function SidebarMenuButton({
 }
 
 export function SidebarTrigger({ className }: { className?: string }) {
-  const { toggle, isMobile } = useSidebar()
+  const { toggle, isMobile, isCollapsed } = useSidebar()
 
-  if (isMobile) {
-    return (
+  return (
        <Button
         variant="ghost"
         size="icon"
-        className={cn("h-8 w-8", className)}
+        className={cn("h-8 w-8 shrink-0", isMobile ? "" : "hidden md:flex", className)}
         onClick={toggle}
         aria-label="Toggle sidebar"
       >
-        <PanelLeft />
+        <PanelLeft className={cn(!isCollapsed && "rotate-180")} />
       </Button>
-    )
-  }
-
-  return (
-    <Button
-      variant="ghost"
-      size="icon"
-      className={cn("hidden md:flex", className)}
-      onClick={toggle}
-      aria-label="Toggle sidebar"
-    >
-      <PanelLeft />
-    </Button>
   )
 }
 
