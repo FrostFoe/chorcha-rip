@@ -19,7 +19,7 @@ const subjects = [
 export default function PracticeExamPage() {
   return (
     <div className="bg-background min-h-screen text-foreground p-6">
-      <header className="flex justify-between items-center mb-10">
+      <header className="flex flex-col sm:flex-row justify-between items-center mb-10 gap-4">
         <h1 className="text-2xl font-bold font-body">দ্রুত প্র্যাকটিস</h1>
         <div className="flex items-center gap-2 bg-card p-1 rounded-full">
           <div className="h-6 w-6 bg-primary rounded-full flex items-center justify-center">
