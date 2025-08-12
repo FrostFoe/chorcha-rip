@@ -165,20 +165,20 @@ const institutionCards = [
 export default function QuestionBankPage() {
   return (
     <div className="bg-background min-h-screen">
-      <header className="p-6 flex justify-between items-center">
+      <header className="p-6 flex flex-col md:flex-row justify-between items-center gap-4">
         <h1 className="text-2xl font-bold font-body">আর্কাইভ</h1>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 w-full md:w-auto">
           <div className="flex items-center gap-2 bg-card p-1 rounded-full">
             <div className="h-6 w-6 bg-primary rounded-full flex items-center justify-center">
               <DDIcon className="h-4 w-4 text-primary-foreground" />
             </div>
             <span className="text-sm font-semibold pr-2">৩</span>
           </div>
-          <div className="relative">
+          <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
               placeholder="প্রশ্নব্যাংক খুঁজুন"
-              className="bg-card border-border pl-9 w-48"
+              className="bg-card border-border pl-9 w-full"
             />
           </div>
         </div>
@@ -197,7 +197,7 @@ export default function QuestionBankPage() {
               সকল বিষয়ের প্রশ্নব্যাংক
             </p>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
             {subjectCards.map((card, index) => (
               <div
                 key={index}
@@ -226,7 +226,7 @@ export default function QuestionBankPage() {
                 </p>
             </div>
           </div>
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-9 2xl:grid-cols-10 gap-4">
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-4">
             {institutionCards.map((card, index) => (
               <div
                 key={index}
@@ -247,6 +247,3 @@ export default function QuestionBankPage() {
     </div>
   );
 }
-
-
-    

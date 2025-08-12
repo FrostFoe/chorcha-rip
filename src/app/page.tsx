@@ -237,12 +237,12 @@ export default function HomePage() {
                 মানের পরীক্ষা পদ্ধতি এখন আপনার হাতের মুঠোয়। এছাড়া লাইভ পরীক্ষা
                 দেয়ার মাধ্যমে এখন দ্রুত প্রস্রুতি নেয়া সম্ভব।
               </p>
-              <div className="flex items-center justify-center md:justify-start gap-4">
-                <Button variant="outline" size="lg">
+              <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
+                <Button variant="outline" size="lg" className='w-full sm:w-auto'>
                   <GoogleIcon className="mr-2 h-5 w-5" />
                   Google Play
                 </Button>
-                <Button variant="outline" size="lg">
+                <Button variant="outline" size="lg" className='w-full sm:w-auto'>
                   <AppleIcon className="mr-2 h-5 w-5" />
                   App Store
                 </Button>
@@ -268,7 +268,7 @@ export default function HomePage() {
                 <h2 className="text-2xl font-semibold mb-6">
                   সকল পরীক্ষার প্রশ্নব্যাংক
                 </h2>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                   {examCategories.map((exam, index) => (
                     <div
                       key={index}
@@ -425,7 +425,7 @@ export default function HomePage() {
                 <div
                   key={index}
                   className={`bg-card p-6 rounded-lg border border-border ${
-                    testimonial.isFirst ? 'md:col-span-2 lg:col-span-1' : ''
+                    testimonial.isFirst ? 'lg:col-span-2' : ''
                   }`}
                 >
                   {testimonial.isFirst ? (
@@ -482,8 +482,8 @@ export default function HomePage() {
 
       <footer className="bg-card border-t border-border">
         <div className="container mx-auto px-4 py-16">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
-            <div className="col-span-2 lg:col-span-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
+            <div className="col-span-full sm:col-span-2 lg:col-span-2">
               <Link href="/" className="flex items-center gap-2 mb-4">
                 <DDIcon className="h-8 w-8 text-primary" />
                 <span className="text-xl font-bold">চর্চা</span>
@@ -500,7 +500,7 @@ export default function HomePage() {
               </div>
             </div>
             {Object.entries(footerLinks).map(([title, links]) => (
-              <div key={title}>
+              <div key={title} className="col-span-1">
                 <h4 className="font-semibold mb-4">{title}</h4>
                 <ul className="space-y-3">
                   {links.map((link, index) => (
@@ -513,7 +513,7 @@ export default function HomePage() {
             ))}
           </div>
           <div className="flex flex-col md:flex-row justify-between items-center mt-16 pt-8 border-t border-border">
-            <p className="text-sm text-gray-500">&copy; 2024 Chorcha. All rights reserved.</p>
+            <p className="text-sm text-gray-500 text-center md:text-left">&copy; 2024 Chorcha. All rights reserved.</p>
             <div className="flex items-center gap-4 mt-4 md:mt-0">
                <Button variant="outline" size="lg">
                   <GoogleIcon className="mr-2 h-5 w-5" />

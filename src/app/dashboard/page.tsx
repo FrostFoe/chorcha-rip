@@ -98,7 +98,7 @@ const progressData = [
 export default function DashboardPage() {
   return (
     <div className="bg-background min-h-screen">
-      <header className="p-6 flex justify-between items-center">
+      <header className="p-6 flex justify-between items-center md:hidden">
         <h1 className="text-2xl font-bold font-body">ড্যাশবোর্ড</h1>
         <div className="flex items-center gap-4">
           <div className="flex items-center gap-2 bg-card p-1 rounded-full">
@@ -107,10 +107,6 @@ export default function DashboardPage() {
             </div>
             <span className="text-sm font-semibold pr-2">৩</span>
           </div>
-          <Avatar className="h-10 w-10">
-            <AvatarImage src="https://placehold.co/40x40.png" />
-            <AvatarFallback>SB</AvatarFallback>
-          </Avatar>
         </div>
       </header>
       <main className="p-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
