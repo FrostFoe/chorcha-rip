@@ -1,0 +1,16 @@
+
+# Next.js
+.next/
+node_modules/
+
+# Build artifacts
+dist/
+build/
+
+# Config files
+next.config.js
+postcss.config.js
+tailwind.config.js
+
+# Other
+*.log
