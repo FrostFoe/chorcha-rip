@@ -10,6 +10,7 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel';
 import { Eye, Lock } from 'lucide-react';
+import React from 'react';
 
 const subjects = [
   'পদার্থবিজ্ঞান',
@@ -24,6 +25,9 @@ const subjects = [
 ];
 
 export default function HistoryPage() {
+  const [activeTab, setActiveTab] = React.useState('প্রশ্ন');
+  const [activeSubject, setActiveSubject] = React.useState('পদার্থবিজ্ঞান');
+
   return (
     <div className="bg-background text-foreground flex flex-col h-screen p-6">
       <header className="flex justify-between items-center mb-8">
@@ -31,19 +35,23 @@ export default function HistoryPage() {
         <div className="flex items-center gap-2 bg-card p-1 rounded-full">
           <Button
             size="sm"
-            className="bg-primary hover:bg-primary/90 rounded-full px-6"
+            onClick={() => setActiveTab('প্রশ্ন')}
+            variant={activeTab === 'প্রশ্ন' ? 'default' : 'ghost'}
+            className="rounded-full px-6"
           >
             প্রশ্ন
           </Button>
           <Button
-            variant="ghost"
+            onClick={() => setActiveTab('পরীক্ষা')}
+            variant={activeTab === 'পরীক্ষা' ? 'default' : 'ghost'}
             size="sm"
             className="rounded-full px-6 text-muted-foreground hover:text-foreground"
           >
             পরীক্ষা
           </Button>
           <Button
-            variant="ghost"
+            onClick={() => setActiveTab('রিপোর্ট')}
+            variant={activeTab === 'রিপোর্ট' ? 'default' : 'ghost'}
             size="sm"
             className="rounded-full px-6 text-muted-foreground hover:text-foreground"
           >
@@ -63,12 +71,9 @@ export default function HistoryPage() {
             {subjects.map((subject, index) => (
               <CarouselItem key={index} className="basis-auto">
                 <Button
-                  variant={index === 0 ? 'secondary' : 'ghost'}
-                  className={`rounded-full font-body ${
-                    index === 0
-                      ? 'bg-secondary text-foreground'
-                      : 'text-muted-foreground'
-                  }`}
+                  onClick={() => setActiveSubject(subject)}
+                  variant={activeSubject === subject ? 'secondary' : 'ghost'}
+                  className="rounded-full font-body text-muted-foreground"
                 >
                   {subject}
                 </Button>

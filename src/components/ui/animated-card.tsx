@@ -13,7 +13,7 @@ export const AnimatedCard = ({ children, className }: AnimatedCardProps) => {
     return (
         <motion.div
             whileHover={{ scale: 1.03, y: -5 }}
-            transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 15 }}
             className={className}
         >
             {children}

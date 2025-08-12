@@ -9,8 +9,8 @@ import {
   Bar,
   XAxis,
   YAxis,
-  ResponsiveContainer,
   Cell,
+  ResponsiveContainer,
 } from 'recharts';
 import {
   Trophy,

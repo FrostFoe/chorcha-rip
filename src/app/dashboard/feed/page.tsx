@@ -49,27 +49,34 @@ export default function FeedPage() {
             placeholder="তোমার প্রশ্নটি এখানে লিখো..."
             className="bg-background border-border min-h-[80px] mb-4"
           />
-          <div className="flex items-center gap-4">
+          <div className="flex flex-col sm:flex-row items-center gap-4">
             <Select>
               <SelectTrigger className="w-full bg-background border-border">
-                <SelectValue placeholder="Select Subject" />
+                <SelectValue placeholder="বিষয় নির্বাচন করুন" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="physics">Physics</SelectItem>
-                <SelectItem value="chemistry">Chemistry</SelectItem>
-                <SelectItem value="math">Math</SelectItem>
+                <SelectItem value="physics">পদার্থবিজ্ঞান</SelectItem>
+                <SelectItem value="chemistry">রসায়ন</SelectItem>
+                <SelectItem value="math">উচ্চতর গণিত</SelectItem>
+                <SelectItem value="biology">জীববিজ্ঞান</SelectItem>
+                <SelectItem value="bangla">বাংলা</SelectItem>
+                <SelectItem value="english">English</SelectItem>
+                <SelectItem value="ict">তথ্য ও যোগাযোগ প্রযুক্তি</SelectItem>
               </SelectContent>
             </Select>
             <Select>
               <SelectTrigger className="w-full bg-background border-border">
-                <SelectValue placeholder="Select Chapter" />
+                <SelectValue placeholder="অধ্যায় নির্বাচন করুন" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="chapter1">Chapter 1</SelectItem>
-                <SelectItem value="chapter2">Chapter 2</SelectItem>
+                <SelectItem value="chapter1">অধ্যায় ১</SelectItem>
+                <SelectItem value="chapter2">অধ্যায় ২</SelectItem>
+                <SelectItem value="chapter3">অধ্যায় ৩</SelectItem>
+                <SelectItem value="chapter4">অধ্যায় ৪</SelectItem>
+                <SelectItem value="chapter5">অধ্যায় ৫</SelectItem>
               </SelectContent>
             </Select>
-            <Button variant="ghost" className="text-muted-foreground">Next</Button>
+            <Button variant="ghost" className="text-muted-foreground self-end sm:self-center">Next</Button>
           </div>
         </div>
 

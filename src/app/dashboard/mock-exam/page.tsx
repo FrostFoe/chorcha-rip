@@ -58,7 +58,7 @@ export default function MockExamPage() {
         
         <section>
           <h2 className="text-lg font-semibold font-body mb-4">প্রিসেট পরীক্ষা</h2>
-          <div className="flex flex-wrap gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
             {presetExams.map((exam, index) => (
               <Button key={index} variant="secondary" className="font-body bg-secondary hover:bg-muted">
                 {exam}

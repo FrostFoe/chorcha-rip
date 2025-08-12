@@ -77,7 +77,7 @@ export default function SettingsPage() {
             </div>
             <h2 className="mt-4 text-lg font-semibold">Sysmad BCF-19</h2>
             <p className="text-sm text-muted-foreground">
-              zhour1060@gmail.com
+              test@example.com
             </p>
             <Badge
               variant="destructive"
@@ -157,7 +157,7 @@ export default function SettingsPage() {
             <div>
               <label htmlFor="phone" className="block text-sm font-medium text-muted-foreground mb-1">Phone</label>
               <div className="relative">
-                <Input id="phone" defaultValue="zhour1060@gmail.com" readOnly className="bg-background pr-10" />
+                <Input id="phone" defaultValue="test@example.com" readOnly className="bg-background pr-10" />
                 <div className="absolute inset-y-0 right-0 flex items-center pr-3">
                    <div className="w-5 h-5 bg-green-500 rounded-full flex items-center justify-center">
                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
