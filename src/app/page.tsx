@@ -17,6 +17,7 @@ import {
   Youtube,
 } from 'lucide-react';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
@@ -31,6 +32,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const navLinks = [
   { icon: Home, text: 'প্রশ্ন ব্যাংক', href: '/dashboard/question-bank' },
@@ -44,7 +46,6 @@ const examCategories = [
   'IUT 2022',
   'Dental 2022',
   'BCS Preli 2022',
-  'Rajshahi University 2022',
   'Rajshahi University 2022',
   'Dhaka University A 2022',
   'CKRUET 2022',
@@ -155,20 +156,36 @@ const footerLinks = {
   ],
 };
 
+const DynamicFeaturesSection = dynamic(() => import('@/components/landing/features-section'), {
+  loading: () => <Skeleton className="h-[400px] w-full" />,
+});
+
+const DynamicPracticeSection = dynamic(() => import('@/components/landing/practice-section'), {
+    loading: () => <Skeleton className="h-[400px] w-full" />,
+});
+
+const DynamicTestimonialsSection = dynamic(() => import('@/components/landing/testimonials-section'), {
+    loading: () => <Skeleton className="h-[400px] w-full" />,
+});
+
+const DynamicFooter = dynamic(() => import('@/components/landing/footer'), {
+    loading: () => <Skeleton className="h-[400px] w-full" />,
+});
+
 export default function HomePage() {
   return (
     <div className="bg-background text-foreground">
-      <header className="container mx-auto px-4 py-4 flex justify-between items-center">
+      <header className="container mx-auto flex items-center justify-between px-4 py-4">
         <Link href="/" className="flex items-center gap-2">
           <DDIcon className="h-8 w-8 text-primary" />
           <span className="text-xl font-bold">চর্চা</span>
         </Link>
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden items-center gap-8 md:flex">
           {navLinks.map((link) => (
             <Link
               key={link.text}
               href={link.href}
-              className="flex items-center gap-2 text-sm text-gray-300 hover:text-white transition-colors"
+              className="flex items-center gap-2 text-sm text-gray-300 transition-colors hover:text-white"
             >
               <link.icon className="h-4 w-4" />
               {link.text}
@@ -190,7 +207,7 @@ export default function HomePage() {
               </Button>
             </SheetTrigger>
             <SheetContent side="left" className="p-0">
-               <SheetHeader className="p-8 pb-0">
+              <SheetHeader className="p-8 pb-0">
                 <SheetTitle className="sr-only">Menu</SheetTitle>
                 <SheetDescription className="sr-only">
                   Navigate to different parts of the application.
@@ -201,7 +218,6 @@ export default function HomePage() {
                 </Link>
               </SheetHeader>
               <div className="flex flex-col gap-8 p-8">
-                
                 <nav className="flex flex-col gap-6">
                   {navLinks.map((link) => (
                     <Link
@@ -227,21 +243,21 @@ export default function HomePage() {
 
       <main>
         <section className="container mx-auto px-4 py-16 md:py-24">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="grid items-center gap-12 md:grid-cols-2">
             <div className="space-y-6 text-center md:text-left">
-              <h1 className="text-5xl md:text-6xl font-bold text-primary leading-tight">
+              <h1 className="text-5xl font-bold leading-tight text-primary md:text-6xl">
                 চর্চা করো নিজের গতিতে
               </h1>
-              <p className="text-gray-300 max-w-lg mx-auto md:mx-0">
+              <p className="mx-auto max-w-lg text-gray-300 md:mx-0">
                 নিজের প্রস্তুতির ধাপ গুলো যাচাই করে নাও আমাদের সাথে। আন্তর্জাতিক
                 মানের পরীক্ষা পদ্ধতি এখন তোমার হাতের মুঠোয়।
               </p>
-              <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
-                <Button variant="outline" size="lg" className='w-full sm:w-auto'>
+              <div className="flex flex-col items-center justify-center gap-4 sm:flex-row md:justify-start">
+                <Button variant="outline" size="lg" className="w-full sm:w-auto">
                   <GoogleIcon className="mr-2 h-5 w-5" />
                   Google Play
                 </Button>
-                <Button variant="outline" size="lg" className='w-full sm:w-auto'>
+                <Button variant="outline" size="lg" className="w-full sm:w-auto">
                   <AppleIcon className="mr-2 h-5 w-5" />
                   App Store
                 </Button>
@@ -262,36 +278,44 @@ export default function HomePage() {
 
         <section className="bg-card py-16">
           <div className="container mx-auto px-4">
-            <div className="grid lg:grid-cols-5 gap-8">
+            <div className="grid gap-8 lg:grid-cols-5">
               <div className="lg:col-span-3">
-                <h2 className="text-2xl font-semibold mb-6">
+                <h2 className="mb-6 text-2xl font-semibold">
                   সকল পরীক্ষার প্রশ্নব্যাংক
                 </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
                   {examCategories.map((exam, index) => (
                     <div
                       key={index}
-                      className="bg-background/50 p-4 rounded-lg border border-border hover:border-primary transition-colors cursor-pointer"
+                      className="cursor-pointer rounded-lg border border-border bg-background/50 p-4 transition-colors hover:border-primary"
                     >
                       <h3 className="font-semibold">{exam}</h3>
-                      <div className="text-sm text-muted-foreground mt-2">
-                        <span>প্রশ্নঃ ১৪৩</span> <span className="mx-2">|</span> <span>সময়ঃ ৪৫ মি.</span>
+                      <div className="mt-2 text-sm text-muted-foreground">
+                        <span>প্রশ্নঃ ১৪৩</span>{' '}
+                        <span className="mx-2">|</span>{' '}
+                        <span>সময়ঃ ৪৫ মি.</span>
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
               <div className="lg:col-span-2">
-                <div className="flex justify-between items-center mb-6">
-                  <h2 className="text-2xl font-semibold">প্রশ্নব্যাংক এনালাইসিস</h2>
+                <div className="mb-6 flex items-center justify-between">
+                  <h2 className="text-2xl font-semibold">
+                    প্রশ্নব্যাংক এনালাইসিস
+                  </h2>
                   <Button variant="secondary" size="sm">
                     আরো <ChevronDown className="ml-2 h-4 w-4" />
                   </Button>
                 </div>
-                <div className="h-[250px] bg-background/50 p-4 rounded-lg border border-border">
+                <div className="h-[250px] rounded-lg border border-border bg-background/50 p-4">
                   <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={analysisData}>
-                      <Bar dataKey="value" fill="hsl(var(--primary))" radius={[4, 4, 0, 0]} />
+                      <Bar
+                        dataKey="value"
+                        fill="hsl(var(--primary))"
+                        radius={[4, 4, 0, 0]}
+                      />
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
@@ -299,240 +323,32 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-
-        <section className="bg-background py-16">
-          <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-card p-6 rounded-xl border border-border flex flex-col items-center text-center">
-              <Image
-                src="https://placehold.co/300x600.png"
-                alt="Mock Test"
-                width={200}
-                height={400}
-                className="mb-4 rounded-2xl"
-                data-ai-hint="app screen"
-              />
-              <h3 className="text-xl font-semibold mt-2">মক পরীক্ষা</h3>
-              <p className="text-muted-foreground mt-2 text-sm max-w-xs">
-                দেশের সেরা প্রশ্নদাতাদের দ্বারা তৈরি করা প্রশ্নপত্রে পরীক্ষা
-                দিয়ে নিজের প্রস্তুতিকে করো আরও নিখুঁত।
-              </p>
-            </div>
-            <div className="bg-card p-6 rounded-xl border border-border flex flex-col items-center text-center">
-               <Image
-                src="https://placehold.co/300x600.png"
-                alt="Result Analysis"
-                width={200}
-                height={400}
-                className="mb-4 rounded-2xl"
-                data-ai-hint="app screen analysis"
-              />
-              <h3 className="text-xl font-semibold mt-2">ফলাফল বিশ্লেষণ</h3>
-              <p className="text-muted-foreground mt-2 text-sm max-w-xs">
-                প্রতিটি পরীক্ষার পর পেয়ে যাও পূর্ণাঙ্গ বিষয়ভিত্তিক ও
-                প্রশ্নভিত্তিক বিশ্লেষণ, যা তোমাকে সাহায্য করবে নিজের দুর্বলতা খুঁজে
-                বের করতে।
-              </p>
-            </div>
-            <div className="bg-card p-6 rounded-xl border border-border flex flex-col items-center text-center">
-              <Image
-                src="https://placehold.co/300x600.png"
-                alt="Analysis"
-                width={200}
-                height={400}
-                className="mb-4 rounded-2xl"
-                data-ai-hint="app screen leaderboard"
-              />
-              <h3 className="text-xl font-semibold mt-2">প্রশ্নব্যাংক এনালাইসিস</h3>
-              <p className="text-muted-foreground mt-2 text-sm max-w-xs">
-                বিগত বছরের প্রশ্নপত্রে পরীক্ষা দিয়ে বুঝে নাও প্রশ্নের ধরন এবং
-                নিজের প্রস্তুতিকে করো আরও শক্তিশালী।
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <section className="bg-card py-16">
-          <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-background/50 p-6 rounded-xl border border-border">
-              <h3 className="text-xl font-semibold mb-4">দ্রুত প্র্যাকটিস</h3>
-              <div className="space-y-3">
-                <Button
-                  variant="outline"
-                  className="w-full justify-between"
-                  size="lg"
-                >
-                  বিষয় নির্বাচন করুন <ChevronDown />
-                </Button>
-                <Button
-                  variant="outline"
-                  className="w-full justify-between"
-                  size="lg"
-                >
-                  পত্র নির্বাচন করুন <ChevronDown />
-                </Button>
-                <Button
-                  variant="outline"
-                  className="w-full justify-between"
-                  size="lg"
-                >
-                  অধ্যায় নির্বাচন করুন <ChevronDown />
-                </Button>
-                <Button className="w-full" size="lg">
-                  প্র্যাকটিস শুরু করুন
-                </Button>
-              </div>
-            </div>
-            <div className="bg-background/50 p-6 rounded-xl border border-border">
-              <h3 className="text-xl font-semibold mb-4">লাইভ লিডারবোর্ড</h3>
-              <div className="space-y-3">
-                {leaderboard.map((player) => (
-                  <div
-                    key={player.rank}
-                    className="flex items-center gap-4 p-2 rounded-md bg-background/50 border border-border"
-                  >
-                    <Badge variant="secondary" className="text-lg bg-card text-foreground">
-                      {player.rank}
-                    </Badge>
-                    <Avatar className="h-10 w-10">
-                      <AvatarImage src={player.avatar} alt={`${player.name} avatar`}/>
-                      <AvatarFallback>{player.fallback}</AvatarFallback>
-                    </Avatar>
-                    <div className="flex-1">
-                      <p className="font-semibold">{player.name}</p>
-                      <p className="text-sm text-muted-foreground">
-                        {player.institution}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="py-16">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-8">
-                <h2 className="text-3xl font-bold mb-2">
-                আমাদের শিক্ষার্থীরা চর্চা সম্পর্কে যা বলছে
-                </h2>
-                <p className="text-muted-foreground">
-                এরকম হাজারো শিক্ষার্থীর রিভিউ দেখতে পারেন আমাদের প্লে-স্টোর পেজে
-                গিয়ে।
-                </p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {testimonials.map((testimonial, index) => (
-                <div
-                  key={index}
-                  className={`bg-card p-6 rounded-lg border border-border ${
-                    testimonial.isFirst ? 'lg:col-span-2' : ''
-                  }`}
-                >
-                  {testimonial.isFirst ? (
-                    <article>
-                      <div className="aspect-video bg-black rounded-md flex items-center justify-center mb-4 relative overflow-hidden">
-                        <Image
-                          src="https://placehold.co/600x400.png"
-                          layout="fill"
-                          objectFit="cover"
-                          alt="Youtube thumbnail of a user testimonial"
-                          className="rounded-md"
-                          data-ai-hint="man presenting"
-                        />
-                        <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                           <Play className="h-12 w-12 text-red-600 fill-current" />
-                        </div>
-                      </div>
-                       <p className="text-sm text-muted-foreground">{testimonial.text}</p>
-                    </article>
-                  ) : (
-                    <article>
-                      <div className="flex items-center gap-3 mb-4">
-                        <Avatar className="h-10 w-10">
-                          <AvatarImage src={testimonial.avatar} alt={`${testimonial.name}'s avatar`} />
-                          <AvatarFallback>{testimonial.fallback}</AvatarFallback>
-                        </Avatar>
-                        <div>
-                          <p className="font-semibold">{testimonial.name}</p>
-                          <div className="flex text-yellow-400">
-                            {testimonial.rating && [...Array(testimonial.rating)].map((_, i) => (
-                              <Star key={i} className="h-4 w-4 fill-current" />
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                      <p className="text-sm text-muted-foreground">{testimonial.text}</p>
-                    </article>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
+        
+        <DynamicFeaturesSection />
+        <DynamicPracticeSection />
+        <DynamicTestimonialsSection />
 
         <section className="container mx-auto px-4 py-16">
-           <div className="bg-card p-8 rounded-xl border border-border flex flex-col md:flex-row justify-between items-center gap-6">
-              <div className="text-center md:text-left">
-                <h2 className="text-2xl font-semibold mb-2">এখনই যুক্ত হও বাংলাদেশের সবচেয়ে বড় প্র্যাকটিস প্ল্যাটফর্মে</h2>
-                <p className="text-muted-foreground">বাংলাদেশের প্রথম অ্যাপ্লিকেশন যেখানে তুমি পাবে তোমার প্রয়োজন অনুযায়ী সবকিছু।</p>
-              </div>
-              <Button size="lg" className="flex-shrink-0" asChild>
-                <Link href="/sign-in">
-                  জয়েন করো এখনই <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-           </div>
+          <div className="flex flex-col items-center justify-between gap-6 rounded-xl border border-border bg-card p-8 md:flex-row">
+            <div className="text-center md:text-left">
+              <h2 className="mb-2 text-2xl font-semibold">
+                এখনই যুক্ত হও বাংলাদেশের সবচেয়ে বড় প্র্যাকটিস প্ল্যাটফর্মে
+              </h2>
+              <p className="text-muted-foreground">
+                বাংলাদেশের প্রথম অ্যাপ্লিকেশন যেখানে তুমি পাবে তোমার প্রয়োজন
+                অনুযায়ী সবকিছু।
+              </p>
+            </div>
+            <Button size="lg" className="flex-shrink-0" asChild>
+              <Link href="/sign-in">
+                জয়েন করো এখনই <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
         </section>
       </main>
 
-      <footer className="bg-card border-t border-border">
-        <div className="container mx-auto px-4 py-16">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
-            <div className="col-span-full sm:col-span-2 lg:col-span-2">
-              <Link href="/" className="flex items-center gap-2 mb-4">
-                <DDIcon className="h-8 w-8 text-primary" />
-                <span className="text-xl font-bold">চর্চা</span>
-              </Link>
-              <div className="flex gap-4 mb-4">
-                <a href="#" aria-label="Instagram" className="text-gray-400 hover:text-white flex items-center justify-center"><Instagram /></a>
-                <a href="#" aria-label="YouTube" className="text-gray-400 hover:text-white flex items-center justify-center"><Youtube /></a>
-                <a href="#" aria-label="LinkedIn" className="text-gray-400 hover:text-white flex items-center justify-center"><Linkedin /></a>
-              </div>
-              <div className="text-sm text-muted-foreground space-y-2">
-                <p className="flex items-center gap-2"><Phone className="h-4 w-4" /> 01825-302379</p>
-                <p className="flex items-center gap-2"><Mail className="h-4 w-4" /> info.chorcha@gmail.com</p>
-                <p>Dhaka, House-969, Road-09, Avenue-11, Mirpur DOHS, 1216</p>
-              </div>
-            </div>
-            {Object.entries(footerLinks).map(([title, links]) => (
-              <div key={title} className="col-span-1">
-                <h4 className="font-semibold mb-4">{title}</h4>
-                <ul className="space-y-3">
-                  {links.map((link, index) => (
-                    <li key={index}>
-                      <a href="#" className="text-sm text-muted-foreground hover:text-white">{link}</a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-          <div className="flex flex-col md:flex-row justify-between items-center mt-16 pt-8 border-t border-border">
-            <p className="text-sm text-gray-500 text-center md:text-left">&copy; 2024 Chorcha. All rights reserved.</p>
-            <div className="flex flex-col sm:flex-row items-center gap-4 mt-4 md:mt-0">
-               <Button variant="outline" size="lg" className='w-full sm:w-auto'>
-                  <GoogleIcon className="mr-2 h-5 w-5" />
-                  Google Play
-                </Button>
-                <Button variant="outline" size="lg" className='w-full sm:w-auto'>
-                  <AppleIcon className="mr-2 h-5 w-5" />
-                  App Store
-                </Button>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <DynamicFooter />
     </div>
   );
 }
