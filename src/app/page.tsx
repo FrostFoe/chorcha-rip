@@ -302,7 +302,7 @@ export default function HomePage() {
         </section>
 
         <section className="bg-background py-16">
-          <div className="container mx-auto px-4 grid md:grid-cols-3 gap-8">
+          <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="bg-card p-6 rounded-xl border border-border flex flex-col items-center text-center">
               <Image
                 src="https://placehold.co/300x600.png"
@@ -353,7 +353,7 @@ export default function HomePage() {
         </section>
 
         <section className="bg-card py-16">
-          <div className="container mx-auto px-4 grid md:grid-cols-2 gap-8">
+          <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="bg-background/50 p-6 rounded-xl border border-border">
               <h3 className="text-xl font-semibold mb-4">দ্রুত প্র্যাকটিস</h3>
               <div className="space-y-3">
@@ -422,7 +422,7 @@ export default function HomePage() {
                 গিয়ে।
                 </p>
             </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {testimonials.map((testimonial, index) => (
                 <div
                   key={index}
@@ -521,12 +521,12 @@ export default function HomePage() {
           </div>
           <div className="flex flex-col md:flex-row justify-between items-center mt-16 pt-8 border-t border-border">
             <p className="text-sm text-gray-500 text-center md:text-left">&copy; 2024 Chorcha. All rights reserved.</p>
-            <div className="flex items-center gap-4 mt-4 md:mt-0">
-               <Button variant="outline" size="lg">
+            <div className="flex flex-col sm:flex-row items-center gap-4 mt-4 md:mt-0">
+               <Button variant="outline" size="lg" className='w-full sm:w-auto'>
                   <GoogleIcon className="mr-2 h-5 w-5" />
                   Google Play
                 </Button>
-                <Button variant="outline" size="lg">
+                <Button variant="outline" size="lg" className='w-full sm:w-auto'>
                   <AppleIcon className="mr-2 h-5 w-5" />
                   App Store
                 </Button>

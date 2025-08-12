@@ -112,14 +112,14 @@ export default function DashboardPage() {
           {featureCards.map((card, index) => (
             <Link href={card.href} key={index}>
               <div
-                className="bg-card p-6 rounded-xl flex flex-col items-center justify-center gap-4 hover:bg-primary/10 transition-colors cursor-pointer h-full"
+                className="bg-card p-4 rounded-xl flex flex-col items-center justify-center gap-3 hover:bg-primary/10 transition-colors cursor-pointer h-full"
               >
                 <div
-                  className={`w-16 h-16 rounded-full flex items-center justify-center ${card.color}`}
+                  className={`w-14 h-14 rounded-full flex items-center justify-center ${card.color}`}
                 >
-                  <card.icon className="w-8 h-8" />
+                  <card.icon className="w-7 h-7" />
                 </div>
-                <p className="font-semibold font-body text-center">{card.text}</p>
+                <p className="font-semibold font-body text-center text-sm">{card.text}</p>
               </div>
             </Link>
           ))}
