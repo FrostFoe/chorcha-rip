@@ -41,6 +41,7 @@ import {
 } from '@/components/icons';
 import { Input } from '@/components/ui/input';
 import { Search } from 'lucide-react';
+import { AnimatedCard } from '@/components/ui/animated-card';
 
 const subjectCards = [
   {
@@ -198,20 +199,21 @@ export default function QuestionBankPage() {
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
             {subjectCards.map((card, index) => (
-              <div
-                key={index}
-                className={`relative rounded-xl aspect-square flex flex-col items-center justify-end p-4 text-center bg-gradient-to-br ${card.color} text-white overflow-hidden`}
-              >
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                    {card.icon}
+              <AnimatedCard key={index}>
+                <div
+                  className={`relative rounded-xl aspect-square flex flex-col items-center justify-end p-4 text-center bg-gradient-to-br ${card.color} text-white overflow-hidden cursor-pointer h-full`}
+                >
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                      {card.icon}
+                  </div>
+                  <div className="z-10 text-left w-full">
+                    <h3 className="font-bold text-lg">{card.title}</h3>
+                    {card.subtitle && (
+                      <p className="text-sm opacity-80">{card.subtitle}</p>
+                    )}
+                  </div>
                 </div>
-                <div className="z-10 text-left w-full">
-                  <h3 className="font-bold text-lg">{card.title}</h3>
-                  {card.subtitle && (
-                    <p className="text-sm opacity-80">{card.subtitle}</p>
-                  )}
-                </div>
-              </div>
+              </AnimatedCard>
             ))}
           </div>
         </section>
@@ -227,18 +229,19 @@ export default function QuestionBankPage() {
           </div>
           <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 gap-4">
             {institutionCards.map((card, index) => (
-              <div
-                key={index}
-                className="rounded-xl aspect-square flex flex-col items-center justify-center gap-2 p-2 text-center"
-                style={{ backgroundColor: card.color }}
-              >
-                <div className="w-12 h-12 bg-black/20 rounded-full flex items-center justify-center">
-                  {card.icon}
+               <AnimatedCard key={index}>
+                <div
+                  className="rounded-xl aspect-square flex flex-col items-center justify-center gap-2 p-2 text-center cursor-pointer h-full"
+                  style={{ backgroundColor: card.color }}
+                >
+                  <div className="w-12 h-12 bg-black/20 rounded-full flex items-center justify-center">
+                    {card.icon}
+                  </div>
+                  <h3 className="font-semibold text-sm text-white">
+                    {card.name}
+                  </h3>
                 </div>
-                <h3 className="font-semibold text-sm text-white">
-                  {card.name}
-                </h3>
-              </div>
+              </AnimatedCard>
             ))}
           </div>
         </section>

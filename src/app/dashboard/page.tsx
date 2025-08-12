@@ -23,6 +23,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import Link from 'next/link';
+import { AnimatedCard } from '@/components/ui/animated-card';
 
 const featureCards = [
   {
@@ -110,18 +111,20 @@ export default function DashboardPage() {
       <main className="p-6 grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-3 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
           {featureCards.map((card, index) => (
-            <Link href={card.href} key={index}>
-              <div
-                className="bg-card p-4 rounded-xl flex flex-col items-center justify-center gap-3 hover:bg-primary/10 transition-colors cursor-pointer h-full"
-              >
+             <Link href={card.href} key={index}>
+              <AnimatedCard className="h-full">
                 <div
-                  className={`w-14 h-14 rounded-full flex items-center justify-center ${card.color}`}
+                  className="bg-card p-4 rounded-xl flex flex-col items-center justify-center gap-3 hover:bg-primary/10 transition-colors cursor-pointer h-full"
                 >
-                  <card.icon className="w-7 h-7" />
+                  <div
+                    className={`w-14 h-14 rounded-full flex items-center justify-center ${card.color}`}
+                  >
+                    <card.icon className="w-7 h-7" />
+                  </div>
+                  <p className="font-semibold font-body text-center text-sm">{card.text}</p>
                 </div>
-                <p className="font-semibold font-body text-center text-sm">{card.text}</p>
-              </div>
-            </Link>
+              </AnimatedCard>
+             </Link>
           ))}
         </div>
 

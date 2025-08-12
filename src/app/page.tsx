@@ -33,6 +33,7 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { Skeleton } from '@/components/ui/skeleton';
+import { AnimatedCard } from '@/components/ui/animated-card';
 
 const navLinks = [
   { icon: Home, text: 'প্রশ্ন ব্যাংক', href: '/dashboard/question-bank' },
@@ -285,17 +286,18 @@ export default function HomePage() {
                 </h2>
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
                   {examCategories.map((exam, index) => (
-                    <div
-                      key={index}
-                      className="cursor-pointer rounded-lg border border-border bg-background/50 p-4 transition-colors hover:border-primary"
-                    >
-                      <h3 className="font-semibold">{exam}</h3>
-                      <div className="mt-2 text-sm text-muted-foreground">
-                        <span>প্রশ্নঃ ১৪৩</span>{' '}
-                        <span className="mx-2">|</span>{' '}
-                        <span>সময়ঃ ৪৫ মি.</span>
+                    <AnimatedCard key={index}>
+                      <div
+                        className="cursor-pointer rounded-lg border border-border bg-background/50 p-4 transition-colors hover:border-primary h-full"
+                      >
+                        <h3 className="font-semibold">{exam}</h3>
+                        <div className="mt-2 text-sm text-muted-foreground">
+                          <span>প্রশ্নঃ ১৪৩</span>{' '}
+                          <span className="mx-2">|</span>{' '}
+                          <span>সময়ঃ ৪৫ মি.</span>
+                        </div>
                       </div>
-                    </div>
+                    </AnimatedCard>
                   ))}
                 </div>
               </div>
