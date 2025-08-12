@@ -12,7 +12,7 @@ interface AnimatedCardProps {
 export const AnimatedCard = ({ children, className }: AnimatedCardProps) => {
     return (
         <motion.div
-            whileHover={{ scale: 1.03, y: -5 }}
+            whileHover={{ scale: 1.015, y: -2 }}
             transition={{ type: 'spring', stiffness: 400, damping: 15 }}
             className={className}
         >
