@@ -227,7 +227,7 @@ export function SidebarTrigger({ className }: { className?: string }) {
     <Button
       variant="ghost"
       size="icon"
-      className={cn(className)}
+      className={cn("hidden md:flex", className)}
       onClick={toggle}
       aria-label="Toggle sidebar"
     >

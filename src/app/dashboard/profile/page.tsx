@@ -28,7 +28,7 @@ import {
 } from 'lucide-react';
 import { Calendar } from '@/components/ui/calendar';
 import { Button } from '@/components/ui/button';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const weeklyPointsData = [
   { day: 'S', points: 50 },
@@ -53,13 +53,7 @@ const progressData = [
 ];
 
 export default function ProfilePage() {
-  const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
-
-  useEffect(() => {
-    // Set the selected date only on the client-side to avoid hydration mismatch
-    setSelectedDate(new Date(2025, 7, 10));
-  }, []);
-
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date(2025, 7, 10));
 
   return (
     <div className="bg-background min-h-screen text-foreground p-6">
