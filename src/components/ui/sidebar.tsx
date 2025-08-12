@@ -177,7 +177,7 @@ export function SidebarMenuButton({
     const buttonContent = (
         <Button
           variant={isActive ? 'secondary' : 'ghost'}
-          className={cn('h-10 w-full justify-start', isCollapsed && 'justify-center', className)}
+          className={cn('h-10 w-full justify-start', className)}
           aria-current={isActive ? 'page' : undefined}
         >
             {children}

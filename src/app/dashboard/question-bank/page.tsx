@@ -1,7 +1,6 @@
 
 'use client';
 
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
   AgriIcon,
@@ -16,7 +15,6 @@ import {
   CuetIcon,
   CuIcon,
   DentalIcon,
-  DDIcon,
   DuIcon,
   GucchoIcon,
   HigherMath1Icon,
@@ -38,7 +36,8 @@ import {
   SatCollegeIcon,
   Stats1Icon,
   Stats2Icon,
-  AfmcIcon
+  AfmcIcon,
+  DDIcon,
 } from '@/components/icons';
 import { Input } from '@/components/ui/input';
 import { Search } from 'lucide-react';

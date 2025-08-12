@@ -24,7 +24,6 @@ import {
   Lock,
   LogOut,
   MessageSquarePlus,
-  Settings,
   Shield,
   Trash2,
   User,

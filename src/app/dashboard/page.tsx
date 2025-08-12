@@ -3,12 +3,10 @@
 
 import { DDIcon } from '@/components/icons';
 import {
-  Archive,
   ArrowRight,
   BookOpen,
   Bot,
   Library,
-  PenSquare,
   Swords,
   Trophy,
   Zap,

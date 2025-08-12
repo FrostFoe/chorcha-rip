@@ -108,7 +108,7 @@ export default function SignUpPage() {
             variant="outline"
             className="h-12 w-full justify-center gap-3 rounded-lg border-none bg-[#2E2E2E] text-base font-medium text-white hover:bg-[#3f3f3f]"
           >
-            <FacebookIcon className="h-5 w-5 text-[#1877F2]" />
+            <FacebookIcon className="h-5 w-5" />
             Facebook
           </Button>
           <Button

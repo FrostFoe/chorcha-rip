@@ -19,8 +19,6 @@ import {
   LayoutGrid,
   Library,
   LogOut,
-  PanelLeft,
-  PenSquare,
   Settings,
   Swords,
   Trophy,
@@ -41,7 +39,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Button } from '@/components/ui/button';
 
 const menuItems = [
   { icon: LayoutGrid, text: 'ড্যাশবোর্ড', href: '/dashboard' },
