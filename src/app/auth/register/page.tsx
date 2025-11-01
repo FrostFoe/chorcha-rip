@@ -1,3 +1,4 @@
+
 "use client";
 
 import { Button } from "@/components/ui/button";
@@ -33,7 +34,13 @@ export default function RegisterPage() {
   };
 
   const handleAnonymousLogin = async () => {
-    const { error } = await supabase.auth.signInAnonymously();
+    const { error } = await supabase.auth.signInAnonymously({
+      options: {
+        // This ensures the session is stored and refreshed automatically
+        autoRefreshToken: true,
+        persistSession: true,
+      },
+    });
     if (error) {
       toast({
         variant: "destructive",
