@@ -9,7 +9,8 @@ import {
   useCallback,
 } from "react";
 import { useSupabase } from "@/app/supabase-provider";
-import type { Course, Lesson, UserProfile } from "@/lib/types";
+import type { Course, UserProfile } from "@/lib/types";
+import { getAllLessonsData } from "@/lib/lessons";
 
 interface EnrolledCourse extends Course {
   progress: number;
@@ -38,7 +39,6 @@ const UserDataContext = createContext<UserDataContextType | undefined>(
 interface UserDataProviderProps {
   children: React.ReactNode;
   allCourses: Course[];
-  allLessons: Lesson[];
 }
 
 const GUEST_PROFILE: UserProfile = {
@@ -49,7 +49,6 @@ const GUEST_PROFILE: UserProfile = {
 export function UserDataProvider({
   children,
   allCourses,
-  allLessons,
 }: UserDataProviderProps) {
   const { session } = useSupabase();
   const [enrolledCourses, setEnrolledCourses] = useState<EnrolledCourse[]>([]);
@@ -109,31 +108,31 @@ export function UserDataProvider({
         localStorage.getItem(enrollmentsKey) || "[]",
       );
 
-      const enrolled = allCourses
-        .filter((course: Course) => enrolledIds.includes(course.id))
-        .map((course: Course) => {
-          const progressKey = `chorcha-progress-${course.slug}-${session.user.id}`;
-          const progressData = localStorage.getItem(progressKey);
-          let progress = 0;
+      const enrolledCoursesWithProgress = await Promise.all(
+        allCourses
+          .filter((course: Course) => enrolledIds.includes(course.id))
+          .map(async (course: Course) => {
+            const progressKey = `chorcha-progress-${course.slug}-${session.user.id}`;
+            const progressData = localStorage.getItem(progressKey);
+            let progress = 0;
 
-          if (progressData) {
-            const completedLessons: string[] = JSON.parse(progressData);
-            const courseLessons = allLessons.filter(
-              (l) => l.module && l.module.startsWith(course.slug),
-            ); // Simplified logic
-            const totalLessons = courseLessons.length;
-            if (totalLessons > 0) {
-              progress = (completedLessons.length / totalLessons) * 100;
+            if (progressData) {
+              const completedLessons: string[] = JSON.parse(progressData);
+              const courseLessons = await getAllLessonsData(course.slug);
+              const totalLessons = courseLessons.length;
+              if (totalLessons > 0) {
+                progress = (completedLessons.length / totalLessons) * 100;
+              }
             }
-          }
 
-          return {
-            ...course,
-            progress: Math.round(progress),
-          };
-        });
+            return {
+              ...course,
+              progress: Math.round(progress),
+            };
+          }),
+      );
 
-      setEnrolledCourses(enrolled);
+      setEnrolledCourses(enrolledCoursesWithProgress);
     } catch (error) {
       console.error("Failed to fetch user data:", error);
       // Reset state on error
@@ -144,7 +143,7 @@ export function UserDataProvider({
     } finally {
       setLoading(false);
     }
-  }, [session, allCourses, allLessons]);
+  }, [session, allCourses]);
 
   useEffect(() => {
     fetchUserData();

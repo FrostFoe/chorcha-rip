@@ -7,7 +7,6 @@ import SupabaseProvider from "./supabase-provider";
 import { ThemeProvider } from "@/components/theme-provider";
 import { UserDataProvider } from "@/providers/UserDataProvider";
 import { getAllCoursesData } from "@/lib/courses";
-import { getAllLessonsData } from "@/lib/lessons";
 
 const hindSiliguri = Hind_Siliguri({
   subsets: ["bengali", "latin"],
@@ -28,12 +27,6 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const allCourses = await getAllCoursesData();
-  // We need to fetch all lessons for all courses to calculate progress
-  const allLessonsPromises = allCourses.map((course) =>
-    getAllLessonsData(course.slug),
-  );
-  const allLessonsNested = await Promise.all(allLessonsPromises);
-  const allLessons = allLessonsNested.flat();
 
   return (
     <html lang="en" suppressHydrationWarning>
@@ -45,7 +38,7 @@ export default async function RootLayout({
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <SupabaseProvider>
-            <UserDataProvider allCourses={allCourses} allLessons={allLessons}>
+            <UserDataProvider allCourses={allCourses}>
               {children}
             </UserDataProvider>
           </SupabaseProvider>
