@@ -1,25 +1,12 @@
+
 "use client";
 
-import { useSupabase } from "@/app/supabase-provider";
-import { useEffect, useState, memo } from "react";
+import { useUserData } from "@/providers/UserDataProvider";
+import { memo } from "react";
 
 function DashboardHeaderComponent() {
-  const { session } = useSupabase();
-  const [userName, setUserName] = useState("ব্যবহারকারী");
-
-  useEffect(() => {
-    if (session?.user) {
-      const localProfile = localStorage.getItem(
-        `chorcha-profile-${session.user.id}`,
-      );
-      if (localProfile) {
-        const profile = JSON.parse(localProfile);
-        setUserName(profile.full_name || "ব্যবহারকারী");
-      } else {
-        setUserName(session.user.user_metadata?.name || "ব্যবহারকারী");
-      }
-    }
-  }, [session]);
+  const { profile } = useUserData();
+  const userName = profile?.full_name || "Guest";
 
   return (
     <div className="mb-8">

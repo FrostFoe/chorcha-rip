@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useSupabase } from "@/app/supabase-provider";
@@ -21,6 +22,7 @@ import * as React from "react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useUserData } from "@/providers/UserDataProvider";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 const sidebarLinks = [
   { href: "/dashboard", label: "ড্যাশবোর্ড", icon: LayoutGrid },
@@ -40,22 +42,11 @@ interface SidebarProps {
 function SidebarComponent({ isCollapsed, toggleSidebar }: SidebarProps) {
   const pathname = usePathname();
   const { session } = useSupabase();
-  const { gemBalance } = useUserData();
-  const [userFullName, setUserFullName] = React.useState("User");
+  const { gemBalance, profile } = useUserData();
 
-  React.useEffect(() => {
-    if (session?.user) {
-      const localProfile = localStorage.getItem(
-        `chorcha-profile-${session.user.id}`,
-      );
-      if (localProfile) {
-        const profile = JSON.parse(localProfile);
-        setUserFullName(profile.full_name || "User");
-      } else {
-        setUserFullName(session.user.user_metadata?.name || "User");
-      }
-    }
-  }, [session]);
+  const userFullName = profile?.full_name || "Guest";
+  const userEmail = session?.user?.email;
+  const userAvatarUrl = profile?.avatar_url;
 
   return (
     <aside
@@ -170,24 +161,22 @@ function SidebarComponent({ isCollapsed, toggleSidebar }: SidebarProps) {
               isCollapsed && "justify-center",
             )}
           >
-            <Image
-              alt="avatar"
-              className="h-10 w-10 rounded-full object-cover border-2 border-sidebar-border"
-              src={
-                session?.user?.user_metadata?.avatar_url ||
-                "https://picsum.photos/seed/avatar/40/40"
-              }
-              width={40}
-              height={40}
-            />
+            <Avatar className="h-10 w-10 border-2 border-sidebar-border">
+              <AvatarImage src={userAvatarUrl} alt={userFullName} />
+              <AvatarFallback>
+                <User className="h-5 w-5" />
+              </AvatarFallback>
+            </Avatar>
             {!isCollapsed && (
               <div className="truncate space-y-1">
                 <p className="text-sm font-medium text-foreground">
                   {userFullName}
                 </p>
-                <p className="text-xs font-light text-muted-foreground">
-                  {session?.user?.email}
-                </p>
+                {userEmail && (
+                  <p className="text-xs font-light text-muted-foreground">
+                    {userEmail}
+                  </p>
+                )}
               </div>
             )}
           </Link>

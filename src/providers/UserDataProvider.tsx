@@ -1,3 +1,4 @@
+
 "use client";
 
 import {
@@ -40,6 +41,11 @@ interface UserDataProviderProps {
   allLessons: Lesson[];
 }
 
+const GUEST_PROFILE: UserProfile = {
+  full_name: "Guest",
+  avatar_url: "", // Empty string will trigger fallback to icon
+};
+
 export function UserDataProvider({
   children,
   allCourses,
@@ -48,46 +54,23 @@ export function UserDataProvider({
   const { session } = useSupabase();
   const [enrolledCourses, setEnrolledCourses] = useState<EnrolledCourse[]>([]);
   const [gemBalance, setGemBalance] = useState(0);
-  const [profile, setProfile] = useState<UserProfile | null>(null);
+  const [profile, setProfile] = useState<UserProfile | null>(GUEST_PROFILE);
   const [submittedAssignments, setSubmittedAssignments] = useState<string[]>(
     [],
   );
   const [loading, setLoading] = useState(true);
 
-  // Helper to find which course a lesson belongs to
-  const getCourseFromLesson = useCallback(
-    (lesson: Lesson): Course | undefined => {
-      return allCourses.find((course) => {
-        const courseLessons = allLessons.filter((l) => {
-          // This logic is tricky. A better data model would link lessons to courses directly.
-          // Let's assume a lesson's module gives a hint.
-          // e.g. lesson.module is 'vectors' and we know that's in 'hsc-physics-1st-paper'
-          // This requires a mapping or conventions.
-          // For now, let's check if the lesson is within the content structure of the course.
-          // This is a placeholder for a more robust lookup.
-          const lessonPathSegment = `/${course.category}/${course.slug}/lessons/`;
-          // This check is conceptual; we can't check file paths on the client.
-          // The `allLessons` prop should ideally contain course identifiers.
-          // Assuming `lesson.module` can be partially matched to a course slug.
-          return course.slug.includes(l.module) || l.module.includes(course.slug);
-        });
-        return courseLessons.some((l) => l.slug === lesson.slug);
-      });
-    },
-    [allCourses, allLessons],
-  );
-
   const fetchUserData = useCallback(async () => {
+    setLoading(true);
     if (!session?.user) {
       setEnrolledCourses([]);
       setGemBalance(0);
-      setProfile(null);
+      setProfile(GUEST_PROFILE);
       setSubmittedAssignments([]);
       setLoading(false);
       return;
     }
 
-    setLoading(true);
     try {
       // Fetch Gem Balance
       const gemKey = `chorcha-gems-${session.user.id}`;
@@ -101,7 +84,10 @@ export function UserDataProvider({
         setProfile(JSON.parse(storedProfile));
       } else {
         const defaultProfile = {
-          full_name: session.user.user_metadata?.name || "ব্যবহারকারী",
+          full_name:
+            session.user.user_metadata?.full_name ||
+            session.user.user_metadata?.name ||
+            "ব্যবহারকারী",
           avatar_url:
             session.user.user_metadata?.avatar_url ||
             "https://picsum.photos/seed/avatar/100/100",
@@ -132,7 +118,9 @@ export function UserDataProvider({
 
           if (progressData) {
             const completedLessons: string[] = JSON.parse(progressData);
-            const courseLessons = allLessons.filter(l => l.module.startsWith(course.slug)); // Simplified logic
+            const courseLessons = allLessons.filter(
+              (l) => l.module && l.module.startsWith(course.slug),
+            ); // Simplified logic
             const totalLessons = courseLessons.length;
             if (totalLessons > 0) {
               progress = (completedLessons.length / totalLessons) * 100;
@@ -151,7 +139,7 @@ export function UserDataProvider({
       // Reset state on error
       setEnrolledCourses([]);
       setGemBalance(0);
-      setProfile(null);
+      setProfile(GUEST_PROFILE);
       setSubmittedAssignments([]);
     } finally {
       setLoading(false);
@@ -169,12 +157,19 @@ export function UserDataProvider({
       }
       // Listen for changes from other tabs
       if (e instanceof StorageEvent) {
+        const key = e.key;
+        if (!key) return;
+
+        const isUserDataKey =
+          key.startsWith("chorcha-enrollments-") ||
+          key.startsWith("chorcha-progress-") ||
+          key.startsWith("chorcha-gems-") ||
+          key.startsWith("chorcha-profile-") ||
+          key.startsWith("chorcha-submissions-");
+
         if (
-          e.key?.startsWith("chorcha-enrollments-") ||
-          e.key?.startsWith("chorcha-progress-") ||
-          e.key?.startsWith("chorcha-gems-") ||
-          e.key?.startsWith("chorcha-profile-") ||
-          e.key?.startsWith("chorcha-submissions-")
+          isUserDataKey &&
+          (!session?.user || key.includes(session.user.id))
         ) {
           fetchUserData();
         }
@@ -188,7 +183,7 @@ export function UserDataProvider({
       window.removeEventListener("storage", handleStorageChange);
       window.removeEventListener("chorcha:storage", handleStorageChange);
     };
-  }, [fetchUserData]);
+  }, [fetchUserData, session]);
 
   const dispatchStorageEvent = () => {
     window.dispatchEvent(new CustomEvent("chorcha:storage"));
@@ -203,10 +198,12 @@ export function UserDataProvider({
   };
 
   const addGems = (amount: number) => {
+    if (!session?.user) return;
     updateGemBalance(gemBalance + amount);
   };
 
   const spendGems = (amount: number) => {
+    if (!session?.user) return false;
     if (gemBalance >= amount) {
       updateGemBalance(gemBalance - amount);
       return true;

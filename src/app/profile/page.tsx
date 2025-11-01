@@ -1,3 +1,4 @@
+
 "use client";
 
 import { Sidebar } from "@/components/dashboard/Sidebar";
@@ -14,6 +15,8 @@ import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 import { useTheme } from "next-themes";
 import { useUserData } from "@/providers/UserDataProvider";
+import Link from "next/link";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default function ProfilePage() {
   const isMobile = useIsMobile();
@@ -24,9 +27,7 @@ export default function ProfilePage() {
   const { profile, loading, updateProfile } = useUserData();
 
   const [fullName, setFullName] = useState("");
-  const [avatarUrl, setAvatarUrl] = useState(
-    "https://picsum.photos/seed/avatar/100/100",
-  );
+  const [avatarUrl, setAvatarUrl] = useState("");
   const [updating, setUpdating] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
@@ -38,9 +39,7 @@ export default function ProfilePage() {
   useEffect(() => {
     if (profile) {
       setFullName(profile.full_name || "");
-      setAvatarUrl(
-        profile.avatar_url || "https://picsum.photos/seed/avatar/100/100",
-      );
+      setAvatarUrl(profile.avatar_url || "");
     }
   }, [profile]);
 
@@ -69,6 +68,20 @@ export default function ProfilePage() {
       setUpdating(false);
     }
   }, [user, fullName, avatarUrl, toast, updateProfile]);
+
+  if (!user) {
+    return (
+      <div className="flex min-h-screen flex-col items-center justify-center bg-background p-4">
+        <h2 className="text-2xl font-bold">অনুগ্রহ করে লগইন করুন</h2>
+        <p className="mt-2 text-muted-foreground">
+          আপনার প্রোফাইল দেখতে হলে আপনাকে লগইন করতে হবে।
+        </p>
+        <Button asChild className="mt-6">
+          <Link href="/auth/register">লগইন / রেজিস্ট্রেশন</Link>
+        </Button>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen">
@@ -106,13 +119,13 @@ export default function ProfilePage() {
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="flex items-center space-x-6">
-                <Image
-                  src={avatarUrl}
-                  alt="Avatar"
-                  width={100}
-                  height={100}
-                  className="rounded-full border-2 border-primary"
-                />
+                <Avatar className="h-24 w-24">
+                  <AvatarImage src={avatarUrl} alt="Avatar" />
+                  <AvatarFallback>
+                    <User className="h-12 w-12" />
+                  </AvatarFallback>
+                </Avatar>
+
                 <div>
                   <Button variant="outline">ছবি পরিবর্তন করুন</Button>
                   <p className="text-xs text-muted-foreground mt-2">
