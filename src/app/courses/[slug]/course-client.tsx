@@ -10,6 +10,7 @@ import type { Course } from "@/lib/types";
 import { MDXRemote, type MDXRemoteSerializeResult } from "next-mdx-remote";
 import { useUserData } from "@/providers/UserDataProvider";
 import { useToast } from "@/hooks/use-toast";
+import { Badge } from "@/components/ui/badge";
 
 interface CourseClientProps {
   course: Course;
@@ -26,8 +27,10 @@ export function CourseClient({ course, mdxSource }: CourseClientProps) {
   }
 
   const handleEnroll = () => {
-    if (gemBalance >= course.price) {
-      spendGems(course.price);
+    // Ensure course.price is treated as a number
+    const coursePrice = Number(course.price);
+    if (gemBalance >= coursePrice) {
+      spendGems(coursePrice);
       enrollCourse(course.id);
       toast({
         title: "সফলভাবে ভর্তি হয়েছেন!",
@@ -98,14 +101,23 @@ export function CourseClient({ course, mdxSource }: CourseClientProps) {
                     </Link>
                   </Button>
                 ) : (
-                  <Button
-                    size="lg"
-                    className="w-full"
-                    onClick={handleEnroll}
-                  >
-                    <Gem className="mr-2 h-5 w-5" />
-                    {course.price} Gem দিয়ে ভর্তি হোন
-                  </Button>
+                  <>
+                    <Button
+                      size="lg"
+                      className="w-full"
+                      onClick={handleEnroll}
+                    >
+                      <Gem className="mr-2 h-5 w-5" />
+                       ভর্তি হোন
+                    </Button>
+                    <Badge
+                      variant="secondary"
+                      className="w-full justify-center py-2 text-base"
+                    >
+                      <Gem className="mr-2 h-4 w-4 text-primary" />
+                      কোর্সের মূল্য: {course.price} Gem
+                    </Badge>
+                  </>
                 )}
               </div>
             </div>
