@@ -93,7 +93,7 @@ export function StoreClient() {
                   </CardTitle>
                   {pack.bonus && (
                     <CardDescription className="text-primary font-semibold">
-                      ( بونس +{pack.bonus} Gem )
+                      (+ бонус {pack.bonus} Gem)
                     </CardDescription>
                   )}
                 </CardHeader>

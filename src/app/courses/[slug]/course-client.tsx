@@ -37,7 +37,7 @@ export function CourseClient({ course, mdxSource }: CourseClientProps) {
     } else {
       toast({
         variant: "destructive",
-        title: "ناکافي Gem!",
+        title: "অপর্যাপ্ত Gem!",
         description: "আপনার পর্যাপ্ত Gem নেই। অনুগ্রহ করে আরও Gem কিনুন।",
         action: (
           <Button variant="secondary" size="sm" asChild>
