@@ -1,6 +1,3 @@
-import fs from "node:fs"
-import path from "node:path"
-import matter from "gray-matter"
 import type { Assignment } from "./types"
 
 const allAssignments: Assignment[] = [
@@ -25,7 +22,7 @@ const allAssignments: Assignment[] = [
   {
     id: "3",
     slug: "newtons-third-law",
-    title: "নিউটনের ৩য় সূত্রের বাস্তব প্রয়োগ",
+    title: "নিউটনের ৩য় সূত্রের বাস্তব প্রয়োগ",
     courseName: "HSC Physics 1st Paper",
     dueDate: "2024-08-25",
     status: "Submitted",
