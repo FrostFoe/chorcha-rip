@@ -1,0 +1,180 @@
+"use client";
+
+import { useSupabase } from "@/app/supabase-provider";
+import {
+  BookOpen,
+  Compass,
+  FilePenLine,
+  LayoutGrid,
+  PanelLeft,
+  PanelRight,
+  Settings,
+  Trophy,
+  User,
+} from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import * as React from "react";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+
+const sidebarLinks = [
+  { href: "/dashboard", label: "ড্যাশবোর্ড", icon: LayoutGrid },
+  { href: "/my-courses", label: "আমার কোর্স", icon: BookOpen },
+  { href: "/browse", label: "ব্রাউজ কোর্স", icon: Compass },
+  { href: "/assignments", label: "অ্যাসাইনমেন্ট", icon: FilePenLine },
+  { href: "/leaderboard", label: "লিডারবোর্ড", icon: Trophy },
+  { href: "/profile", label: "প্রোফাইল", icon: User },
+];
+
+interface SidebarProps {
+  isCollapsed: boolean;
+  toggleSidebar: () => void;
+}
+
+function SidebarComponent({ isCollapsed, toggleSidebar }: SidebarProps) {
+  const pathname = usePathname();
+  const { session } = useSupabase();
+  const [userFullName, setUserFullName] = React.useState("User");
+
+  React.useEffect(() => {
+    if (session?.user) {
+      const localProfile = localStorage.getItem(
+        `chorcha-profile-${session.user.id}`,
+      );
+      if (localProfile) {
+        const profile = JSON.parse(localProfile);
+        setUserFullName(profile.full_name || "User");
+      } else {
+        setUserFullName(session.user.user_metadata?.name || "User");
+      }
+    }
+  }, [session]);
+
+  return (
+    <aside
+      className={cn(
+        "hidden lg:fixed lg:inset-y-0 z-30 lg:flex lg:flex-col bg-sidebar text-sidebar-foreground transition-[width] duration-300",
+        isCollapsed ? "lg:w-sidebar-collapsed" : "lg:w-sidebar-expanded",
+      )}
+    >
+      <div className="flex h-20 items-center justify-between px-5">
+        {!isCollapsed && (
+          <div className="flex items-center">
+            <Link href="/dashboard">
+              <Image
+                className="h-8 w-auto"
+                src="/logo-dark.webp"
+                alt="Chorcha Logo"
+                width={100}
+                height={32}
+              />
+            </Link>
+          </div>
+        )}
+        <button
+          type="button"
+          onClick={toggleSidebar}
+          className={cn(
+            buttonVariants({ variant: "ghost", size: "icon" }),
+            "h-10 w-10 text-muted-foreground hover:text-foreground rounded-full transition-transform",
+            isCollapsed && "mx-auto",
+          )}
+        >
+          {isCollapsed ? (
+            <PanelRight className="h-6 w-6" />
+          ) : (
+            <PanelLeft className="h-6 w-6" />
+          )}
+        </button>
+      </div>
+      <nav className="flex-1 overflow-y-auto px-4 mt-6 space-y-2">
+        {sidebarLinks.map((link) => (
+          <Link
+            key={link.href}
+            href={link.href}
+            className={cn(
+              buttonVariants({
+                variant:
+                  (pathname.startsWith(link.href) &&
+                    link.href !== "/dashboard") ||
+                  pathname === link.href
+                    ? "secondary"
+                    : "ghost",
+                size: "default",
+              }),
+              "w-full justify-start gap-x-4 px-4 py-2 h-auto text-base",
+              (pathname.startsWith(link.href) && link.href !== "/dashboard") ||
+                pathname === link.href
+                ? "bg-sidebar-accent text-sidebar-accent-foreground"
+                : "text-muted-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground",
+              isCollapsed && "justify-center",
+            )}
+            title={isCollapsed ? link.label : undefined}
+          >
+            <link.icon className="h-5 w-5" />
+            {!isCollapsed && <span className="truncate">{link.label}</span>}
+          </Link>
+        ))}
+      </nav>
+      <div
+        className={cn(
+          "mt-auto px-4 py-6 border-t border-sidebar-border",
+          isCollapsed && "px-2",
+        )}
+      >
+        <div className="space-y-2">
+          <Link
+            href="/settings"
+            className={cn(
+              buttonVariants({
+                variant: pathname === "/settings" ? "secondary" : "ghost",
+                size: "default",
+              }),
+              "w-full justify-start gap-x-4 px-4 py-2 h-auto text-base",
+              pathname === "/settings"
+                ? "bg-sidebar-accent text-sidebar-accent-foreground"
+                : "text-muted-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground",
+              isCollapsed && "justify-center",
+            )}
+            title={isCollapsed ? "সেটিংস" : undefined}
+          >
+            <Settings className="h-5 w-5" />
+            {!isCollapsed && <span className="truncate">সেটিংস</span>}
+          </Link>
+          <Link
+            href="/profile"
+            className={cn(
+              "flex items-center gap-x-3 p-2 rounded-md hover:bg-sidebar-accent/50",
+              isCollapsed && "justify-center",
+            )}
+          >
+            <Image
+              alt="avatar"
+              className="h-10 w-10 rounded-full object-cover border-2 border-sidebar-border"
+              src={
+                session?.user?.user_metadata?.avatar_url ||
+                "https://picsum.photos/seed/avatar/40/40"
+              }
+              width={40}
+              height={40}
+            />
+            {!isCollapsed && (
+              <div className="truncate space-y-1">
+                <p className="text-sm font-medium text-foreground">
+                  {userFullName}
+                </p>
+                <p className="text-xs font-light text-muted-foreground">
+                  {session?.user?.email}
+                </p>
+              </div>
+            )}
+          </Link>
+        </div>
+      </div>
+    </aside>
+  );
+}
+
+export const Sidebar = React.memo(SidebarComponent);

@@ -1,0 +1,49 @@
+{
+  "name": "shikhbo",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 9002",
+    "build": " rm -rf .next/ && NODE_ENV=production next build",
+    "start": "next start",
+    "lint": " rm -rf .next/ && biome lint .",
+    "format": " rm -rf .next/ && biome format . --write",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@radix-ui/react-accordion": "^1.2.12",
+    "@radix-ui/react-avatar": "^1.1.10",
+    "@radix-ui/react-progress": "^1.1.7",
+    "@radix-ui/react-slot": "^1.2.3",
+    "@radix-ui/react-tabs": "^1.1.13",
+    "@radix-ui/react-toast": "^1.2.15",
+    "@supabase/auth-helpers-nextjs": "0.9.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "gray-matter": "^4.0.3",
+    "html-react-parser": "^5.2.7",
+    "html2canvas": "^1.4.1",
+    "lucide-react": "^0.475.0",
+    "next": "14.2.5",
+    "next-mdx-remote": "^5.0.0",
+    "next-themes": "^0.3.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remark-mdx-frontmatter": "^5.2.0",
+    "tailwind-merge": "^2.6.0",
+    "tailwindcss-animate": "^1.0.7"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@mdx-js/loader": "^3.1.1",
+    "@next/mdx": "14.2.5",
+    "@tailwindcss/typography": "^0.5.19",
+    "@types/node": "^20.19.24",
+    "@types/react": "^18.3.26",
+    "@types/react-dom": "^18.3.7",
+    "postcss": "^8.5.6",
+    "rehype-pretty-code": "^0.13.2",
+    "tailwindcss": "^3.4.18",
+    "typescript": "^5.9.3"
+  }
+}
