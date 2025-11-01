@@ -1,19 +1,18 @@
+"use client"
 
-"use client";
-
-import { Button } from "@/components/ui/button";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import Image from "next/image";
-import Link from "next/link";
-import { Ghost, Github } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { useRouter } from "next/navigation";
-import { useToast } from "@/hooks/use-toast";
+import { Button } from "@/components/ui/button"
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
+import Image from "next/image"
+import Link from "next/link"
+import { Ghost, Github } from "lucide-react"
+import { Input } from "@/components/ui/input"
+import { useRouter } from "next/navigation"
+import { useToast } from "@/hooks/use-toast"
 
 export default function RegisterPage() {
-  const supabase = createClientComponentClient();
-  const router = useRouter();
-  const { toast } = useToast();
+  const supabase = createClientComponentClient()
+  const router = useRouter()
+  const { toast } = useToast()
 
   const handleGitHubLogin = async () => {
     await supabase.auth.signInWithOAuth({
@@ -21,8 +20,8 @@ export default function RegisterPage() {
       options: {
         redirectTo: `${location.origin}/auth/callback`,
       },
-    });
-  };
+    })
+  }
 
   const handleGoogleLogin = async () => {
     await supabase.auth.signInWithOAuth({
@@ -30,8 +29,8 @@ export default function RegisterPage() {
       options: {
         redirectTo: `${location.origin}/auth/callback`,
       },
-    });
-  };
+    })
+  }
 
   const handleAnonymousLogin = async () => {
     const { error } = await supabase.auth.signInAnonymously({
@@ -40,17 +39,17 @@ export default function RegisterPage() {
         autoRefreshToken: true,
         persistSession: true,
       },
-    });
+    })
     if (error) {
       toast({
         variant: "destructive",
         title: "Error signing in",
         description: error.message,
-      });
+      })
     } else {
-      router.push("/dashboard");
+      router.push("/dashboard")
     }
-  };
+  }
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-background p-4 text-foreground">
@@ -126,5 +125,5 @@ export default function RegisterPage() {
         </div>
       </div>
     </div>
-  );
+  )
 }

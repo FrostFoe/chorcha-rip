@@ -1,18 +1,18 @@
-"use client";
+"use client"
 
-import { Book, CheckCircle2 } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-import { Button } from "../ui/button";
-import { Card } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
-import { DashboardHeader } from "./DashboardHeader";
-import { Loader } from "../ui/loader";
-import { useUserData } from "@/providers/UserDataProvider";
-import * as React from "react";
+import { Book, CheckCircle2 } from "lucide-react"
+import Image from "next/image"
+import Link from "next/link"
+import { Button } from "../ui/button"
+import { Card } from "@/components/ui/card"
+import { Progress } from "@/components/ui/progress"
+import { DashboardHeader } from "./DashboardHeader"
+import { Loader } from "../ui/loader"
+import { useUserData } from "@/providers/UserDataProvider"
+import * as React from "react"
 
 function DashboardClientComponent() {
-  const { enrolledCourses, loading } = useUserData();
+  const { enrolledCourses, loading } = useUserData()
 
   return (
     <>
@@ -89,7 +89,7 @@ function DashboardClientComponent() {
         </div>
       </div>
     </>
-  );
+  )
 }
 
-export const DashboardClient = React.memo(DashboardClientComponent);
+export const DashboardClient = React.memo(DashboardClientComponent)

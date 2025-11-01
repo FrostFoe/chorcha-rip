@@ -1,73 +1,72 @@
+"use client"
 
-"use client";
-
-import { Sidebar } from "@/components/dashboard/Sidebar";
-import { MobileNav } from "@/components/dashboard/MobileNav";
-import { useIsMobile } from "@/hooks/use-mobile";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { useSupabase } from "@/app/supabase-provider";
-import Image from "next/image";
-import { Moon, Sun, User } from "lucide-react";
-import { useEffect, useState, useCallback } from "react";
-import { useToast } from "@/hooks/use-toast";
-import { cn } from "@/lib/utils";
-import { useTheme } from "next-themes";
-import { useUserData } from "@/providers/UserDataProvider";
-import Link from "next/link";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Sidebar } from "@/components/dashboard/Sidebar"
+import { MobileNav } from "@/components/dashboard/MobileNav"
+import { useIsMobile } from "@/hooks/use-mobile"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { useSupabase } from "@/app/supabase-provider"
+import Image from "next/image"
+import { Moon, Sun, User } from "lucide-react"
+import { useEffect, useState, useCallback } from "react"
+import { useToast } from "@/hooks/use-toast"
+import { cn } from "@/lib/utils"
+import { useTheme } from "next-themes"
+import { useUserData } from "@/providers/UserDataProvider"
+import Link from "next/link"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 export default function ProfilePage() {
-  const isMobile = useIsMobile();
-  const { session } = useSupabase();
-  const user = session?.user;
-  const { toast } = useToast();
-  const { theme, setTheme } = useTheme();
-  const { profile, loading, updateProfile } = useUserData();
+  const isMobile = useIsMobile()
+  const { session } = useSupabase()
+  const user = session?.user
+  const { toast } = useToast()
+  const { theme, setTheme } = useTheme()
+  const { profile, loading, updateProfile } = useUserData()
 
-  const [fullName, setFullName] = useState("");
-  const [avatarUrl, setAvatarUrl] = useState("");
-  const [updating, setUpdating] = useState(false);
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [fullName, setFullName] = useState("")
+  const [avatarUrl, setAvatarUrl] = useState("")
+  const [updating, setUpdating] = useState(false)
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false)
 
   const toggleSidebar = useCallback(
     () => setIsSidebarCollapsed((prev) => !prev),
-    [],
-  );
+    []
+  )
 
   useEffect(() => {
     if (profile) {
-      setFullName(profile.full_name || "");
-      setAvatarUrl(profile.avatar_url || "");
+      setFullName(profile.full_name || "")
+      setAvatarUrl(profile.avatar_url || "")
     }
-  }, [profile]);
+  }, [profile])
 
   const handleUpdateProfile = useCallback(async () => {
-    if (!user) return;
+    if (!user) return
 
     try {
-      setUpdating(true);
+      setUpdating(true)
       await updateProfile({
         full_name: fullName,
         avatar_url: avatarUrl,
-      });
+      })
 
       toast({
         title: "প্রোফাইল আপডেট হয়েছে",
         description: "আপনার তথ্য সফলভাবে সংরক্ষণ করা হয়েছে।",
-      });
+      })
     } catch (error) {
       toast({
         variant: "destructive",
         title: "কিছু একটা ভুল হয়েছে!",
         description: "আপনার প্রোফাইল আপডেট করা যায়নি।",
-      });
-      console.error("Error updating profile:", error);
+      })
+      console.error("Error updating profile:", error)
     } finally {
-      setUpdating(false);
+      setUpdating(false)
     }
-  }, [user, fullName, avatarUrl, toast, updateProfile]);
+  }, [user, fullName, avatarUrl, toast, updateProfile])
 
   if (!user) {
     return (
@@ -80,7 +79,7 @@ export default function ProfilePage() {
           <Link href="/auth/register">লগইন / রেজিস্ট্রেশন</Link>
         </Button>
       </div>
-    );
+    )
   }
 
   return (
@@ -100,7 +99,7 @@ export default function ProfilePage() {
             ? "pt-16"
             : isSidebarCollapsed
               ? "lg:ml-sidebar-collapsed"
-              : "lg:ml-sidebar-expanded",
+              : "lg:ml-sidebar-expanded"
         )}
       >
         <div className="p-4 sm:p-6 lg:p-8">
@@ -191,5 +190,5 @@ export default function ProfilePage() {
         </div>
       </main>
     </div>
-  );
+  )
 }

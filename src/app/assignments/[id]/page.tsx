@@ -1,16 +1,16 @@
-"use client";
+"use client"
 
-import { getAssignmentData } from "@/lib/assignments";
-import { notFound, useParams, useRouter } from "next/navigation";
-import { useSupabase } from "@/app/supabase-provider";
-import * as React from "react";
-import { cn } from "@/lib/utils";
-import { MobileNav } from "@/components/dashboard/MobileNav";
-import { Sidebar } from "@/components/dashboard/Sidebar";
-import { useIsMobile } from "@/hooks/use-mobile";
-import { ArrowLeft, FilePenLine, Paperclip, Upload } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { getAssignmentData } from "@/lib/assignments"
+import { notFound, useParams, useRouter } from "next/navigation"
+import { useSupabase } from "@/app/supabase-provider"
+import * as React from "react"
+import { cn } from "@/lib/utils"
+import { MobileNav } from "@/components/dashboard/MobileNav"
+import { Sidebar } from "@/components/dashboard/Sidebar"
+import { useIsMobile } from "@/hooks/use-mobile"
+import { ArrowLeft, FilePenLine, Paperclip, Upload } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
 import {
   Card,
   CardContent,
@@ -18,84 +18,77 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
-import { useToast } from "@/hooks/use-toast";
-import type { Assignment } from "@/lib/types";
-import { useUserData } from "@/providers/UserDataProvider";
+} from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Input } from "@/components/ui/input"
+import { useToast } from "@/hooks/use-toast"
+import type { Assignment } from "@/lib/types"
+import { useUserData } from "@/providers/UserDataProvider"
 
 export default function AssignmentDetailsPage() {
-  const isMobile = useIsMobile();
-  const params = useParams();
-  const router = useRouter();
-  const id = Array.isArray(params.id) ? params.id[0] : params.id;
-  const { session } = useSupabase();
-  const { toast } = useToast();
-  const { isAssignmentSubmitted, submitAssignment } = useUserData();
+  const isMobile = useIsMobile()
+  const params = useParams()
+  const router = useRouter()
+  const id = Array.isArray(params.id) ? params.id[0] : params.id
+  const { session } = useSupabase()
+  const { toast } = useToast()
+  const { isAssignmentSubmitted, submitAssignment } = useUserData()
 
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = React.useState(false);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = React.useState(false)
   const [assignment, setAssignment] = React.useState<Assignment | undefined>(
-    undefined,
-  );
-  const [selectedFile, setSelectedFile] = React.useState<File | null>(null);
-  const [isSubmitting, setIsSubmitting] = React.useState(false);
+    undefined
+  )
+  const [selectedFile, setSelectedFile] = React.useState<File | null>(null)
+  const [isSubmitting, setIsSubmitting] = React.useState(false)
 
   React.useEffect(() => {
     async function loadAssignment() {
-      const data = await getAssignmentData(id);
+      const data = await getAssignmentData(id)
       if (data) {
         const isSubmitted = session?.user
           ? isAssignmentSubmitted(data.id)
-          : false;
+          : false
         setAssignment({
           ...data,
           status: isSubmitted ? "Submitted" : "Pending",
-        });
+        })
       } else {
-        notFound();
+        notFound()
       }
     }
-    loadAssignment();
-  }, [id, session, isAssignmentSubmitted]);
+    loadAssignment()
+  }, [id, session, isAssignmentSubmitted])
 
   const toggleSidebar = React.useCallback(
     () => setIsSidebarCollapsed((prev) => !prev),
-    [],
-  );
+    []
+  )
 
   const handleFileChange = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       if (event.target.files?.[0]) {
-        setSelectedFile(event.target.files[0]);
+        setSelectedFile(event.target.files[0])
       }
     },
-    [],
-  );
+    []
+  )
 
   const handleSubmit = React.useCallback(() => {
-    if (!selectedFile || !session?.user || !assignment?.id) return;
+    if (!selectedFile || !session?.user || !assignment?.id) return
 
-    setIsSubmitting(true);
+    setIsSubmitting(true)
     // Simulate submission
     setTimeout(() => {
-      submitAssignment(assignment.id);
+      submitAssignment(assignment.id)
 
       toast({
         title: "অ্যাসাইনমেন্ট জমা হয়েছে",
         description: `"${assignment.title}" সফলভাবে জমা দেওয়া হয়েছে।`,
-      });
-      setIsSubmitting(false);
-      router.push("/assignments");
-    }, 1000);
-  }, [
-    selectedFile,
-    session,
-    assignment,
-    toast,
-    router,
-    submitAssignment,
-  ]);
+      })
+      setIsSubmitting(false)
+      router.push("/assignments")
+    }, 1000)
+  }, [selectedFile, session, assignment, toast, router, submitAssignment])
 
   if (!assignment) {
     // You can render a loader here while the assignment is being fetched
@@ -103,7 +96,7 @@ export default function AssignmentDetailsPage() {
       <div className="flex min-h-screen items-center justify-center">
         Loading...
       </div>
-    );
+    )
   }
 
   return (
@@ -123,7 +116,7 @@ export default function AssignmentDetailsPage() {
             ? "pt-16"
             : isSidebarCollapsed
               ? "lg:ml-sidebar-collapsed"
-              : "lg:ml-sidebar-expanded",
+              : "lg:ml-sidebar-expanded"
         )}
       >
         <div className="p-4 sm:p-6 lg:p-8">
@@ -170,9 +163,8 @@ export default function AssignmentDetailsPage() {
               <div>
                 <h3 className="font-semibold mb-2">নির্দেশনা</h3>
                 <p className="text-muted-foreground prose prose-sm">
-                  অ্যাসাইনমেন্টটি সম্পন্ন করে একটি PDF ফাইল আকারে আপলোড করুন।
-                  ফাইলের নাম আপনার রোল নম্বর দিয়ে শুরু করতে হবে। যেমন:
-                  `12345_assignment.pdf`
+                  অ্যাসাইনমেন্টটি সম্পন্ন করে একটি PDF ফাইল আকারে আপলোড করুন। ফাইলের নাম
+                  আপনার রোল নম্বর দিয়ে শুরু করতে হবে। যেমন: `12345_assignment.pdf`
                 </p>
               </div>
               <div>
@@ -215,5 +207,5 @@ export default function AssignmentDetailsPage() {
         </div>
       </main>
     </div>
-  );
+  )
 }

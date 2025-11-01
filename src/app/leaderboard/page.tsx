@@ -1,15 +1,15 @@
-"use client";
+"use client"
 
-import { Sidebar } from "@/components/dashboard/Sidebar";
-import { MobileNav } from "@/components/dashboard/MobileNav";
-import { useIsMobile } from "@/hooks/use-mobile";
+import { Sidebar } from "@/components/dashboard/Sidebar"
+import { MobileNav } from "@/components/dashboard/MobileNav"
+import { useIsMobile } from "@/hooks/use-mobile"
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "@/components/ui/card"
 import {
   Table,
   TableBody,
@@ -17,12 +17,12 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { Trophy } from "lucide-react";
-import * as React from "react";
-import { cn } from "@/lib/utils";
-import Image from "next/image";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+} from "@/components/ui/table"
+import { Trophy } from "lucide-react"
+import * as React from "react"
+import { cn } from "@/lib/utils"
+import Image from "next/image"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 const leaderboard = [
   {
@@ -55,23 +55,23 @@ const leaderboard = [
     name: "মেহেদি হাসান",
     college: "ভিক্টোরিয়া কলেজ",
   },
-];
+]
 
 export default function LeaderboardPage() {
-  const isMobile = useIsMobile();
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = React.useState(false);
+  const isMobile = useIsMobile()
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = React.useState(false)
 
   const toggleSidebar = React.useCallback(
     () => setIsSidebarCollapsed((prev) => !prev),
-    [],
-  );
+    []
+  )
 
   const getRankColor = (rank: number) => {
-    if (rank === 1) return "text-yellow-400";
-    if (rank === 2) return "text-gray-400";
-    if (rank === 3) return "text-yellow-600";
-    return "text-foreground";
-  };
+    if (rank === 1) return "text-yellow-400"
+    if (rank === 2) return "text-gray-400"
+    if (rank === 3) return "text-yellow-600"
+    return "text-foreground"
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -90,7 +90,7 @@ export default function LeaderboardPage() {
             ? "pt-16"
             : isSidebarCollapsed
               ? "lg:ml-sidebar-collapsed"
-              : "lg:ml-sidebar-expanded",
+              : "lg:ml-sidebar-expanded"
         )}
       >
         <div className="p-4 sm:p-6 lg:p-8">
@@ -106,9 +106,7 @@ export default function LeaderboardPage() {
           <Card>
             <CardHeader>
               <CardTitle>শীর্ষ শিক্ষার্থী</CardTitle>
-              <CardDescription>
-                সারাদেশের সেরা শিক্ষার্থীদের র‍্যাঙ্কিং
-              </CardDescription>
+              <CardDescription>সারাদেশের সেরা শিক্ষার্থীদের র‍্যাঙ্কিং</CardDescription>
             </CardHeader>
             <CardContent>
               <Table>
@@ -126,7 +124,7 @@ export default function LeaderboardPage() {
                     <TableRow key={student.name}>
                       <TableCell
                         className={`text-xl font-bold ${getRankColor(
-                          index + 1,
+                          index + 1
                         )}`}
                       >
                         #{index + 1}
@@ -157,5 +155,5 @@ export default function LeaderboardPage() {
         </div>
       </main>
     </div>
-  );
+  )
 }

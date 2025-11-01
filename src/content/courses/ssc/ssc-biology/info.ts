@@ -1,4 +1,4 @@
-import type { Course } from "@/lib/types";
+import type { Course } from "@/lib/types"
 
 export const course: Partial<Course> = {
   id: "6",
@@ -7,4 +7,4 @@ export const course: Partial<Course> = {
   thumbnail: "https://picsum.photos/seed/biology/600/400",
   slug: "ssc-biology",
   category: "ssc",
-};
+}

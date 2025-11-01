@@ -3,14 +3,14 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
-import type { DashboardProgressItem } from "@/lib/types";
-import { memo } from "react";
+} from "@/components/ui/accordion"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Progress } from "@/components/ui/progress"
+import type { DashboardProgressItem } from "@/lib/types"
+import { memo } from "react"
 
 interface ProgressReportProps {
-  items: DashboardProgressItem[];
+  items: DashboardProgressItem[]
 }
 
 function ProgressReportComponent({ items }: ProgressReportProps) {
@@ -49,7 +49,7 @@ function ProgressReportComponent({ items }: ProgressReportProps) {
         </Accordion>
       </CardContent>
     </Card>
-  );
+  )
 }
 
-export const ProgressReport = memo(ProgressReportComponent);
+export const ProgressReport = memo(ProgressReportComponent)

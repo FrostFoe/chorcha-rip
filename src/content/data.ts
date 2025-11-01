@@ -8,8 +8,8 @@
 // The logic in the components will have to handle cases where the user ID doesn't exist here.
 
 interface UserProfile {
-  full_name: string;
-  avatar_url: string;
+  full_name: string
+  avatar_url: string
 }
 
 export const userProfiles: Record<string, UserProfile> = {
@@ -18,15 +18,15 @@ export const userProfiles: Record<string, UserProfile> = {
     full_name: "ডেমো ব্যবহারকারী",
     avatar_url: "https://picsum.photos/seed/demo-user/100/100",
   },
-};
+}
 
 interface Enrollment {
-  courseId: string;
-  progress: number;
+  courseId: string
+  progress: number
 }
 
 interface UserEnrollment {
-  enrolledCourses: Enrollment[];
+  enrolledCourses: Enrollment[]
 }
 
 export const userEnrollments: Record<string, UserEnrollment> = {
@@ -34,4 +34,4 @@ export const userEnrollments: Record<string, UserEnrollment> = {
   "placeholder-user-id-1": {
     enrolledCourses: [{ courseId: "1", progress: 75 }],
   },
-};
+}

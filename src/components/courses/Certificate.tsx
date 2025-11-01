@@ -1,32 +1,32 @@
-"use client";
+"use client"
 
-import { Button } from "@/components/ui/button";
-import { Download } from "lucide-react";
-import React from "react";
-import html2canvas from "html2canvas";
-import { useTheme } from "next-themes";
+import { Button } from "@/components/ui/button"
+import { Download } from "lucide-react"
+import React from "react"
+import html2canvas from "html2canvas"
+import { useTheme } from "next-themes"
 
 interface CertificateProps {
-  courseName: string;
-  studentName: string;
+  courseName: string
+  studentName: string
 }
 
 export function Certificate({ courseName, studentName }: CertificateProps) {
-  const certificateRef = React.useRef<HTMLDivElement>(null);
-  const { theme } = useTheme();
+  const certificateRef = React.useRef<HTMLDivElement>(null)
+  const { theme } = useTheme()
 
   const handleDownload = () => {
     if (certificateRef.current) {
       // Temporarily set a light theme for the canvas to ensure dark text is visible
-      const originalBgColor = certificateRef.current.style.backgroundColor;
+      const originalBgColor = certificateRef.current.style.backgroundColor
       const childElements =
-        certificateRef.current.querySelectorAll<HTMLElement>("*");
-      const originalTextColors: { el: HTMLElement; color: string }[] = [];
+        certificateRef.current.querySelectorAll<HTMLElement>("*")
+      const originalTextColors: { el: HTMLElement; color: string }[] = []
       for (const el of childElements) {
-        originalTextColors.push({ el, color: el.style.color });
-        el.style.color = "#000"; // Set text to black for canvas
+        originalTextColors.push({ el, color: el.style.color })
+        el.style.color = "#000" // Set text to black for canvas
       }
-      certificateRef.current.style.backgroundColor = "#FFFFFF";
+      certificateRef.current.style.backgroundColor = "#FFFFFF"
 
       html2canvas(certificateRef.current, {
         backgroundColor: "#FFFFFF",
@@ -34,22 +34,22 @@ export function Certificate({ courseName, studentName }: CertificateProps) {
       }).then((canvas) => {
         // Restore original styles
         if (certificateRef.current) {
-          certificateRef.current.style.backgroundColor = originalBgColor;
+          certificateRef.current.style.backgroundColor = originalBgColor
         }
         for (const { el, color } of originalTextColors) {
-          el.style.color = color;
+          el.style.color = color
         }
 
-        const link = document.createElement("a");
+        const link = document.createElement("a")
         link.download = `Chorcha_Certificate_${courseName.replace(
           /\s+/g,
-          "_",
-        )}.png`;
-        link.href = canvas.toDataURL("image/png");
-        link.click();
-      });
+          "_"
+        )}.png`
+        link.href = canvas.toDataURL("image/png")
+        link.click()
+      })
     }
-  };
+  }
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col items-center justify-center p-4">
@@ -105,5 +105,5 @@ export function Certificate({ courseName, studentName }: CertificateProps) {
         </div>
       </div>
     </div>
-  );
+  )
 }

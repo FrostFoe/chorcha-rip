@@ -1,35 +1,35 @@
-"use client";
+"use client"
 
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { CheckCircle } from "lucide-react";
-import { Quiz } from "@/components/courses/Quiz";
-import * as React from "react";
-import { useSupabase } from "@/app/supabase-provider";
-import type { Course, Lesson, QuizQuestion } from "@/lib/types";
-import { MDXRemote, type MDXRemoteSerializeResult } from "next-mdx-remote";
-import { useUserData } from "@/providers/UserDataProvider";
+import { Card, CardContent } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { CheckCircle } from "lucide-react"
+import { Quiz } from "@/components/courses/Quiz"
+import * as React from "react"
+import { useSupabase } from "@/app/supabase-provider"
+import type { Course, Lesson, QuizQuestion } from "@/lib/types"
+import { MDXRemote, type MDXRemoteSerializeResult } from "next-mdx-remote"
+import { useUserData } from "@/providers/UserDataProvider"
 
 interface LessonClientProps {
-  course: Course;
-  lesson: Lesson;
-  mdxSource: MDXRemoteSerializeResult | undefined; // The serialized MDX content
+  course: Course
+  lesson: Lesson
+  mdxSource: MDXRemoteSerializeResult | undefined // The serialized MDX content
 }
 
 export function LessonClient({ course, lesson, mdxSource }: LessonClientProps) {
-  const { session } = useSupabase();
-  const { getLessonProgress, updateLessonProgress } = useUserData();
+  const { session } = useSupabase()
+  const { getLessonProgress, updateLessonProgress } = useUserData()
 
   const isCompleted = React.useMemo(() => {
-    if (!session?.user) return false;
-    const completedSlugs = getLessonProgress(course.slug);
-    return completedSlugs.includes(lesson.slug);
-  }, [session, course.slug, lesson.slug, getLessonProgress]);
+    if (!session?.user) return false
+    const completedSlugs = getLessonProgress(course.slug)
+    return completedSlugs.includes(lesson.slug)
+  }, [session, course.slug, lesson.slug, getLessonProgress])
 
   const handleMarkAsComplete = React.useCallback(() => {
-    if (!session?.user || !course || !lesson) return;
-    updateLessonProgress(course.slug, lesson.slug);
-  }, [session, course, lesson, updateLessonProgress]);
+    if (!session?.user || !course || !lesson) return
+    updateLessonProgress(course.slug, lesson.slug)
+  }, [session, course, lesson, updateLessonProgress])
 
   const renderContent = () => {
     switch (lesson.lessonType) {
@@ -44,7 +44,7 @@ export function LessonClient({ course, lesson, mdxSource }: LessonClientProps) {
               className="absolute left-0 top-0 h-full w-full"
             />
           </div>
-        );
+        )
       case "article":
         return (
           mdxSource && (
@@ -54,7 +54,7 @@ export function LessonClient({ course, lesson, mdxSource }: LessonClientProps) {
               </CardContent>
             </Card>
           )
-        );
+        )
       case "quiz":
         return lesson.content && typeof lesson.content !== "string" ? (
           <Quiz
@@ -70,11 +70,11 @@ export function LessonClient({ course, lesson, mdxSource }: LessonClientProps) {
               </p>
             </CardContent>
           </Card>
-        );
+        )
       default:
-        return <p>Unknown lesson type</p>;
+        return <p>Unknown lesson type</p>
     }
-  };
+  }
 
   return (
     <div className="space-y-6">
@@ -94,5 +94,5 @@ export function LessonClient({ course, lesson, mdxSource }: LessonClientProps) {
       </div>
       {renderContent()}
     </div>
-  );
+  )
 }

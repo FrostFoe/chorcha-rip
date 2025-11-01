@@ -1,6 +1,6 @@
-import { ArrowRight, Star } from "lucide-react";
-import Image from "next/image";
-import { Card } from "../ui/card";
+import { ArrowRight, Star } from "lucide-react"
+import Image from "next/image"
+import { Card } from "../ui/card"
 
 // Data previously in lib/data.ts
 const testimonials = [
@@ -32,15 +32,13 @@ const testimonials = [
     review:
       "This Chorcha app is very much helpful for student's exam practice. A student can easily practice exam on any chapter or topic of that chapter. So, It's very helpful for a admission student.",
   },
-];
+]
 
 export function Testimonials() {
   return (
     <section>
       <div className="text-center py-20 pb-12 flex flex-col gap-1">
-        <h1 className="text-3xl font-bold">
-          আমাদের শিক্ষার্থীরা চর্চা সম্পর্কে যা বলছে
-        </h1>
+        <h1 className="text-3xl font-bold">আমাদের শিক্ষার্থীরা চর্চা সম্পর্কে যা বলছে</h1>
         <p className="text-muted-foreground">
           ৫ লক্ষ শিক্ষার্থীর সাথে আজই যুক্ত হও চর্চা তে
         </p>
@@ -129,5 +127,5 @@ export function Testimonials() {
         </div>
       </section>
     </section>
-  );
+  )
 }

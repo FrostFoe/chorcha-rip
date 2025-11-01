@@ -1,14 +1,14 @@
-import { Card } from "@/components/ui/card";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { Compass, Gem, Search } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { getAllCoursesData } from "@/lib/courses";
-import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card"
+import Image from "next/image"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
+import { Compass, Gem, Search } from "lucide-react"
+import { Input } from "@/components/ui/input"
+import { getAllCoursesData } from "@/lib/courses"
+import { Badge } from "@/components/ui/badge"
 
 export default async function BrowsePage() {
-  const courses = await getAllCoursesData();
+  const courses = await getAllCoursesData()
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -70,5 +70,5 @@ export default async function BrowsePage() {
         </div>
       </main>
     </div>
-  );
+  )
 }

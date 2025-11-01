@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "next/image"
 
 export function Hero() {
   return (
@@ -13,14 +13,12 @@ export function Hero() {
                   lineHeight: 1.2,
                 }}
               >
-                <span className="text-gradient-green">চর্চা</span> করো নিজের
-                গতিতে
+                <span className="text-gradient-green">চর্চা</span> করো নিজের গতিতে
               </h1>
               <div className="max-w-lg lg:max-w-xl">
                 <h2 className="font-normal leading-6 lg:leading-7 text-base lg:text-lg text-center md:text-left tracking-wide text-muted-foreground">
-                  নিজের পছন্দমত হাজার হাজার প্রশ্ন থেকে বিষয় ও অধ্যায়ভিত্তিক
-                  পরীক্ষা, পূর্বের ভুল রিভিউ, এবং লাইভ পরীক্ষার মাধ্যমে প্রস্তুত
-                  হও যেকোন পরীক্ষার জন্য।
+                  নিজের পছন্দমত হাজার হাজার প্রশ্ন থেকে বিষয় ও অধ্যায়ভিত্তিক পরীক্ষা, পূর্বের
+                  ভুল রিভিউ, এবং লাইভ পরীক্ষার মাধ্যমে প্রস্তুত হও যেকোন পরীক্ষার জন্য।
                 </h2>
               </div>
               <div className="flex items-center justify-center md:justify-start space-x-2 pt-4">
@@ -59,5 +57,5 @@ export function Hero() {
         </div>
       </section>
     </div>
-  );
+  )
 }

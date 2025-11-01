@@ -1,51 +1,51 @@
-"use client";
+"use client"
 
-import * as React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { CheckCircle, XCircle } from "lucide-react";
-import type { QuizQuestion } from "@/lib/types";
+import * as React from "react"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { CheckCircle, XCircle } from "lucide-react"
+import type { QuizQuestion } from "@/lib/types"
 
 interface QuizProps {
-  questions: QuizQuestion[];
-  onQuizComplete: () => void;
+  questions: QuizQuestion[]
+  onQuizComplete: () => void
 }
 
 export function Quiz({ questions, onQuizComplete }: QuizProps) {
-  const [currentQuestionIndex, setCurrentQuestionIndex] = React.useState(0);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = React.useState(0)
   const [selectedAnswers, setSelectedAnswers] = React.useState<
     (number | null)[]
-  >(Array(questions.length).fill(null));
-  const [showResults, setShowResults] = React.useState(false);
+  >(Array(questions.length).fill(null))
+  const [showResults, setShowResults] = React.useState(false)
 
   const handleAnswerSelect = (optionIndex: number) => {
-    const newAnswers = [...selectedAnswers];
-    newAnswers[currentQuestionIndex] = optionIndex;
-    setSelectedAnswers(newAnswers);
-  };
+    const newAnswers = [...selectedAnswers]
+    newAnswers[currentQuestionIndex] = optionIndex
+    setSelectedAnswers(newAnswers)
+  }
 
   const handleNext = () => {
     if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
+      setCurrentQuestionIndex(currentQuestionIndex + 1)
     } else {
-      setShowResults(true);
-      onQuizComplete();
+      setShowResults(true)
+      onQuizComplete()
     }
-  };
+  }
 
   const calculateScore = () => {
     return selectedAnswers.reduce((score: number, answer, index) => {
       if (answer === questions[index].correctAnswer) {
-        return score + 1;
+        return score + 1
       }
-      return score;
-    }, 0);
-  };
+      return score
+    }, 0)
+  }
 
   if (showResults) {
-    const score = calculateScore();
+    const score = calculateScore()
     const percentage =
-      questions.length > 0 ? (score / questions.length) * 100 : 0;
+      questions.length > 0 ? (score / questions.length) * 100 : 0
 
     return (
       <Card>
@@ -68,10 +68,10 @@ export function Quiz({ questions, onQuizComplete }: QuizProps) {
           </p>
         </CardContent>
       </Card>
-    );
+    )
   }
 
-  const currentQuestion = questions[currentQuestionIndex];
+  const currentQuestion = questions[currentQuestionIndex]
 
   return (
     <Card>
@@ -113,5 +113,5 @@ export function Quiz({ questions, onQuizComplete }: QuizProps) {
         </div>
       </CardContent>
     </Card>
-  );
+  )
 }

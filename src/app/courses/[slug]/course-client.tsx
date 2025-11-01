@@ -1,42 +1,42 @@
-"use client";
+"use client"
 
-import { notFound, useParams, useRouter } from "next/navigation";
-import Image from "next/image";
-import Link from "next/link";
-import { ArrowLeft, BookCheck, Gem } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Icon } from "@/components/ui/icon";
-import type { Course } from "@/lib/types";
-import { MDXRemote, type MDXRemoteSerializeResult } from "next-mdx-remote";
-import { useUserData } from "@/providers/UserDataProvider";
-import { useToast } from "@/hooks/use-toast";
-import { Badge } from "@/components/ui/badge";
+import { notFound, useParams, useRouter } from "next/navigation"
+import Image from "next/image"
+import Link from "next/link"
+import { ArrowLeft, BookCheck, Gem } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Icon } from "@/components/ui/icon"
+import type { Course } from "@/lib/types"
+import { MDXRemote, type MDXRemoteSerializeResult } from "next-mdx-remote"
+import { useUserData } from "@/providers/UserDataProvider"
+import { useToast } from "@/hooks/use-toast"
+import { Badge } from "@/components/ui/badge"
 
 interface CourseClientProps {
-  course: Course;
-  mdxSource: MDXRemoteSerializeResult | undefined;
+  course: Course
+  mdxSource: MDXRemoteSerializeResult | undefined
 }
 
 export function CourseClient({ course, mdxSource }: CourseClientProps) {
-  const { enrollCourse, isEnrolled, gemBalance, spendGems } = useUserData();
-  const { toast } = useToast();
-  const router = useRouter();
+  const { enrollCourse, isEnrolled, gemBalance, spendGems } = useUserData()
+  const { toast } = useToast()
+  const router = useRouter()
 
   if (!course) {
-    notFound();
+    notFound()
   }
 
   const handleEnroll = () => {
     // Ensure course.price is treated as a number
-    const coursePrice = Number(course.price);
+    const coursePrice = Number(course.price)
     if (gemBalance >= coursePrice) {
-      spendGems(coursePrice);
-      enrollCourse(course.id);
+      spendGems(coursePrice)
+      enrollCourse(course.id)
       toast({
         title: "সফলভাবে ভর্তি হয়েছেন!",
         description: `আপনি "${course.title}" কোর্সে ভর্তি হয়েছেন।`,
-      });
-      router.push(`/courses/${course.slug}/learn`);
+      })
+      router.push(`/courses/${course.slug}/learn`)
     } else {
       toast({
         variant: "destructive",
@@ -47,11 +47,11 @@ export function CourseClient({ course, mdxSource }: CourseClientProps) {
             <Link href="/store">Gem কিনুন</Link>
           </Button>
         ),
-      });
+      })
     }
-  };
+  }
 
-  const isAlreadyEnrolled = isEnrolled(course.id);
+  const isAlreadyEnrolled = isEnrolled(course.id)
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -102,13 +102,9 @@ export function CourseClient({ course, mdxSource }: CourseClientProps) {
                   </Button>
                 ) : (
                   <>
-                    <Button
-                      size="lg"
-                      className="w-full"
-                      onClick={handleEnroll}
-                    >
+                    <Button size="lg" className="w-full" onClick={handleEnroll}>
                       <Gem className="mr-2 h-5 w-5" />
-                       ভর্তি হোন
+                      ভর্তি হোন
                     </Button>
                     <Badge
                       variant="secondary"
@@ -157,5 +153,5 @@ export function CourseClient({ course, mdxSource }: CourseClientProps) {
         </div>
       </main>
     </div>
-  );
+  )
 }

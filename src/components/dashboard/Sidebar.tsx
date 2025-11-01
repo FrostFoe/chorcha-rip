@@ -1,7 +1,6 @@
+"use client"
 
-"use client";
-
-import { useSupabase } from "@/app/supabase-provider";
+import { useSupabase } from "@/app/supabase-provider"
 import {
   BookOpen,
   Compass,
@@ -14,15 +13,15 @@ import {
   User,
   Gem,
   Store,
-} from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import * as React from "react";
-import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import { useUserData } from "@/providers/UserDataProvider";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+} from "lucide-react"
+import Image from "next/image"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import * as React from "react"
+import { buttonVariants } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
+import { useUserData } from "@/providers/UserDataProvider"
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 
 const sidebarLinks = [
   { href: "/dashboard", label: "ড্যাশবোর্ড", icon: LayoutGrid },
@@ -32,27 +31,27 @@ const sidebarLinks = [
   { href: "/assignments", label: "অ্যাসাইনমেন্ট", icon: FilePenLine },
   { href: "/leaderboard", label: "লিডারবোর্ড", icon: Trophy },
   { href: "/profile", label: "প্রোফাইল", icon: User },
-];
+]
 
 interface SidebarProps {
-  isCollapsed: boolean;
-  toggleSidebar: () => void;
+  isCollapsed: boolean
+  toggleSidebar: () => void
 }
 
 function SidebarComponent({ isCollapsed, toggleSidebar }: SidebarProps) {
-  const pathname = usePathname();
-  const { session } = useSupabase();
-  const { gemBalance, profile } = useUserData();
+  const pathname = usePathname()
+  const { session } = useSupabase()
+  const { gemBalance, profile } = useUserData()
 
-  const userFullName = profile?.full_name || "Guest";
-  const userEmail = session?.user?.email;
-  const userAvatarUrl = profile?.avatar_url;
+  const userFullName = profile?.full_name || "Guest"
+  const userEmail = session?.user?.email
+  const userAvatarUrl = profile?.avatar_url
 
   return (
     <aside
       className={cn(
         "hidden lg:fixed lg:inset-y-0 z-30 lg:flex lg:flex-col bg-sidebar text-sidebar-foreground transition-[width] duration-300",
-        isCollapsed ? "lg:w-sidebar-collapsed" : "lg:w-sidebar-expanded",
+        isCollapsed ? "lg:w-sidebar-collapsed" : "lg:w-sidebar-expanded"
       )}
     >
       <div className="flex h-20 items-center justify-between px-5">
@@ -75,7 +74,7 @@ function SidebarComponent({ isCollapsed, toggleSidebar }: SidebarProps) {
           className={cn(
             buttonVariants({ variant: "ghost", size: "icon" }),
             "h-10 w-10 text-muted-foreground hover:text-foreground rounded-full transition-transform",
-            isCollapsed && "mx-auto",
+            isCollapsed && "mx-auto"
           )}
         >
           {isCollapsed ? (
@@ -105,7 +104,7 @@ function SidebarComponent({ isCollapsed, toggleSidebar }: SidebarProps) {
                 pathname === link.href
                 ? "bg-primary/10 text-primary"
                 : "text-muted-foreground hover:bg-primary/5 hover:text-primary",
-              isCollapsed && "justify-center",
+              isCollapsed && "justify-center"
             )}
             title={isCollapsed ? link.label : undefined}
           >
@@ -117,7 +116,7 @@ function SidebarComponent({ isCollapsed, toggleSidebar }: SidebarProps) {
       <div
         className={cn(
           "mt-auto px-4 py-6 border-t border-sidebar-border",
-          isCollapsed && "px-2",
+          isCollapsed && "px-2"
         )}
       >
         <div className="space-y-2">
@@ -125,7 +124,7 @@ function SidebarComponent({ isCollapsed, toggleSidebar }: SidebarProps) {
             className={cn(
               buttonVariants({ variant: "ghost", size: "default" }),
               "w-full justify-start gap-x-4 px-4 py-2 h-auto text-base text-muted-foreground",
-              isCollapsed && "justify-center",
+              isCollapsed && "justify-center"
             )}
           >
             <Gem className="h-5 w-5 text-primary" />
@@ -147,7 +146,7 @@ function SidebarComponent({ isCollapsed, toggleSidebar }: SidebarProps) {
               pathname === "/settings"
                 ? "bg-primary/10 text-primary"
                 : "text-muted-foreground hover:bg-primary/5 hover:text-primary",
-              isCollapsed && "justify-center",
+              isCollapsed && "justify-center"
             )}
             title={isCollapsed ? "সেটিংস" : undefined}
           >
@@ -158,7 +157,7 @@ function SidebarComponent({ isCollapsed, toggleSidebar }: SidebarProps) {
             href="/profile"
             className={cn(
               "flex items-center gap-x-3 p-2 rounded-md hover:bg-primary/5",
-              isCollapsed && "justify-center",
+              isCollapsed && "justify-center"
             )}
           >
             <Avatar className="h-10 w-10 border-2 border-sidebar-border">
@@ -183,7 +182,7 @@ function SidebarComponent({ isCollapsed, toggleSidebar }: SidebarProps) {
         </div>
       </div>
     </aside>
-  );
+  )
 }
 
-export const Sidebar = React.memo(SidebarComponent);
+export const Sidebar = React.memo(SidebarComponent)

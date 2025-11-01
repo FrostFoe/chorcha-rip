@@ -1,7 +1,7 @@
-import fs from "node:fs";
-import path from "node:path";
-import matter from "gray-matter";
-import type { Assignment } from "./types";
+import fs from "node:fs"
+import path from "node:path"
+import matter from "gray-matter"
+import type { Assignment } from "./types"
 
 const allAssignments: Assignment[] = [
   {
@@ -31,17 +31,17 @@ const allAssignments: Assignment[] = [
     status: "Submitted",
     body: "অ্যাসাইনমেন্টের বিস্তারিত এখানে থাকবে।",
   },
-];
+]
 
 export async function getAssignmentsData(): Promise<Assignment[]> {
   // This is a placeholder. In a real app, you'd fetch this from a database
   // or a more robust file-based system. For now, we return the static array.
-  return allAssignments;
+  return allAssignments
 }
 
 export async function getAssignmentData(
-  id: string,
+  id: string
 ): Promise<Assignment | undefined> {
-  const assignments = await getAssignmentsData();
-  return assignments.find((assignment) => assignment.id === id);
+  const assignments = await getAssignmentsData()
+  return assignments.find((assignment) => assignment.id === id)
 }

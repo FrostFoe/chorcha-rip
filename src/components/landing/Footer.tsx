@@ -1,12 +1,5 @@
-import {
-  Facebook,
-  Instagram,
-  Mail,
-  MapPin,
-  Phone,
-  Youtube,
-} from "lucide-react";
-import Image from "next/image";
+import { Facebook, Instagram, Mail, MapPin, Phone, Youtube } from "lucide-react"
+import Image from "next/image"
 
 export function Footer() {
   return (
@@ -80,5 +73,5 @@ export function Footer() {
         </div>
       </div>
     </footer>
-  );
+  )
 }

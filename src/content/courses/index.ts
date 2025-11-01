@@ -3,4 +3,4 @@
 // This file is no longer needed and can be removed.
 // For now, it's kept to avoid breaking any potential lingering imports,
 // though the goal is to phase it out completely.
-export {};
+export {}

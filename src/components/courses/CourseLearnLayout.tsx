@@ -1,17 +1,17 @@
-"use client";
+"use client"
 
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
-import { cn } from "@/lib/utils";
-import type { Course, Lesson, Module } from "@/lib/types";
+} from "@/components/ui/accordion"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Button, buttonVariants } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Progress } from "@/components/ui/progress"
+import { cn } from "@/lib/utils"
+import type { Course, Lesson, Module } from "@/lib/types"
 
 import {
   Check,
@@ -23,17 +23,17 @@ import {
   PanelRight,
   Play,
   Star,
-} from "lucide-react";
-import Link from "next/link";
-import * as React from "react";
-import { useUserData } from "@/providers/UserDataProvider";
+} from "lucide-react"
+import Link from "next/link"
+import * as React from "react"
+import { useUserData } from "@/providers/UserDataProvider"
 
 interface CourseLearnLayoutProps {
-  course: Course;
-  modules: Module[];
-  lessons: Lesson[];
-  activeLessonSlug: string;
-  children: React.ReactNode;
+  course: Course
+  modules: Module[]
+  lessons: Lesson[]
+  activeLessonSlug: string
+  children: React.ReactNode
 }
 
 export function CourseLearnLayout({
@@ -43,28 +43,28 @@ export function CourseLearnLayout({
   activeLessonSlug,
   children,
 }: CourseLearnLayoutProps) {
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = React.useState(false);
-  const { getLessonProgress } = useUserData();
-  const toggleSidebar = () => setIsSidebarCollapsed(!isSidebarCollapsed);
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = React.useState(false)
+  const { getLessonProgress } = useUserData()
+  const toggleSidebar = () => setIsSidebarCollapsed(!isSidebarCollapsed)
 
-  const completedLessonSlugs = getLessonProgress(course.slug);
-  const completedLessonsCount = completedLessonSlugs.length;
-  const totalLessons = lessons.length;
+  const completedLessonSlugs = getLessonProgress(course.slug)
+  const completedLessonsCount = completedLessonSlugs.length
+  const totalLessons = lessons.length
   const courseProgress =
-    totalLessons > 0 ? (completedLessonsCount / totalLessons) * 100 : 0;
+    totalLessons > 0 ? (completedLessonsCount / totalLessons) * 100 : 0
 
   const getLessonIcon = (type: "video" | "article" | "quiz") => {
     switch (type) {
       case "video":
-        return Play;
+        return Play
       case "article":
-        return FileText;
+        return FileText
       case "quiz":
-        return HelpCircle;
+        return HelpCircle
       default:
-        return CirclePlay;
+        return CirclePlay
     }
-  };
+  }
 
   const lessonListContent = (
     <Card className={cn(isSidebarCollapsed && "p-2")}>
@@ -83,7 +83,7 @@ export function CourseLearnLayout({
             <h4
               className={cn(
                 "mb-2 text-base font-semibold",
-                isSidebarCollapsed && "hidden",
+                isSidebarCollapsed && "hidden"
               )}
             >
               {module.title}
@@ -92,10 +92,8 @@ export function CourseLearnLayout({
               {lessons
                 .filter((lesson) => lesson.module === module.slug)
                 .map((lesson) => {
-                  const LessonIcon = getLessonIcon(lesson.lessonType);
-                  const isCompleted = completedLessonSlugs.includes(
-                    lesson.slug,
-                  );
+                  const LessonIcon = getLessonIcon(lesson.lessonType)
+                  const isCompleted = completedLessonSlugs.includes(lesson.slug)
                   return (
                     <Link
                       key={lesson.slug}
@@ -135,14 +133,14 @@ export function CourseLearnLayout({
                         </div>
                       </div>
                     </Link>
-                  );
+                  )
                 })}
             </div>
           </div>
         ))}
       </CardContent>
     </Card>
-  );
+  )
 
   const instructorCardContent = (
     <Card className={cn(isSidebarCollapsed && "hidden")}>
@@ -171,7 +169,7 @@ export function CourseLearnLayout({
         </Button>
       </CardContent>
     </Card>
-  );
+  )
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -183,7 +181,7 @@ export function CourseLearnLayout({
               onClick={toggleSidebar}
               className={cn(
                 buttonVariants({ variant: "ghost", size: "icon" }),
-                "h-10 w-10 shrink-0 text-muted-foreground hover:text-foreground rounded-full transition-transform hidden md:flex",
+                "h-10 w-10 shrink-0 text-muted-foreground hover:text-foreground rounded-full transition-transform hidden md:flex"
               )}
             >
               {isSidebarCollapsed ? (
@@ -219,7 +217,7 @@ export function CourseLearnLayout({
         <aside
           className={cn(
             "hidden shrink-0 border-r bg-background/50 p-6 md:block transition-all duration-300",
-            isSidebarCollapsed ? "md:w-24" : "md:w-96",
+            isSidebarCollapsed ? "md:w-24" : "md:w-96"
           )}
         >
           <div className="space-y-6">
@@ -250,5 +248,5 @@ export function CourseLearnLayout({
         </main>
       </div>
     </div>
-  );
+  )
 }

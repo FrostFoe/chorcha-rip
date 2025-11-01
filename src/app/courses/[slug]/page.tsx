@@ -1,22 +1,22 @@
-import { notFound } from "next/navigation";
-import { getCourseData } from "@/lib/courses";
-import { CourseClient } from "./course-client";
-import { serialize } from "next-mdx-remote/serialize";
+import { notFound } from "next/navigation"
+import { getCourseData } from "@/lib/courses"
+import { CourseClient } from "./course-client"
+import { serialize } from "next-mdx-remote/serialize"
 
 export default async function CoursePage({
   params,
 }: {
-  params: { slug: string };
+  params: { slug: string }
 }) {
-  const { slug } = params;
+  const { slug } = params
 
-  const course = await getCourseData(slug);
+  const course = await getCourseData(slug)
 
   if (!course) {
-    notFound();
+    notFound()
   }
 
-  const mdxSource = await serialize(course.body);
+  const mdxSource = await serialize(course.body)
 
-  return <CourseClient course={course} mdxSource={mdxSource} />;
+  return <CourseClient course={course} mdxSource={mdxSource} />
 }

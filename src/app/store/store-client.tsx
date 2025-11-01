@@ -1,9 +1,9 @@
-"use client";
+"use client"
 
-import * as React from "react";
-import { Sidebar } from "@/components/dashboard/Sidebar";
-import { MobileNav } from "@/components/dashboard/MobileNav";
-import { useIsMobile } from "@/hooks/use-mobile";
+import * as React from "react"
+import { Sidebar } from "@/components/dashboard/Sidebar"
+import { MobileNav } from "@/components/dashboard/MobileNav"
+import { useIsMobile } from "@/hooks/use-mobile"
 import {
   Card,
   CardContent,
@@ -11,38 +11,38 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Gem, Store } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { useUserData } from "@/providers/UserDataProvider";
-import { useToast } from "@/hooks/use-toast";
+} from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Gem, Store } from "lucide-react"
+import { cn } from "@/lib/utils"
+import { useUserData } from "@/providers/UserDataProvider"
+import { useToast } from "@/hooks/use-toast"
 
 const gemPacks = [
   { amount: 100, price: 100 },
   { amount: 550, price: 500, bonus: 50 },
   { amount: 1200, price: 1000, bonus: 200 },
   { amount: 3000, price: 2500, bonus: 500 },
-];
+]
 
 export function StoreClient() {
-  const isMobile = useIsMobile();
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = React.useState(false);
-  const { gemBalance, addGems } = useUserData();
-  const { toast } = useToast();
+  const isMobile = useIsMobile()
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = React.useState(false)
+  const { gemBalance, addGems } = useUserData()
+  const { toast } = useToast()
 
   const toggleSidebar = React.useCallback(
     () => setIsSidebarCollapsed((prev) => !prev),
-    [],
-  );
+    []
+  )
 
   const handlePurchase = (amount: number) => {
-    addGems(amount);
+    addGems(amount)
     toast({
       title: "Gems কেনা সফল হয়েছে!",
       description: `আপনার একাউন্টে ${amount} Gem যোগ করা হয়েছে।`,
-    });
-  };
+    })
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -61,7 +61,7 @@ export function StoreClient() {
             ? "pt-16"
             : isSidebarCollapsed
               ? "lg:ml-sidebar-collapsed"
-              : "lg:ml-sidebar-expanded",
+              : "lg:ml-sidebar-expanded"
         )}
       >
         <div className="p-4 sm:p-6 lg:p-8">
@@ -114,5 +114,5 @@ export function StoreClient() {
         </div>
       </main>
     </div>
-  );
+  )
 }

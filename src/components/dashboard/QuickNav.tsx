@@ -7,11 +7,11 @@
 // but for this static file, we can't know them in advance.
 // The logic in the components will have to handle cases where the user ID doesn't exist here.
 
-import type { Assignment } from "./types";
+import type { Assignment } from "./types"
 
 interface UserProfile {
-  full_name: string;
-  avatar_url: string;
+  full_name: string
+  avatar_url: string
 }
 
 export const userProfiles: Record<string, UserProfile> = {
@@ -20,15 +20,15 @@ export const userProfiles: Record<string, UserProfile> = {
     full_name: "ডেমো ব্যবহারকারী",
     avatar_url: "https://picsum.photos/seed/demo-user/100/100",
   },
-};
+}
 
 interface Enrollment {
-  courseId: string;
-  progress: number;
+  courseId: string
+  progress: number
 }
 
 interface UserEnrollment {
-  enrolledCourses: Enrollment[];
+  enrolledCourses: Enrollment[]
 }
 
 export const userEnrollments: Record<string, UserEnrollment> = {
@@ -36,25 +36,25 @@ export const userEnrollments: Record<string, UserEnrollment> = {
   "placeholder-user-id-1": {
     enrolledCourses: [{ courseId: "1", progress: 75 }],
   },
-};
+}
 
 export const questionBankExams = [
   { name: "BUET Preli 2022", questions: 100, time: 60 },
   { name: "Medical 2022", questions: 100, time: 60 },
   { name: "IUT 2022", questions: 100, time: 60 },
-];
+]
 
 export const questionBankExams2 = [
   { name: "Dental 2022", questions: 100, time: 60 },
   { name: "BCS Preli 2022", questions: 100, time: 60 },
   { name: "Rajshahi University 2022", questions: 100, time: 60 },
-];
+]
 
 export const questionBankExams3 = [
   { name: "Rajshahi University 2022", questions: 100, time: 60 },
   { name: "Dhaka University A 2022", questions: 100, time: 60 },
   { name: "CKRUET 2022", questions: 100, time: 60 },
-];
+]
 
 export const analysisData = [
   { year: "2017", height: "63.288%" },
@@ -63,7 +63,7 @@ export const analysisData = [
   { year: "2020", height: "65.5979%" },
   { year: "2021", height: "71.5741%" },
   { year: "2022", height: "79.0024%" },
-];
+]
 
 export const quickPractice = [
   "ব্রিটিশ শাসনের বিরুদ্ধে বাঙালিদের প্রথম বিদ্রোহ-",
@@ -71,7 +71,7 @@ export const quickPractice = [
   "নীল বিদ্রোহ",
   "সিপাহী বিদ্রোহ",
   "আগস্ট (১৯৪২) বিদ্রোহ",
-];
+]
 
 export const testimonials = [
   {
@@ -102,7 +102,7 @@ export const testimonials = [
     review:
       "This Chorcha app is very much helpful for student's exam practice. A student can easily practice exam on any chapter or topic of that chapter. So, It's very helpful for a admission student.",
   },
-];
+]
 
 export const leaderboard = [
   {
@@ -135,11 +135,11 @@ export const leaderboard = [
     name: "মেহেদি হাসান",
     college: "ভিক্টোরিয়া কলেজ",
   },
-];
+]
 
 export interface DashboardProgressItem {
-  subject: string;
-  percentage: number;
+  subject: string
+  percentage: number
 }
 
 export const dashboardProgress: DashboardProgressItem[] = [
@@ -151,7 +151,7 @@ export const dashboardProgress: DashboardProgressItem[] = [
   { subject: "বাংলা", percentage: 0.95 },
   { subject: "English", percentage: 0.69 },
   { subject: "সাধারণ জ্ঞান", percentage: 0.27 },
-];
+]
 
 export const allAssignments: Partial<Assignment>[] = [
   {
@@ -181,4 +181,4 @@ export const allAssignments: Partial<Assignment>[] = [
     status: "Submitted",
     body: "অ্যাসাইনমেন্টের বিস্তারিত এখানে থাকবে।",
   },
-];
+]

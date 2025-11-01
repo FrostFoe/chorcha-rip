@@ -1,12 +1,12 @@
-"use client";
+"use client"
 
-import { ArrowRight, LayoutGrid } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-import { useSupabase } from "@/app/supabase-provider";
+import { ArrowRight, LayoutGrid } from "lucide-react"
+import Image from "next/image"
+import Link from "next/link"
+import { useSupabase } from "@/app/supabase-provider"
 
 export function Header() {
-  const { session } = useSupabase();
+  const { session } = useSupabase()
 
   return (
     <header className="sticky top-0 z-50 backdrop-blur-2xl shadow-[0_2px_10px_-4px_rgba(0,0,0,0.25)]">
@@ -42,5 +42,5 @@ export function Header() {
         </div>
       </div>
     </header>
-  );
+  )
 }

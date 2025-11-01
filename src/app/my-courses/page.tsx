@@ -1,28 +1,28 @@
-"use client";
+"use client"
 
-import { Sidebar } from "@/components/dashboard/Sidebar";
-import { MobileNav } from "@/components/dashboard/MobileNav";
-import { useIsMobile } from "@/hooks/use-mobile";
-import { Card } from "@/components/ui/card";
-import Image from "next/image";
-import { Progress } from "@/components/ui/progress";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { CheckCircle2, BookOpen } from "lucide-react";
-import { useState, useCallback } from "react";
-import { Loader } from "@/components/ui/loader";
-import { cn } from "@/lib/utils";
-import { useUserData } from "@/providers/UserDataProvider";
+import { Sidebar } from "@/components/dashboard/Sidebar"
+import { MobileNav } from "@/components/dashboard/MobileNav"
+import { useIsMobile } from "@/hooks/use-mobile"
+import { Card } from "@/components/ui/card"
+import Image from "next/image"
+import { Progress } from "@/components/ui/progress"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
+import { CheckCircle2, BookOpen } from "lucide-react"
+import { useState, useCallback } from "react"
+import { Loader } from "@/components/ui/loader"
+import { cn } from "@/lib/utils"
+import { useUserData } from "@/providers/UserDataProvider"
 
 export default function MyCoursesPage() {
-  const isMobile = useIsMobile();
-  const { enrolledCourses, loading } = useUserData();
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const isMobile = useIsMobile()
+  const { enrolledCourses, loading } = useUserData()
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false)
 
   const toggleSidebar = useCallback(
     () => setIsSidebarCollapsed((prev) => !prev),
-    [],
-  );
+    []
+  )
 
   return (
     <div className="min-h-screen bg-background">
@@ -41,7 +41,7 @@ export default function MyCoursesPage() {
             ? "pt-16"
             : isSidebarCollapsed
               ? "lg:ml-sidebar-collapsed"
-              : "lg:ml-sidebar-expanded",
+              : "lg:ml-sidebar-expanded"
         )}
       >
         <div className="p-4 sm:p-6 lg:p-8">
@@ -112,5 +112,5 @@ export default function MyCoursesPage() {
         </div>
       </main>
     </div>
-  );
+  )
 }

@@ -1,9 +1,8 @@
-import type { CourseDetails } from "@/lib/types";
+import type { CourseDetails } from "@/lib/types"
 
 export const details: CourseDetails = {
   totalDuration: "9 ঘন্টা",
-  description:
-    "এসএসসি শিক্ষার্থীদের জন্য জীববিজ্ঞান বিষয়ের পূর্ণাঙ্গ প্রস্তুতি।",
+  description: "এসএসসি শিক্ষার্থীদের জন্য জীববিজ্ঞান বিষয়ের পূর্ণাঙ্গ প্রস্তুতি।",
   instructor: {
     name: "Imran Hossain",
     avatar: "https://i.pravatar.cc/150?u=imran",
@@ -32,4 +31,4 @@ export const details: CourseDetails = {
       text: "এসএসসি পরীক্ষায় জীববিজ্ঞানে ভালো নম্বর পাওয়ার জন্য প্রস্তুত হন।",
     },
   ],
-};
+}

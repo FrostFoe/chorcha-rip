@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import {
   BookOpen,
@@ -7,11 +7,11 @@ import {
   LayoutGrid,
   Store,
   Trophy,
-} from "lucide-react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import * as React from "react";
-import { cn } from "@/lib/utils";
+} from "lucide-react"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import * as React from "react"
+import { cn } from "@/lib/utils"
 
 const bottomNavLinks = [
   { href: "/dashboard", label: "ড্যাশবোর্ড", icon: LayoutGrid },
@@ -19,10 +19,10 @@ const bottomNavLinks = [
   { href: "/browse", label: "ব্রাউজ", icon: Compass },
   { href: "/store", label: "স্টোর", icon: Store },
   { href: "/assignments", label: "অ্যাসাইনমেন্ট", icon: FilePenLine },
-];
+]
 
 function MobileNavComponent() {
-  const pathname = usePathname();
+  const pathname = usePathname()
 
   return (
     <nav className="fixed bottom-0 left-0 z-40 w-full border-t bg-background lg:hidden">
@@ -36,7 +36,7 @@ function MobileNavComponent() {
               (pathname.startsWith(link.href) && link.href !== "/dashboard") ||
                 pathname === link.href
                 ? "text-primary"
-                : "text-muted-foreground hover:text-foreground",
+                : "text-muted-foreground hover:text-foreground"
             )}
           >
             <link.icon className="mb-1 h-6 w-6" />
@@ -45,7 +45,7 @@ function MobileNavComponent() {
         ))}
       </div>
     </nav>
-  );
+  )
 }
 
-export const MobileNav = React.memo(MobileNavComponent);
+export const MobileNav = React.memo(MobileNavComponent)

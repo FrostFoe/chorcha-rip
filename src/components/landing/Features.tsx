@@ -1,26 +1,26 @@
-import { Card } from "@/components/ui/card";
-import { Clock, Pencil, Trophy } from "lucide-react";
-import Image from "next/image";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Card } from "@/components/ui/card"
+import { Clock, Pencil, Trophy } from "lucide-react"
+import Image from "next/image"
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar"
 
 // Data previously in lib/data.ts
 const questionBankExams = [
   { name: "BUET Preli 2022", questions: 100, time: 60 },
   { name: "Medical 2022", questions: 100, time: 60 },
   { name: "IUT 2022", questions: 100, time: 60 },
-];
+]
 
 const questionBankExams2 = [
   { name: "Dental 2022", questions: 100, time: 60 },
   { name: "BCS Preli 2022", questions: 100, time: 60 },
   { name: "Rajshahi University 2022", questions: 100, time: 60 },
-];
+]
 
 const questionBankExams3 = [
   { name: "Rajshahi University 2022", questions: 100, time: 60 },
   { name: "Dhaka University A 2022", questions: 100, time: 60 },
   { name: "CKRUET 2022", questions: 100, time: 60 },
-];
+]
 
 const analysisData = [
   { year: "2017", height: "63.288%" },
@@ -29,7 +29,7 @@ const analysisData = [
   { year: "2020", height: "65.5979%" },
   { year: "2021", height: "71.5741%" },
   { year: "2022", height: "79.0024%" },
-];
+]
 
 const quickPractice = [
   "ব্রিটিশ শাসনের বিরুদ্ধে বাঙালিদের প্রথম বিদ্রোহ-",
@@ -37,7 +37,7 @@ const quickPractice = [
   "নীল বিদ্রোহ",
   "সিপাহী বিদ্রোহ",
   "আগস্ট (১৯৪২) বিদ্রোহ",
-];
+]
 
 const leaderboard = [
   {
@@ -70,34 +70,34 @@ const leaderboard = [
     name: "মেহেদি হাসান",
     college: "ভিক্টোরিয়া কলেজ",
   },
-];
+]
 
 export function Features() {
   const getRankClasses = (rank: number) => {
     switch (rank) {
       case 1:
-        return "border-yellow-400 bg-yellow-400/10";
+        return "border-yellow-400 bg-yellow-400/10"
       case 2:
-        return "border-gray-400 bg-gray-400/10";
+        return "border-gray-400 bg-gray-400/10"
       case 3:
-        return "border-yellow-600 bg-yellow-600/10";
+        return "border-yellow-600 bg-yellow-600/10"
       default:
-        return "border-border";
+        return "border-border"
     }
-  };
+  }
 
   const getRankTextClass = (rank: number) => {
     switch (rank) {
       case 1:
-        return "text-yellow-400";
+        return "text-yellow-400"
       case 2:
-        return "text-gray-400";
+        return "text-gray-400"
       case 3:
-        return "text-yellow-600";
+        return "text-yellow-600"
       default:
-        return "text-muted-foreground";
+        return "text-muted-foreground"
     }
-  };
+  }
 
   return (
     <div className="mx-auto flex max-w-screen-xl flex-col gap-8 p-4 py-16 md:p-14">
@@ -133,7 +133,7 @@ export function Features() {
                       </Card>
                     ))}
                   </div>
-                ),
+                )
               )}
             </div>
           </div>
@@ -169,8 +169,8 @@ export function Features() {
             <div className="flex flex-col gap-2 p-8">
               <h1 className="text-2xl font-bold">মক পরীক্ষা</h1>
               <div className="text-sm text-muted-foreground">
-                নিজের ইচ্ছেমত বিষয়, টপিক, সময় ও প্রশ্নের ধরণ নির্বাচন করে মক
-                পরীক্ষা দেওয়ার সুযোগ
+                নিজের ইচ্ছেমত বিষয়, টপিক, সময় ও প্রশ্নের ধরণ নির্বাচন করে মক পরীক্ষা
+                দেওয়ার সুযোগ
               </div>
             </div>
             <Image
@@ -188,8 +188,8 @@ export function Features() {
             <div className="flex flex-col gap-2 p-8">
               <h1 className="text-2xl font-bold">ফলাফল বিশ্লেষণ</h1>
               <div className="text-sm text-muted-foreground">
-                নিজের ইচ্ছেমত বিষয়, টপিক, সময় ও প্রশ্নের ধরণ নির্বাচন করে মক
-                পরীক্ষা দেওয়ার সুযোগ
+                নিজের ইচ্ছেমত বিষয়, টপিক, সময় ও প্রশ্নের ধরণ নির্বাচন করে মক পরীক্ষা
+                দেওয়ার সুযোগ
               </div>
             </div>
             <Image
@@ -235,12 +235,12 @@ export function Features() {
               <Card
                 key={student.name}
                 className={`flex items-center gap-4 border-l-4 p-4 transition-all hover:shadow-md ${getRankClasses(
-                  i + 1,
+                  i + 1
                 )}`}
               >
                 <div
                   className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full border-2 font-bold ${getRankClasses(
-                    i + 1,
+                    i + 1
                   )} ${getRankTextClass(i + 1)}`}
                 >
                   {i + 1}
@@ -261,5 +261,5 @@ export function Features() {
         </Card>
       </div>
     </div>
-  );
+  )
 }

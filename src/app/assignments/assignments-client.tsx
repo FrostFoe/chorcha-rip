@@ -1,15 +1,15 @@
-"use client";
+"use client"
 
-import { Sidebar } from "@/components/dashboard/Sidebar";
-import { MobileNav } from "@/components/dashboard/MobileNav";
-import { useIsMobile } from "@/hooks/use-mobile";
+import { Sidebar } from "@/components/dashboard/Sidebar"
+import { MobileNav } from "@/components/dashboard/MobileNav"
+import { useIsMobile } from "@/hooks/use-mobile"
 import {
   Card,
   CardDescription,
   CardHeader,
   CardTitle,
   CardContent,
-} from "@/components/ui/card";
+} from "@/components/ui/card"
 import {
   Table,
   TableBody,
@@ -17,47 +17,47 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { FilePenLine } from "lucide-react";
-import * as React from "react";
-import { cn } from "@/lib/utils";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { useSupabase } from "../supabase-provider";
-import type { Assignment } from "@/lib/types";
-import { useUserData } from "@/providers/UserDataProvider";
+} from "@/components/ui/table"
+import { FilePenLine } from "lucide-react"
+import * as React from "react"
+import { cn } from "@/lib/utils"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
+import { useSupabase } from "../supabase-provider"
+import type { Assignment } from "@/lib/types"
+import { useUserData } from "@/providers/UserDataProvider"
 
 interface AssignmentsClientProps {
-  staticAssignments: Assignment[];
+  staticAssignments: Assignment[]
 }
 
 export function AssignmentsClient({
   staticAssignments,
 }: AssignmentsClientProps) {
-  const isMobile = useIsMobile();
-  const [isSidebarCollapsed, setIsSidebarCollapsed] = React.useState(false);
-  const { session } = useSupabase();
-  const { isAssignmentSubmitted } = useUserData();
+  const isMobile = useIsMobile()
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = React.useState(false)
+  const { session } = useSupabase()
+  const { isAssignmentSubmitted } = useUserData()
 
   const toggleSidebar = React.useCallback(
     () => setIsSidebarCollapsed((prev) => !prev),
-    [],
-  );
+    []
+  )
 
   const assignments = React.useMemo(() => {
     if (!session?.user) {
-      return staticAssignments;
+      return staticAssignments
     }
 
     return staticAssignments.map((assignment) => {
-      const isSubmitted = isAssignmentSubmitted(assignment.id);
+      const isSubmitted = isAssignmentSubmitted(assignment.id)
       return {
         ...assignment,
         status: isSubmitted ? "Submitted" : "Pending",
-      };
-    });
-  }, [session, staticAssignments, isAssignmentSubmitted]);
+      }
+    })
+  }, [session, staticAssignments, isAssignmentSubmitted])
 
   return (
     <div className="min-h-screen bg-background">
@@ -76,7 +76,7 @@ export function AssignmentsClient({
             ? "pt-16"
             : isSidebarCollapsed
               ? "lg:ml-sidebar-collapsed"
-              : "lg:ml-sidebar-expanded",
+              : "lg:ml-sidebar-expanded"
         )}
       >
         <div className="p-4 sm:p-6 lg:p-8">
@@ -101,9 +101,7 @@ export function AssignmentsClient({
                 <TableHeader>
                   <TableRow>
                     <TableHead>অ্যাসাইনমেন্ট</TableHead>
-                    <TableHead className="hidden sm:table-cell">
-                      কোর্স
-                    </TableHead>
+                    <TableHead className="hidden sm:table-cell">কোর্স</TableHead>
                     <TableHead>জমাদানের তারিখ</TableHead>
                     <TableHead>স্ট্যাটাস</TableHead>
                     <TableHead />
@@ -153,5 +151,5 @@ export function AssignmentsClient({
         </div>
       </main>
     </div>
-  );
+  )
 }
