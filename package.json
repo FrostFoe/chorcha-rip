@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 9002",
-    "build": " rm -rf .next/ && NODE_ENV=production next build",
+    "dev": "next dev",
+    "build": "rm -rf .next/ && NODE_ENV=production next build",
     "start": "next start",
-    "lint": " rm -rf .next/ && biome lint .",
-    "format": " rm -rf .next/ && biome format . --write",
+    "lint": "rm -rf .next/ && biome lint .",
+    "format": "rm -rf .next/ && biome format . --write",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
