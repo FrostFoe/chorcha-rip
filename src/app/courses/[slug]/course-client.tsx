@@ -1,26 +1,54 @@
 "use client";
 
-import { notFound, useParams } from "next/navigation";
+import { notFound, useParams, useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, BookCheck } from "lucide-react";
+import { ArrowLeft, BookCheck, Gem } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import type { Course } from "@/lib/types";
 import { MDXRemote, type MDXRemoteSerializeResult } from "next-mdx-remote";
+import { useUserData } from "@/providers/UserDataProvider";
+import { useToast } from "@/hooks/use-toast";
 
 interface CourseClientProps {
   course: Course;
-  mdxSource: MDXRemoteSerializeResult | undefined; // The serialized MDX content
+  mdxSource: MDXRemoteSerializeResult | undefined;
 }
 
 export function CourseClient({ course, mdxSource }: CourseClientProps) {
-  const params = useParams();
-  const slug = Array.isArray(params.slug) ? params.slug[0] : params.slug;
+  const { enrollCourse, isEnrolled, gemBalance, spendGems } = useUserData();
+  const { toast } = useToast();
+  const router = useRouter();
 
   if (!course) {
     notFound();
   }
+
+  const handleEnroll = () => {
+    if (gemBalance >= course.price) {
+      spendGems(course.price);
+      enrollCourse(course.id);
+      toast({
+        title: "সফলভাবে ভর্তি হয়েছেন!",
+        description: `আপনি "${course.title}" কোর্সে ভর্তি হয়েছেন।`,
+      });
+      router.push(`/courses/${course.slug}/learn`);
+    } else {
+      toast({
+        variant: "destructive",
+        title: "ناکافي Gem!",
+        description: "আপনার পর্যাপ্ত Gem নেই। অনুগ্রহ করে আরও Gem কিনুন।",
+        action: (
+          <Button variant="secondary" size="sm" asChild>
+            <Link href="/store">Gem কিনুন</Link>
+          </Button>
+        ),
+      });
+    }
+  };
+
+  const isAlreadyEnrolled = isEnrolled(course.id);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -59,15 +87,26 @@ export function CourseClient({ course, mdxSource }: CourseClientProps) {
                 </p>
               </div>
               <div className="w-full shrink-0 space-y-2 md:w-auto">
-                <Button size="lg" asChild className="w-full">
-                  <Link
-                    href={`/courses/${course.slug}/learn`}
-                    className="flex items-center gap-2"
+                {isAlreadyEnrolled ? (
+                  <Button size="lg" asChild className="w-full">
+                    <Link
+                      href={`/courses/${course.slug}/learn`}
+                      className="flex items-center gap-2"
+                    >
+                      <BookCheck className="h-5 w-5" />
+                      {"শেখা চালিয়ে যান"}
+                    </Link>
+                  </Button>
+                ) : (
+                  <Button
+                    size="lg"
+                    className="w-full"
+                    onClick={handleEnroll}
                   >
-                    <BookCheck className="h-5 w-5" />
-                    {"কোর্স শুরু করুন"}
-                  </Link>
-                </Button>
+                    <Gem className="mr-2 h-5 w-5" />
+                    {course.price} Gem দিয়ে ভর্তি হোন
+                  </Button>
+                )}
               </div>
             </div>
 

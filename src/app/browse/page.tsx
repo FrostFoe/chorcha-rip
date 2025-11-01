@@ -2,9 +2,10 @@ import { Card } from "@/components/ui/card";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { Compass, Search } from "lucide-react";
+import { Compass, Gem, Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { getAllCoursesData } from "@/lib/courses";
+import { Badge } from "@/components/ui/badge";
 
 export default async function BrowsePage() {
   const courses = await getAllCoursesData();
@@ -44,6 +45,10 @@ export default async function BrowsePage() {
                     fill
                     className="object-cover transition-transform duration-300 group-hover:scale-105"
                   />
+                  <Badge className="absolute top-2 right-2 flex items-center gap-1.5">
+                    <Gem className="h-4 w-4" />
+                    {course.price}
+                  </Badge>
                 </div>
                 <div className="flex flex-col flex-grow p-4">
                   <h3 className="mb-2 flex-grow text-lg font-semibold">

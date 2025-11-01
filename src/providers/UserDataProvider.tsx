@@ -18,6 +18,10 @@ interface UserDataContextType {
   enrolledCourses: EnrolledCourse[];
   loading: boolean;
   enrollCourse: (courseId: string) => void;
+  isEnrolled: (courseId: string) => boolean;
+  gemBalance: number;
+  addGems: (amount: number) => void;
+  spendGems: (amount: number) => boolean;
   getLessonProgress: (courseSlug: string) => string[];
   updateLessonProgress: (courseSlug: string, lessonSlug: string) => void;
 }
@@ -39,17 +43,25 @@ export function UserDataProvider({
 }: UserDataProviderProps) {
   const { session } = useSupabase();
   const [enrolledCourses, setEnrolledCourses] = useState<EnrolledCourse[]>([]);
+  const [gemBalance, setGemBalance] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  const fetchEnrolledCourses = useCallback(async () => {
+  const fetchUserData = useCallback(async () => {
     if (!session?.user) {
       setEnrolledCourses([]);
+      setGemBalance(0);
       setLoading(false);
       return;
     }
 
+    setLoading(true);
     try {
-      setLoading(true);
+      // Fetch Gem Balance
+      const gemKey = `chorcha-gems-${session.user.id}`;
+      const storedGems = localStorage.getItem(gemKey);
+      setGemBalance(storedGems ? parseInt(storedGems, 10) : 500); // Start with 500 gems
+
+      // Fetch Enrolled Courses
       const enrollmentsKey = `chorcha-enrollments-${session.user.id}`;
       const enrolledIds: string[] = JSON.parse(
         localStorage.getItem(enrollmentsKey) || "[]",
@@ -64,9 +76,10 @@ export function UserDataProvider({
 
           if (progressData) {
             const completedLessons: string[] = JSON.parse(progressData);
-            const totalLessons = allLessons.filter((l) =>
-              l.slug.startsWith(course.slug),
-            ).length;
+            const courseLessons = allLessons.filter(
+              (l) => l.module.split("-")[0] === course.slug,
+            );
+            const totalLessons = courseLessons.length;
             if (totalLessons > 0) {
               progress = (completedLessons.length / totalLessons) * 100;
             }
@@ -80,22 +93,24 @@ export function UserDataProvider({
 
       setEnrolledCourses(enrolled);
     } catch (error) {
-      console.error("Failed to fetch enrolled courses:", error);
+      console.error("Failed to fetch user data:", error);
       setEnrolledCourses([]);
+      setGemBalance(0);
     } finally {
       setLoading(false);
     }
   }, [session, allCourses, allLessons]);
 
   useEffect(() => {
-    fetchEnrolledCourses();
+    fetchUserData();
 
     const handleStorageChange = (e: StorageEvent) => {
       if (
         e.key?.startsWith("chorcha-enrollments-") ||
-        e.key?.startsWith("chorcha-progress-")
+        e.key?.startsWith("chorcha-progress-") ||
+        e.key?.startsWith("chorcha-gems-")
       ) {
-        fetchEnrolledCourses();
+        fetchUserData();
       }
     };
 
@@ -103,7 +118,26 @@ export function UserDataProvider({
     return () => {
       window.removeEventListener("storage", handleStorageChange);
     };
-  }, [fetchEnrolledCourses]);
+  }, [fetchUserData]);
+
+  const updateGemBalance = (newBalance: number) => {
+    if (!session?.user) return;
+    const gemKey = `chorcha-gems-${session.user.id}`;
+    localStorage.setItem(gemKey, newBalance.toString());
+    setGemBalance(newBalance);
+  };
+
+  const addGems = (amount: number) => {
+    updateGemBalance(gemBalance + amount);
+  };
+
+  const spendGems = (amount: number) => {
+    if (gemBalance >= amount) {
+      updateGemBalance(gemBalance - amount);
+      return true;
+    }
+    return false;
+  };
 
   const enrollCourse = (courseId: string) => {
     if (!session?.user) return;
@@ -114,32 +148,31 @@ export function UserDataProvider({
     if (!enrolledIds.includes(courseId)) {
       const updatedIds = [...enrolledIds, courseId];
       localStorage.setItem(enrollmentsKey, JSON.stringify(updatedIds));
-      fetchEnrolledCourses(); // Re-fetch to update state
+      fetchUserData(); // Re-fetch to update state
     }
+  };
+
+  const isEnrolled = (courseId: string): boolean => {
+    return enrolledCourses.some((c) => c.id === courseId);
   };
 
   const getLessonProgress = (courseSlug: string): string[] => {
     if (!session?.user) return [];
-    const course = allCourses.find((c) => c.slug === courseSlug);
-    if (!course) return [];
-
-    const progressKey = `chorcha-progress-${course.slug}-${session.user.id}`;
+    const progressKey = `chorcha-progress-${courseSlug}-${session.user.id}`;
     const storedProgress = localStorage.getItem(progressKey);
     return storedProgress ? JSON.parse(storedProgress) : [];
   };
 
   const updateLessonProgress = (courseSlug: string, lessonSlug: string) => {
     if (!session?.user) return;
-    const course = allCourses.find((c) => c.slug === courseSlug);
-    if (!course) return;
 
-    const progressKey = `chorcha-progress-${course.slug}-${session.user.id}`;
+    const progressKey = `chorcha-progress-${courseSlug}-${session.user.id}`;
     const completedSlugs = getLessonProgress(courseSlug);
 
     if (!completedSlugs.includes(lessonSlug)) {
       const updatedSlugs = [...completedSlugs, lessonSlug];
       localStorage.setItem(progressKey, JSON.stringify(updatedSlugs));
-      fetchEnrolledCourses(); // Re-fetch to update progress percentage
+      fetchUserData(); // Re-fetch to update progress percentage
     }
   };
 
@@ -149,6 +182,10 @@ export function UserDataProvider({
         enrolledCourses,
         loading,
         enrollCourse,
+        isEnrolled,
+        gemBalance,
+        addGems,
+        spendGems,
         getLessonProgress,
         updateLessonProgress,
       }}

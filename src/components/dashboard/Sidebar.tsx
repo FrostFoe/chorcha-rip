@@ -11,6 +11,8 @@ import {
   Settings,
   Trophy,
   User,
+  Gem,
+  Store,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -18,11 +20,13 @@ import { usePathname } from "next/navigation";
 import * as React from "react";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useUserData } from "@/providers/UserDataProvider";
 
 const sidebarLinks = [
   { href: "/dashboard", label: "ড্যাশবোর্ড", icon: LayoutGrid },
   { href: "/my-courses", label: "আমার কোর্স", icon: BookOpen },
   { href: "/browse", label: "ব্রাউজ কোর্স", icon: Compass },
+  { href: "/store", label: "স্টোর", icon: Store },
   { href: "/assignments", label: "অ্যাসাইনমেন্ট", icon: FilePenLine },
   { href: "/leaderboard", label: "লিডারবোর্ড", icon: Trophy },
   { href: "/profile", label: "প্রোফাইল", icon: User },
@@ -36,6 +40,7 @@ interface SidebarProps {
 function SidebarComponent({ isCollapsed, toggleSidebar }: SidebarProps) {
   const pathname = usePathname();
   const { session } = useSupabase();
+  const { gemBalance } = useUserData();
   const [userFullName, setUserFullName] = React.useState("User");
 
   React.useEffect(() => {
@@ -125,6 +130,21 @@ function SidebarComponent({ isCollapsed, toggleSidebar }: SidebarProps) {
         )}
       >
         <div className="space-y-2">
+          <div
+            className={cn(
+              buttonVariants({ variant: "ghost", size: "default" }),
+              "w-full justify-start gap-x-4 px-4 py-2 h-auto text-base text-muted-foreground",
+              isCollapsed && "justify-center",
+            )}
+          >
+            <Gem className="h-5 w-5 text-primary" />
+            {!isCollapsed && (
+              <div className="flex justify-between w-full items-center">
+                <span className="truncate">Gem ব্যালেন্স</span>
+                <span className="font-bold text-foreground">{gemBalance}</span>
+              </div>
+            )}
+          </div>
           <Link
             href="/settings"
             className={cn(

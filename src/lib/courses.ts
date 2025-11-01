@@ -38,6 +38,7 @@ export async function getCourseData(slug: string): Promise<Course | null> {
         instructor: { name: string };
         outcomes?: string[];
         name: string;
+        price: number;
         category: "hsc" | "ssc" | "admission" | "bcs";
       };
 
@@ -89,6 +90,7 @@ export async function getAllCoursesData(): Promise<Course[]> {
           instructor: { name: string };
           outcomes?: string[];
           name: string;
+          price: number;
           category: "hsc" | "ssc" | "admission" | "bcs";
         };
 

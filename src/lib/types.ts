@@ -14,6 +14,7 @@ export interface Course {
   description: string;
   image: string;
   outcomes?: string[];
+  price: number;
 }
 
 export type LessonType = "video" | "article" | "quiz";
