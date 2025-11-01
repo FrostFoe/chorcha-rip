@@ -13,12 +13,7 @@ import { useEffect, useState, useCallback } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 import { useTheme } from "next-themes";
-
-// Mock data, previously in `lib/data.ts`
-const userProfiles: Record<string, { full_name: string; avatar_url: string }> =
-  {
-    // In a real app, this would be fetched from a database against the user.id
-  };
+import { useUserData } from "@/providers/UserDataProvider";
 
 export default function ProfilePage() {
   const isMobile = useIsMobile();
@@ -26,12 +21,12 @@ export default function ProfilePage() {
   const user = session?.user;
   const { toast } = useToast();
   const { theme, setTheme } = useTheme();
+  const { profile, loading, updateProfile } = useUserData();
 
   const [fullName, setFullName] = useState("");
   const [avatarUrl, setAvatarUrl] = useState(
     "https://picsum.photos/seed/avatar/100/100",
   );
-  const [loading, setLoading] = useState(true);
   const [updating, setUpdating] = useState(false);
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
@@ -41,56 +36,27 @@ export default function ProfilePage() {
   );
 
   useEffect(() => {
-    const fetchProfile = () => {
-      if (!user) return;
-
-      try {
-        setLoading(true);
-        // Try loading from localStorage first
-        const localProfile = localStorage.getItem(`chorcha-profile-${user.id}`);
-        if (localProfile) {
-          const profile = JSON.parse(localProfile);
-          setFullName(profile.full_name || "");
-          setAvatarUrl(
-            profile.avatar_url || "https://picsum.photos/seed/avatar/100/100",
-          );
-        } else {
-          // Fallback to static data
-          const profile = userProfiles[user.id];
-          if (profile) {
-            setFullName(profile.full_name || "");
-            setAvatarUrl(
-              profile.avatar_url || "https://picsum.photos/seed/avatar/100/100",
-            );
-          }
-        }
-      } catch (error) {
-        console.error("Error in fetchProfile:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProfile();
-  }, [user]);
+    if (profile) {
+      setFullName(profile.full_name || "");
+      setAvatarUrl(
+        profile.avatar_url || "https://picsum.photos/seed/avatar/100/100",
+      );
+    }
+  }, [profile]);
 
   const handleUpdateProfile = useCallback(async () => {
     if (!user) return;
 
     try {
       setUpdating(true);
-      const updatedProfile = {
+      await updateProfile({
         full_name: fullName,
         avatar_url: avatarUrl,
-      };
-      localStorage.setItem(
-        `chorcha-profile-${user.id}`,
-        JSON.stringify(updatedProfile),
-      );
+      });
 
       toast({
         title: "প্রোফাইল আপডেট হয়েছে",
-        description: "আপনার তথ্য সফলভাবে লোকাল স্টোরেজে সংরক্ষণ করা হয়েছে।",
+        description: "আপনার তথ্য সফলভাবে সংরক্ষণ করা হয়েছে।",
       });
     } catch (error) {
       toast({
@@ -102,7 +68,7 @@ export default function ProfilePage() {
     } finally {
       setUpdating(false);
     }
-  }, [user, fullName, avatarUrl, toast]);
+  }, [user, fullName, avatarUrl, toast, updateProfile]);
 
   return (
     <div className="min-h-screen">

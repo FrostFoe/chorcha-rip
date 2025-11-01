@@ -23,6 +23,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import type { Assignment } from "@/lib/types";
+import { useUserData } from "@/providers/UserDataProvider";
 
 export default function AssignmentDetailsPage() {
   const isMobile = useIsMobile();
@@ -31,6 +32,7 @@ export default function AssignmentDetailsPage() {
   const id = Array.isArray(params.id) ? params.id[0] : params.id;
   const { session } = useSupabase();
   const { toast } = useToast();
+  const { isAssignmentSubmitted, submitAssignment } = useUserData();
 
   const [isSidebarCollapsed, setIsSidebarCollapsed] = React.useState(false);
   const [assignment, setAssignment] = React.useState<Assignment | undefined>(
@@ -43,28 +45,19 @@ export default function AssignmentDetailsPage() {
     async function loadAssignment() {
       const data = await getAssignmentData(id);
       if (data) {
-        setAssignment(data);
+        const isSubmitted = session?.user
+          ? isAssignmentSubmitted(data.id)
+          : false;
+        setAssignment({
+          ...data,
+          status: isSubmitted ? "Submitted" : "Pending",
+        });
       } else {
         notFound();
       }
     }
     loadAssignment();
-  }, [id]);
-
-  React.useEffect(() => {
-    if (!session?.user || !assignment?.id) return;
-
-    const submissionsKey = `chorcha-submissions-${session.user.id}`;
-    const submittedIds: string[] = JSON.parse(
-      localStorage.getItem(submissionsKey) || "[]",
-    );
-
-    if (submittedIds.includes(assignment.id)) {
-      setAssignment((prev) =>
-        prev ? { ...prev, status: "Submitted" } : undefined,
-      );
-    }
-  }, [session, assignment?.id]);
+  }, [id, session, isAssignmentSubmitted]);
 
   const toggleSidebar = React.useCallback(
     () => setIsSidebarCollapsed((prev) => !prev),
@@ -86,14 +79,7 @@ export default function AssignmentDetailsPage() {
     setIsSubmitting(true);
     // Simulate submission
     setTimeout(() => {
-      const submissionsKey = `chorcha-submissions-${session.user.id}`;
-      const submittedIds: string[] = JSON.parse(
-        localStorage.getItem(submissionsKey) || "[]",
-      );
-      if (assignment.id && !submittedIds.includes(assignment.id)) {
-        submittedIds.push(assignment.id);
-        localStorage.setItem(submissionsKey, JSON.stringify(submittedIds));
-      }
+      submitAssignment(assignment.id);
 
       toast({
         title: "অ্যাসাইনমেন্ট জমা হয়েছে",
@@ -102,7 +88,14 @@ export default function AssignmentDetailsPage() {
       setIsSubmitting(false);
       router.push("/assignments");
     }, 1000);
-  }, [selectedFile, session, assignment, toast, router]);
+  }, [
+    selectedFile,
+    session,
+    assignment,
+    toast,
+    router,
+    submitAssignment,
+  ]);
 
   if (!assignment) {
     // You can render a loader here while the assignment is being fetched

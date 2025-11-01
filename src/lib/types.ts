@@ -85,3 +85,8 @@ export interface DashboardProgressItem {
   subject: string;
   percentage: number;
 }
+
+export interface UserProfile {
+  full_name: string;
+  avatar_url: string;
+}

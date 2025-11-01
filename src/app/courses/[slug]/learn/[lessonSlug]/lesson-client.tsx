@@ -8,6 +8,7 @@ import * as React from "react";
 import { useSupabase } from "@/app/supabase-provider";
 import type { Course, Lesson, QuizQuestion } from "@/lib/types";
 import { MDXRemote, type MDXRemoteSerializeResult } from "next-mdx-remote";
+import { useUserData } from "@/providers/UserDataProvider";
 
 interface LessonClientProps {
   course: Course;
@@ -17,34 +18,18 @@ interface LessonClientProps {
 
 export function LessonClient({ course, lesson, mdxSource }: LessonClientProps) {
   const { session } = useSupabase();
-  const [isCompleted, setIsCompleted] = React.useState(false);
+  const { getLessonProgress, updateLessonProgress } = useUserData();
 
-  React.useEffect(() => {
+  const isCompleted = React.useMemo(() => {
+    if (!session?.user) return false;
+    const completedSlugs = getLessonProgress(course.slug);
+    return completedSlugs.includes(lesson.slug);
+  }, [session, course.slug, lesson.slug, getLessonProgress]);
+
+  const handleMarkAsComplete = React.useCallback(() => {
     if (!session?.user || !course || !lesson) return;
-
-    const progressKey = `chorcha-progress-${course.slug}-${session.user.id}`;
-    const storedProgress = localStorage.getItem(progressKey);
-    if (storedProgress) {
-      const completedSlugs: string[] = JSON.parse(storedProgress);
-      setIsCompleted(completedSlugs.includes(lesson.slug));
-    }
-  }, [session, course, lesson]);
-
-  const handleMarkAsComplete = () => {
-    if (!session?.user || !course || !lesson) return;
-
-    const progressKey = `chorcha-progress-${course.slug}-${session.user.id}`;
-    const storedProgress = localStorage.getItem(progressKey);
-    const completedSlugs: string[] = storedProgress
-      ? JSON.parse(storedProgress)
-      : [];
-
-    if (!completedSlugs.includes(lesson.slug)) {
-      const updatedSlugs = [...completedSlugs, lesson.slug];
-      localStorage.setItem(progressKey, JSON.stringify(updatedSlugs));
-      setIsCompleted(true);
-    }
-  };
+    updateLessonProgress(course.slug, lesson.slug);
+  }, [session, course, lesson, updateLessonProgress]);
 
   const renderContent = () => {
     switch (lesson.lessonType) {

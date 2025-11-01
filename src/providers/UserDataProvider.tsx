@@ -1,4 +1,3 @@
-
 "use client";
 
 import {
@@ -9,7 +8,7 @@ import {
   useCallback,
 } from "react";
 import { useSupabase } from "@/app/supabase-provider";
-import type { Course, Lesson } from "@/lib/types";
+import type { Course, Lesson, UserProfile } from "@/lib/types";
 
 interface EnrolledCourse extends Course {
   progress: number;
@@ -25,6 +24,10 @@ interface UserDataContextType {
   spendGems: (amount: number) => boolean;
   getLessonProgress: (courseSlug: string) => string[];
   updateLessonProgress: (courseSlug: string, lessonSlug: string) => void;
+  profile: UserProfile | null;
+  updateProfile: (profile: Partial<UserProfile>) => Promise<void>;
+  isAssignmentSubmitted: (assignmentId: string) => boolean;
+  submitAssignment: (assignmentId: string) => void;
 }
 
 const UserDataContext = createContext<UserDataContextType | undefined>(
@@ -45,40 +48,41 @@ export function UserDataProvider({
   const { session } = useSupabase();
   const [enrolledCourses, setEnrolledCourses] = useState<EnrolledCourse[]>([]);
   const [gemBalance, setGemBalance] = useState(0);
+  const [profile, setProfile] = useState<UserProfile | null>(null);
+  const [submittedAssignments, setSubmittedAssignments] = useState<string[]>(
+    [],
+  );
   const [loading, setLoading] = useState(true);
 
-  const getCourseBySlug = (slug: string) => {
-    return allCourses.find((c) => c.slug === slug);
-  };
-
-  const getLessonsForCourse = (courseSlug: string) => {
-    return allLessons.filter((l) => {
-      // Assuming lesson module slugs are prefixed with the course slug, e.g., "hsc-physics-1-vectors"
-      const course = getCourseBySlug(courseSlug);
-      if (!course) return false;
-      const moduleCourseSlug = l.module.split("-").slice(0, -1).join("-");
-      // This logic might need to be more robust based on actual slug structures.
-      // A simpler way could be to have a courseId in the lesson data.
-      // For now, let's assume a course category folder structure is enough.
-      return allLessons.some(lesson => lesson.slug === l.slug && getCourseFromLesson(lesson) === courseSlug);
-    });
-  };
-
-  const getCourseFromLesson = (lesson: Lesson): string | undefined => {
-      // This is a bit of a hack. A better data model would link lessons to courses via ID.
-      // E.g. lesson.module = 'vectors' and we know 'vectors' belongs to 'hsc-physics-1'.
-      // For now, we'll assume the file path structure is our source of truth.
-      const course = allCourses.find(c => {
-          const lessonsForCourse = allLessons.filter(l => l.module.startsWith(c.slug));
-          return lessonsForCourse.some(l => l.slug === lesson.slug);
+  // Helper to find which course a lesson belongs to
+  const getCourseFromLesson = useCallback(
+    (lesson: Lesson): Course | undefined => {
+      return allCourses.find((course) => {
+        const courseLessons = allLessons.filter((l) => {
+          // This logic is tricky. A better data model would link lessons to courses directly.
+          // Let's assume a lesson's module gives a hint.
+          // e.g. lesson.module is 'vectors' and we know that's in 'hsc-physics-1st-paper'
+          // This requires a mapping or conventions.
+          // For now, let's check if the lesson is within the content structure of the course.
+          // This is a placeholder for a more robust lookup.
+          const lessonPathSegment = `/${course.category}/${course.slug}/lessons/`;
+          // This check is conceptual; we can't check file paths on the client.
+          // The `allLessons` prop should ideally contain course identifiers.
+          // Assuming `lesson.module` can be partially matched to a course slug.
+          return course.slug.includes(l.module) || l.module.includes(course.slug);
+        });
+        return courseLessons.some((l) => l.slug === lesson.slug);
       });
-      return course?.slug;
-  }
+    },
+    [allCourses, allLessons],
+  );
 
   const fetchUserData = useCallback(async () => {
     if (!session?.user) {
       setEnrolledCourses([]);
       setGemBalance(0);
+      setProfile(null);
+      setSubmittedAssignments([]);
       setLoading(false);
       return;
     }
@@ -88,9 +92,32 @@ export function UserDataProvider({
       // Fetch Gem Balance
       const gemKey = `chorcha-gems-${session.user.id}`;
       const storedGems = localStorage.getItem(gemKey);
-      setGemBalance(storedGems ? parseInt(storedGems, 10) : 500); // Start with 500 gems
+      setGemBalance(storedGems ? parseInt(storedGems, 10) : 500);
 
-      // Fetch Enrolled Courses
+      // Fetch Profile
+      const profileKey = `chorcha-profile-${session.user.id}`;
+      const storedProfile = localStorage.getItem(profileKey);
+      if (storedProfile) {
+        setProfile(JSON.parse(storedProfile));
+      } else {
+        const defaultProfile = {
+          full_name: session.user.user_metadata?.name || "ব্যবহারকারী",
+          avatar_url:
+            session.user.user_metadata?.avatar_url ||
+            "https://picsum.photos/seed/avatar/100/100",
+        };
+        setProfile(defaultProfile);
+        localStorage.setItem(profileKey, JSON.stringify(defaultProfile));
+      }
+
+      // Fetch Assignments
+      const submissionsKey = `chorcha-submissions-${session.user.id}`;
+      const submittedIds: string[] = JSON.parse(
+        localStorage.getItem(submissionsKey) || "[]",
+      );
+      setSubmittedAssignments(submittedIds);
+
+      // Fetch Enrolled Courses and their progress
       const enrollmentsKey = `chorcha-enrollments-${session.user.id}`;
       const enrolledIds: string[] = JSON.parse(
         localStorage.getItem(enrollmentsKey) || "[]",
@@ -105,9 +132,7 @@ export function UserDataProvider({
 
           if (progressData) {
             const completedLessons: string[] = JSON.parse(progressData);
-             const courseLessons = allLessons.filter(
-              (l) => getCourseFromLesson(l) === course.slug
-            );
+            const courseLessons = allLessons.filter(l => l.module.startsWith(course.slug)); // Simplified logic
             const totalLessons = courseLessons.length;
             if (totalLessons > 0) {
               progress = (completedLessons.length / totalLessons) * 100;
@@ -123,8 +148,11 @@ export function UserDataProvider({
       setEnrolledCourses(enrolled);
     } catch (error) {
       console.error("Failed to fetch user data:", error);
+      // Reset state on error
       setEnrolledCourses([]);
       setGemBalance(0);
+      setProfile(null);
+      setSubmittedAssignments([]);
     } finally {
       setLoading(false);
     }
@@ -134,21 +162,22 @@ export function UserDataProvider({
     fetchUserData();
 
     const handleStorageChange = (e: StorageEvent | CustomEvent) => {
-      // Check for custom event
+      // Listen for custom event triggered by local changes
       if (e instanceof CustomEvent && e.type === "chorcha:storage") {
         fetchUserData();
         return;
       }
-
-      // Check for StorageEvent
+      // Listen for changes from other tabs
       if (e instanceof StorageEvent) {
-          if (
-            e.key?.startsWith("chorcha-enrollments-") ||
-            e.key?.startsWith("chorcha-progress-") ||
-            e.key?.startsWith("chorcha-gems-")
-          ) {
-            fetchUserData();
-          }
+        if (
+          e.key?.startsWith("chorcha-enrollments-") ||
+          e.key?.startsWith("chorcha-progress-") ||
+          e.key?.startsWith("chorcha-gems-") ||
+          e.key?.startsWith("chorcha-profile-") ||
+          e.key?.startsWith("chorcha-submissions-")
+        ) {
+          fetchUserData();
+        }
       }
     };
 
@@ -160,7 +189,6 @@ export function UserDataProvider({
       window.removeEventListener("chorcha:storage", handleStorageChange);
     };
   }, [fetchUserData]);
-
 
   const dispatchStorageEvent = () => {
     window.dispatchEvent(new CustomEvent("chorcha:storage"));
@@ -223,6 +251,34 @@ export function UserDataProvider({
     }
   };
 
+  const updateProfile = async (newProfile: Partial<UserProfile>) => {
+    if (!session?.user) return;
+    const profileKey = `chorcha-profile-${session.user.id}`;
+    const currentProfile = profile || { full_name: "", avatar_url: "" };
+    const updatedProfile = { ...currentProfile, ...newProfile };
+    localStorage.setItem(profileKey, JSON.stringify(updatedProfile));
+    setProfile(updatedProfile);
+    dispatchStorageEvent();
+  };
+
+  const isAssignmentSubmitted = (assignmentId: string): boolean => {
+    return submittedAssignments.includes(assignmentId);
+  };
+
+  const submitAssignment = (assignmentId: string) => {
+    if (!session?.user) return;
+    const submissionsKey = `chorcha-submissions-${session.user.id}`;
+    if (!submittedAssignments.includes(assignmentId)) {
+      const updatedSubmissions = [...submittedAssignments, assignmentId];
+      localStorage.setItem(
+        submissionsKey,
+        JSON.stringify(updatedSubmissions),
+      );
+      setSubmittedAssignments(updatedSubmissions);
+      dispatchStorageEvent();
+    }
+  };
+
   return (
     <UserDataContext.Provider
       value={{
@@ -235,6 +291,10 @@ export function UserDataProvider({
         spendGems,
         getLessonProgress,
         updateLessonProgress,
+        profile,
+        updateProfile,
+        isAssignmentSubmitted,
+        submitAssignment,
       }}
     >
       {children}

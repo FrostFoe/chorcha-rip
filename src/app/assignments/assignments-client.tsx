@@ -26,6 +26,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { useSupabase } from "../supabase-provider";
 import type { Assignment } from "@/lib/types";
+import { useUserData } from "@/providers/UserDataProvider";
 
 interface AssignmentsClientProps {
   staticAssignments: Assignment[];
@@ -37,6 +38,7 @@ export function AssignmentsClient({
   const isMobile = useIsMobile();
   const [isSidebarCollapsed, setIsSidebarCollapsed] = React.useState(false);
   const { session } = useSupabase();
+  const { isAssignmentSubmitted } = useUserData();
 
   const toggleSidebar = React.useCallback(
     () => setIsSidebarCollapsed((prev) => !prev),
@@ -48,19 +50,14 @@ export function AssignmentsClient({
       return staticAssignments;
     }
 
-    const submissionsKey = `chorcha-submissions-${session.user.id}`;
-    const submittedIds: string[] = JSON.parse(
-      localStorage.getItem(submissionsKey) || "[]",
-    );
-
     return staticAssignments.map((assignment) => {
-      const isSubmitted = submittedIds.includes(assignment.id);
+      const isSubmitted = isAssignmentSubmitted(assignment.id);
       return {
         ...assignment,
         status: isSubmitted ? "Submitted" : "Pending",
       };
     });
-  }, [session, staticAssignments]);
+  }, [session, staticAssignments, isAssignmentSubmitted]);
 
   return (
     <div className="min-h-screen bg-background">
