@@ -24,7 +24,7 @@ function MobileNavComponent() {
   const pathname = usePathname();
 
   return (
-    <nav className="fixed bottom-0 left-0 z-40 w-full border-t bg-sidebar lg:hidden">
+    <nav className="fixed bottom-0 left-0 z-40 w-full border-t bg-background lg:hidden">
       <div className="mx-auto grid h-16 max-w-lg grid-cols-5 font-medium">
         {sidebarLinks.map((link) => (
           <Link
@@ -34,7 +34,7 @@ function MobileNavComponent() {
               "group inline-flex flex-col items-center justify-center px-4",
               (pathname.startsWith(link.href) && link.href !== "/dashboard") ||
                 pathname === link.href
-                ? "text-sidebar-primary"
+                ? "text-primary"
                 : "text-muted-foreground hover:text-foreground",
             )}
           >

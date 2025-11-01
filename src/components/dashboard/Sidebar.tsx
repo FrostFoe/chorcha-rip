@@ -107,8 +107,8 @@ function SidebarComponent({ isCollapsed, toggleSidebar }: SidebarProps) {
               "w-full justify-start gap-x-4 px-4 py-2 h-auto text-base",
               (pathname.startsWith(link.href) && link.href !== "/dashboard") ||
                 pathname === link.href
-                ? "bg-sidebar-accent text-sidebar-accent-foreground"
-                : "text-muted-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground",
+                ? "bg-primary/10 text-primary"
+                : "text-muted-foreground hover:bg-primary/5 hover:text-primary",
               isCollapsed && "justify-center",
             )}
             title={isCollapsed ? link.label : undefined}
@@ -134,8 +134,8 @@ function SidebarComponent({ isCollapsed, toggleSidebar }: SidebarProps) {
               }),
               "w-full justify-start gap-x-4 px-4 py-2 h-auto text-base",
               pathname === "/settings"
-                ? "bg-sidebar-accent text-sidebar-accent-foreground"
-                : "text-muted-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground",
+                ? "bg-primary/10 text-primary"
+                : "text-muted-foreground hover:bg-primary/5 hover:text-primary",
               isCollapsed && "justify-center",
             )}
             title={isCollapsed ? "সেটিংস" : undefined}
@@ -146,7 +146,7 @@ function SidebarComponent({ isCollapsed, toggleSidebar }: SidebarProps) {
           <Link
             href="/profile"
             className={cn(
-              "flex items-center gap-x-3 p-2 rounded-md hover:bg-sidebar-accent/50",
+              "flex items-center gap-x-3 p-2 rounded-md hover:bg-primary/5",
               isCollapsed && "justify-center",
             )}
           >
