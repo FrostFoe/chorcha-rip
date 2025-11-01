@@ -71,16 +71,6 @@ export interface CourseDetails {
   outcomes: Outcome[]
 }
 
-export interface Assignment {
-  id: string
-  slug: string
-  title: string
-  courseName: string
-  dueDate: string
-  status?: "Pending" | "Submitted"
-  body: string
-}
-
 export interface DashboardProgressItem {
   subject: string
   percentage: number
@@ -89,4 +79,14 @@ export interface DashboardProgressItem {
 export interface UserProfile {
   full_name: string
   avatar_url: string
+}
+
+export interface Assignment {
+  id: string
+  slug: string
+  title: string
+  courseName: string
+  dueDate: string
+  status?: "Pending" | "Submitted"
+  body: string
 }
