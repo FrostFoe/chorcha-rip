@@ -4,11 +4,24 @@ import { Button } from "@/components/ui/button";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import Image from "next/image";
 import Link from "next/link";
-import { Ghost } from "lucide-react";
+import { Ghost, Github } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import { useRouter } from "next/navigation";
+import { useToast } from "@/hooks/use-toast";
 
 export default function RegisterPage() {
   const supabase = createClientComponentClient();
+  const router = useRouter();
+  const { toast } = useToast();
+
+  const handleGitHubLogin = async () => {
+    await supabase.auth.signInWithOAuth({
+      provider: "github",
+      options: {
+        redirectTo: `${location.origin}/auth/callback`,
+      },
+    });
+  };
 
   const handleGoogleLogin = async () => {
     await supabase.auth.signInWithOAuth({
@@ -19,17 +32,17 @@ export default function RegisterPage() {
     });
   };
 
-  const handleFacebookLogin = async () => {
-    await supabase.auth.signInWithOAuth({
-      provider: "facebook",
-      options: {
-        redirectTo: `${location.origin}/auth/callback`,
-      },
-    });
-  };
-
   const handleAnonymousLogin = async () => {
-    await supabase.auth.signInAnonymously();
+    const { error } = await supabase.auth.signInAnonymously();
+    if (error) {
+      toast({
+        variant: "destructive",
+        title: "Error signing in",
+        description: error.message,
+      });
+    } else {
+      router.push("/dashboard");
+    }
   };
 
   return (
@@ -77,12 +90,12 @@ export default function RegisterPage() {
 
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <Button
-            onClick={handleFacebookLogin}
+            onClick={handleGitHubLogin}
             variant="outline"
             className="h-12 w-full justify-center gap-3 rounded-lg"
           >
-            <Image src="/svgs/fb.svg" alt="fb" width={24} height={24} />
-            Facebook
+            <Github className="h-5 w-5" />
+            GitHub
           </Button>
           <Button
             onClick={handleGoogleLogin}

@@ -15,10 +15,12 @@ import { Settings as SettingsIcon } from "lucide-react";
 import { useSupabase } from "@/app/supabase-provider";
 import * as React from "react";
 import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
 export default function SettingsPage() {
   const isMobile = useIsMobile();
   const { supabase } = useSupabase();
+  const router = useRouter();
   const [isSidebarCollapsed, setIsSidebarCollapsed] = React.useState(false);
 
   const toggleSidebar = React.useCallback(
@@ -28,6 +30,7 @@ export default function SettingsPage() {
 
   const handleSignOut = async () => {
     await supabase.auth.signOut();
+    router.push("/");
   };
 
   return (
