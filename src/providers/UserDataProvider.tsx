@@ -1,3 +1,4 @@
+
 "use client";
 
 import {
@@ -104,27 +105,42 @@ export function UserDataProvider({
   useEffect(() => {
     fetchUserData();
 
-    const handleStorageChange = (e: StorageEvent) => {
-      if (
-        e.key?.startsWith("chorcha-enrollments-") ||
-        e.key?.startsWith("chorcha-progress-") ||
-        e.key?.startsWith("chorcha-gems-")
-      ) {
+    const handleStorageChange = (e: StorageEvent | CustomEvent) => {
+      // Check for custom event
+      if (e instanceof CustomEvent && e.type === "gemBalanceChanged") {
         fetchUserData();
+        return;
+      }
+      
+      // Check for StorageEvent
+      if (e instanceof StorageEvent) {
+          if (
+            e.key?.startsWith("chorcha-enrollments-") ||
+            e.key?.startsWith("chorcha-progress-") ||
+            e.key?.startsWith("chorcha-gems-")
+          ) {
+            fetchUserData();
+          }
       }
     };
 
     window.addEventListener("storage", handleStorageChange);
+    window.addEventListener("gemBalanceChanged", handleStorageChange);
+    
     return () => {
       window.removeEventListener("storage", handleStorageChange);
+      window.removeEventListener("gemBalanceChanged", handleStorageChange);
     };
   }, [fetchUserData]);
+
 
   const updateGemBalance = (newBalance: number) => {
     if (!session?.user) return;
     const gemKey = `chorcha-gems-${session.user.id}`;
     localStorage.setItem(gemKey, newBalance.toString());
     setGemBalance(newBalance);
+    // Dispatch a custom event to notify other components
+    window.dispatchEvent(new CustomEvent("gemBalanceChanged"));
   };
 
   const addGems = (amount: number) => {
@@ -202,3 +218,4 @@ export const useUserData = () => {
   }
   return context;
 };
+
