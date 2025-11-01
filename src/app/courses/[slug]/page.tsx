@@ -16,7 +16,10 @@ export default async function CoursePage({
     notFound()
   }
 
-  const mdxSource = await serialize(course.body)
+  let mdxSource
+  if (course.body) {
+    mdxSource = await serialize(course.body)
+  }
 
   return <CourseClient course={course} mdxSource={mdxSource} />
 }

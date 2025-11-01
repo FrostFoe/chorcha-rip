@@ -1,52 +1,35 @@
-import fs from "node:fs"
-import path from "node:path"
-import matter from "gray-matter"
 import type { Module } from "./types"
 import { getAllLessonsData } from "./lessons"
 import { getCourseData } from "./courses"
+import { modules as hscPhysicsModules } from "@/content/courses/hsc/hsc-physics-1st-paper/modules"
+import { modules as sscBiologyModules } from "@/content/courses/ssc/ssc-biology/modules"
+
+const allModulesData: Record<string, Omit<Module, "lessons">[]> = {
+  "hsc-physics-1st-paper": hscPhysicsModules,
+  "ssc-biology": sscBiologyModules,
+}
 
 export async function getAllModulesData(courseSlug: string): Promise<Module[]> {
   const course = await getCourseData(courseSlug)
   if (!course) {
     return []
   }
-  const modulesDirectory = path.join(
-    process.cwd(),
-    "src",
-    "content",
-    "courses",
-    course.category,
-    courseSlug,
-    "modules"
-  )
-
-  if (!fs.existsSync(modulesDirectory)) {
+  const modulesForCourse = allModulesData[courseSlug]
+  if (!modulesForCourse) {
     return []
   }
 
   const allLessons = await getAllLessonsData(courseSlug)
 
-  const dirents = fs.readdirSync(modulesDirectory, { withFileTypes: true })
+  const modulesWithLessons = modulesForCourse.map((module) => {
+    const moduleLessons = allLessons.filter(
+      (lesson) => lesson.module === module.slug
+    )
+    return {
+      ...module,
+      lessons: moduleLessons,
+    }
+  })
 
-  const allModulesData = dirents
-    .filter((dirent) => dirent.isFile() && dirent.name.endsWith(".mdx"))
-    .map((dirent) => {
-      const fileName = dirent.name
-      const slug = fileName.replace(/\.mdx$/, "")
-      const fullPath = path.join(modulesDirectory, fileName)
-      const fileContents = fs.readFileSync(fullPath, "utf8")
-      const { data } = matter(fileContents)
-
-      const moduleLessons = allLessons.filter(
-        (lesson) => lesson.module === slug
-      )
-
-      return {
-        slug,
-        lessons: moduleLessons,
-        ...(data as { title: string }),
-      }
-    })
-
-  return allModulesData
+  return modulesWithLessons
 }

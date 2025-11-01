@@ -8,7 +8,7 @@ export interface Course {
   slug: string
   category: "hsc" | "ssc" | "admission" | "bcs"
   totalLessons?: number
-  body: string
+  body?: string
   mdxSource?: MDXRemoteSerializeResult
   title: string
   description: string
