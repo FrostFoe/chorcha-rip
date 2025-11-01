@@ -35,7 +35,7 @@ export function Header() {
               href="/auth/register"
               className="btn-3d btn-3d-primary text-black hover:text-black transition-colors duration-200"
             >
-              <span className="font-bold">লগইন / রেজিস্ট্রেশন</span>
+              <span className="font-bold">লগইন</span>
               <ArrowRight className="stroke-[3] w-4 h-4" />
             </Link>
           )}
