@@ -2,15 +2,15 @@
   "title": "Programming Language (C Programming)",
   "slug": "programming-language-c-programming",
   "lessons": [
-        {
-          "title": "১ ক্লাসেই ১০০% শেষ করো প্রোগ্রামিং (Basic+CQ+MCQ) - HSC",
-          "slug": "programming-basiccqmcq-hsc",
+    {
+      "title": "১ ক্লাসেই ১০০% শেষ করো প্রোগ্রামিং (Basic+CQ+MCQ) - HSC",
+      "slug": "programming-basiccqmcq-hsc",
       "duration": "4 hours, 48 minutes, 41 seconds",
       "lessonType": "video",
-          "content": "PUGOQ5zJeVk",
-          "completed": false,
-          "module": "programming-language-c-programming"
-        }
+      "content": "PUGOQ5zJeVk",
+      "completed": false,
+      "module": "programming-language-c-programming"
+    }
   ],
   "order": 4
 }

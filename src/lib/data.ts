@@ -5,11 +5,7 @@ import {
   LucideProps,
   Trophy,
 } from "lucide-react";
-import type {
-  Feature,
-  GemPack,
-  LeaderboardEntry,
-} from "./types";
+import type { Feature, GemPack, LeaderboardEntry } from "./types";
 
 export const questionBankExams = [
   { name: "BUET Preli 2022", questions: 100, time: 60 },

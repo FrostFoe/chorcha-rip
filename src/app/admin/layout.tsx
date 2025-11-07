@@ -34,7 +34,6 @@ export default function AdminLayout({
     }
   }, []);
 
-
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}

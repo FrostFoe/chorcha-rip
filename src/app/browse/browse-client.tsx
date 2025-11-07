@@ -151,7 +151,9 @@ export function BrowseClient({ courses }: BrowseClientProps) {
                         {course.instructor}
                       </p>
                       <DesignedButton asChild className="mt-auto w-full">
-                        <Link href={`/courses/${course.slug}`}>কোর্স দেখুন</Link>
+                        <Link href={`/courses/${course.slug}`}>
+                          কোর্স দেখুন
+                        </Link>
                       </DesignedButton>
                     </div>
                   </Card>

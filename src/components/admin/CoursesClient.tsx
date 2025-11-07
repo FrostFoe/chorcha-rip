@@ -439,9 +439,7 @@ export function CoursesClient({ courses: initialCourses }: CoursesClientProps) {
                           </span>
                         </div>
                         <div>
-                          <span className="text-muted-foreground">
-                            বিভাগ:{" "}
-                          </span>
+                          <span className="text-muted-foreground">বিভাগ: </span>
                           <span className="font-medium">{course.category}</span>
                         </div>
                         <div>
@@ -470,8 +468,7 @@ export function CoursesClient({ courses: initialCourses }: CoursesClientProps) {
                             handleReorderCourse(originalIndex, "down")
                           }
                           disabled={
-                            originalIndex === courses.length - 1 ||
-                            isReordering
+                            originalIndex === courses.length - 1 || isReordering
                           }
                           className="flex-1 min-w-max transition-all disabled:opacity-50"
                           title="Move down"

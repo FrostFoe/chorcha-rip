@@ -249,16 +249,8 @@ export function WeeklyPointsChart() {
                     y2="1"
                     gradientUnits="objectBoundingBox"
                   >
-                    <stop
-                      offset="0%"
-                      stopColor="#F79329"
-                      stopOpacity="0.5"
-                    />
-                    <stop
-                      offset="100%"
-                      stopColor="#F79329"
-                      stopOpacity="0"
-                    />
+                    <stop offset="0%" stopColor="#F79329" stopOpacity="0.5" />
+                    <stop offset="100%" stopColor="#F79329" stopOpacity="0" />
                   </linearGradient>
                 </defs>
                 <rect

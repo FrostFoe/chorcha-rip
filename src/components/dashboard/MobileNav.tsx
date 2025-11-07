@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  Compass,
-  FilePenLine,
-  LayoutGrid,
-  Store,
-  User,
-} from "lucide-react";
+import { Compass, FilePenLine, LayoutGrid, Store, User } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import * as React from "react";

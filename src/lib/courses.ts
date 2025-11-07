@@ -71,7 +71,8 @@ export async function getCourseData(
   const allCourses = await getAllCoursesData();
   return (
     allCourses.find(
-      (course) => course.slug === courseIdOrSlug || course.id === courseIdOrSlug,
+      (course) =>
+        course.slug === courseIdOrSlug || course.id === courseIdOrSlug,
     ) || null
   );
 }

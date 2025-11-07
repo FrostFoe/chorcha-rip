@@ -4,23 +4,23 @@ import type { Lesson } from "./types";
 import { getAllModulesData } from "./modules";
 
 export async function getAllLessonsData(courseId: string): Promise<Lesson[]> {
-    const allModules = await getAllModulesData(courseId);
-    const lessons = allModules.flatMap((module) => module.lessons || []);
+  const allModules = await getAllModulesData(courseId);
+  const lessons = allModules.flatMap((module) => module.lessons || []);
 
-    // Sort all lessons by their order property within their respective modules
-    lessons.sort((a, b) => {
-      const moduleA = allModules.find((m) => m.slug === a.module);
-      const moduleB = allModules.find((m) => m.slug === b.module);
-      const moduleOrderA = moduleA?.order ?? 0;
-      const moduleOrderB = moduleB?.order ?? 0;
+  // Sort all lessons by their order property within their respective modules
+  lessons.sort((a, b) => {
+    const moduleA = allModules.find((m) => m.slug === a.module);
+    const moduleB = allModules.find((m) => m.slug === b.module);
+    const moduleOrderA = moduleA?.order ?? 0;
+    const moduleOrderB = moduleB?.order ?? 0;
 
-      if (moduleOrderA !== moduleOrderB) {
-        return moduleOrderA - moduleOrderB;
-      }
-      return (a.order ?? 0) - (b.order ?? 0);
-    });
+    if (moduleOrderA !== moduleOrderB) {
+      return moduleOrderA - moduleOrderB;
+    }
+    return (a.order ?? 0) - (b.order ?? 0);
+  });
 
-    return lessons;
+  return lessons;
 }
 
 export async function getLessonData(
