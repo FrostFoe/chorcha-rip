@@ -9,7 +9,6 @@ import {
 } from "react";
 import { useSupabase } from "@/app/supabase-provider";
 import type { Course, UserProfile } from "@/lib/types";
-import { getAllLessonsData } from "@/lib/lessons";
 
 interface EnrolledCourse extends Course {
   progress: number;
@@ -105,29 +104,26 @@ export function UserDataProvider({
         localStorage.getItem(enrollmentsKey) || "[]",
       );
 
-      const enrolledCoursesWithProgress = await Promise.all(
-        allCourses
-          .filter((course: Course) => enrolledIds.includes(course.id))
-          .map(async (course: Course) => {
-            const progressKey = `chorcha-progress-${course.slug}-${session.user.id}`;
-            const progressData = localStorage.getItem(progressKey);
-            let progress = 0;
+      const enrolledCoursesWithProgress = allCourses
+        .filter((course: Course) => enrolledIds.includes(course.id))
+        .map((course: Course) => {
+          const progressKey = `chorcha-progress-${course.slug}-${session.user.id}`;
+          const progressData = localStorage.getItem(progressKey);
+          let progress = 0;
 
-            if (progressData) {
-              const completedLessons: string[] = JSON.parse(progressData);
-              const courseLessons = await getAllLessonsData(course.slug);
-              const totalLessons = courseLessons.length;
-              if (totalLessons > 0) {
-                progress = (completedLessons.length / totalLessons) * 100;
-              }
+          if (progressData) {
+            const completedLessons: string[] = JSON.parse(progressData);
+            const totalLessons = course.totalLessons ?? 0;
+            if (totalLessons > 0) {
+              progress = (completedLessons.length / totalLessons) * 100;
             }
+          }
 
-            return {
-              ...course,
-              progress: Math.round(progress),
-            };
-          }),
-      );
+          return {
+            ...course,
+            progress: Math.round(progress),
+          };
+        });
 
       setEnrolledCourses(enrolledCoursesWithProgress);
     } catch (error) {

@@ -22,14 +22,33 @@ export async function getAllCoursesData(): Promise<Course[]> {
 
       for (const courseDir of courseDirs) {
         if (courseDir.isDirectory()) {
-          const courseJsonPath = path.join(
-            categoryPath,
-            courseDir.name,
-            "course.json",
-          );
+          const coursePath = path.join(categoryPath, courseDir.name);
+          const courseJsonPath = path.join(coursePath, "course.json");
           const promise = fs
             .readFile(courseJsonPath, "utf-8")
-            .then((content) => JSON.parse(content) as Course)
+            .then(async (content) => {
+              const course = JSON.parse(content) as Course;
+              const modulesDir = path.join(coursePath, "modules");
+              let totalLessons = 0;
+              try {
+                const moduleFiles = await fs.readdir(modulesDir);
+                for (const file of moduleFiles) {
+                  if (!file.endsWith(".json")) continue;
+                  const moduleContent = await fs.readFile(
+                    path.join(modulesDir, file),
+                    "utf-8",
+                  );
+                  const moduleData = JSON.parse(moduleContent);
+                  totalLessons += moduleData.lessons?.length || 0;
+                }
+              } catch {
+                // Modules directory might not exist yet
+              }
+              if (totalLessons > 0) {
+                course.totalLessons = totalLessons;
+              }
+              return course;
+            })
             .catch(() => null);
           coursePromises.push(promise);
         }

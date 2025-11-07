@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import * as fs from "node:fs/promises";
 import * as path from "node:path";
 import type { Course, Module } from "@/lib/types";
+import { randomUUID } from "node:crypto";
 
 const COURSES_DIR = path.join(process.cwd(), "src/content/courses");
 
@@ -112,8 +113,9 @@ export async function POST(request: Request) {
       }
     }
 
-    // Assign order
+    // Assign defaults
     course.order = totalCourses;
+    course.id = course.id || randomUUID();
 
     const courseDir = path.join(COURSES_DIR, course.category, course.slug);
 

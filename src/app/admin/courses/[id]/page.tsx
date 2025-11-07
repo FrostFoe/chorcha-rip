@@ -1,7 +1,7 @@
 "use server";
 
 import { notFound } from "next/navigation";
-import { getCourseData, getAllCoursesData } from "@/lib/courses";
+import { getCourseAndModulesData, getAllCoursesData } from "@/lib/courses";
 import { EditCourseForm } from "@/components/admin/EditCourseForm";
 import type { Course } from "@/lib/types";
 
@@ -12,14 +12,19 @@ export default async function EditCoursePage({
 }) {
   const courseId = params.id;
 
-  const [course, allCourses] = await Promise.all([
-    getCourseData(courseId),
+  const [courseData, allCourses] = await Promise.all([
+    getCourseAndModulesData(courseId),
     getAllCoursesData(),
   ]);
 
-  if (!course) {
+  if (!courseData) {
     notFound();
   }
 
-  return <EditCourseForm course={course} allCourses={allCourses} />;
+  const courseWithModules = {
+    ...courseData.course,
+    modules: courseData.modules,
+  };
+
+  return <EditCourseForm course={courseWithModules} allCourses={allCourses} />;
 }

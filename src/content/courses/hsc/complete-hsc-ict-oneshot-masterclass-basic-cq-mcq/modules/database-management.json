@@ -2,15 +2,15 @@
   "title": "Database Management",
   "slug": "database-management",
   "lessons": [
-    {
-      "title": "১ ক্লাসেই ICT ৬ষ্ঠ অধ্যায়ের ১০০% প্রস্তুতি (Basic+CQ+MCQ) - HSC",
-      "slug": "-ict-basiccqmcq-hsc",
+        {
+          "title": "১ ক্লাসেই ICT ৬ষ্ঠ অধ্যায়ের ১০০% প্রস্তুতি (Basic+CQ+MCQ) - HSC",
+          "slug": "database-ict-basiccqmcq-hsc",
       "duration": "3 hours, 45 minutes, 42 seconds",
       "lessonType": "video",
-      "content": "warR3iHt_Wc",
-      "completed": false,
-      "module": "database-management"
-    }
+          "content": "warR3iHt_Wc",
+          "completed": false,
+          "module": "database-management"
+        }
   ],
   "order": 5
 }
