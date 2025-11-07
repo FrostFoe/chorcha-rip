@@ -1,0 +1,114 @@
+{
+  "title": "Complete HSC ICT 'Oneshot' Masterclass (Basic + CQ + MCQ)",
+  "name": "Complete HSC ICT 'Oneshot' Masterclass (Basic + CQ + MCQ)",
+  "slug": "complete-hsc-ict-oneshot-masterclass-basic-cq-mcq",
+  "description": "<div class=\"space-y-4\"><p class=\"text-base leading-relaxed\">এই অনলাইন মাস্টারক্লাসে HSC ICT সিলেবাসের প্রতিটি অধ্যায় এক শটে শেষ করা হয়েছে Basic, CQ এবং MCQ অনুশীলনের মাধ্যমে। তত্ত্ব, প্রশ্ন সমাধান ও বোঝার সুবিধার জন্য প্রতিটি মডিউলে পূর্ণাঙ্গ ব্যাখ্যা যুক্ত করা হয়েছে।</p><ul class=\"list-disc space-y-1 pl-6 text-sm leading-6\"><li>Module 1: Communication &amp; Networking</li><li>Module 2: Number Systems &amp; Digital Devices</li><li>Module 3: Web Design &amp; HTML</li><li>Module 4: Programming Language (C)</li><li>Module 5: Database Management</li></ul><p class=\"text-sm text-muted-foreground\">লাইভ রেকর্ডকৃত সেশন, নোটস এবং পুনরাবৃত্তির জন্য ভিডিও সব এক জায়গায়।</p></div>",
+  "instructor": "Kazi Rakibul Hasan",
+  "category": "hsc",
+  "price": 99,
+  "image": "https://img.youtube.com/vi/FycgM1KkpN0/maxresdefault.jpg",
+  "thumbnail": "https://img.youtube.com/vi/FycgM1KkpN0/maxresdefault.jpg",
+  "body": "",
+  "outcomes": [],
+  "id": "1762165907277",
+  "modules": [
+    {
+      "title": "World and Bangladesh Perspective",
+      "slug": "world-and-bangladesh-perspective",
+      "lessons": [
+        {
+          "title": "১ ক্লাসেই ICT ১ম অধ্যায়ের ১০০% প্রস্তুতি (Basic+CQ+MCQ) - HSC",
+          "slug": "-ict-basiccqmcq-hsc",
+          "duration": "1 hour, 42 minutes, 47 seconds",
+          "lessonType": "video",
+          "content": "FycgM1KkpN0",
+          "completed": false,
+          "module": "world-and-bangladesh-perspective"
+        }
+      ],
+      "order": 0
+    },
+    {
+      "title": "Communication & Networking",
+      "slug": "communication-networking",
+      "lessons": [
+        {
+          "title": "১ ক্লাসেই ২য় অধ্যায়ের ১০০% প্রস্তুতি (Basic+CQ+MCQ) - HSC",
+          "slug": "lecture-1-",
+          "duration": "3 hours, 3 minutes, 3 seconds",
+          "lessonType": "video",
+          "content": "pHO9fmTlHyQ",
+          "completed": false,
+          "module": "communication-networking"
+        }
+      ],
+      "order": 1
+    },
+    {
+      "title": "Number Systems & Digital Devices",
+      "slug": "number-systems-digital-devices",
+      "lessons": [
+        {
+          "title": "১ ক্লাসেই ৩য় অধ্যায়ের ১০০% প্রস্তুতি (Basic+CQ+MCQ) - HSC",
+          "slug": "-basiccqmcq-hsc",
+          "duration": "5 hours, 55 minutes, 11 seconds",
+          "lessonType": "video",
+          "content": "UraWGwzZIU0",
+          "completed": false,
+          "module": "number-systems-digital-devices"
+        }
+      ],
+      "order": 2
+    },
+    {
+      "title": "Web Design & HTML",
+      "slug": "web-design-html",
+      "lessons": [
+        {
+          "title": "১ ক্লাসেই ১০০% শেষ করো Web Design & HTML (Basic+CQ+MCQ) - HSC",
+          "slug": "-web-design-html-basiccqmcq-hsc",
+          "duration": "3 hours, 30 minutes, 26 seconds",
+          "lessonType": "video",
+          "content": "zljcRsSi8QU",
+          "completed": false,
+          "module": "web-design-html"
+        }
+      ],
+      "order": 3
+    },
+    {
+      "title": "Programming Language (C Programming)",
+      "slug": "programming-language-c-programming",
+      "lessons": [
+        {
+          "title": "১ ক্লাসেই ১০০% শেষ করো প্রোগ্রামিং (Basic+CQ+MCQ) - HSC",
+          "slug": "-basiccqmcq-hsc",
+          "duration": "4 hours, 48 minutes, 41 seconds",
+          "lessonType": "video",
+          "content": "PUGOQ5zJeVk",
+          "completed": false,
+          "module": "programming-language-c-programming"
+        }
+      ],
+      "order": 4
+    },
+    {
+      "title": "Database Management",
+      "slug": "database-management",
+      "lessons": [
+        {
+          "title": "১ ক্লাসেই ICT ৬ষ্ঠ অধ্যায়ের ১০০% প্রস্তুতি (Basic+CQ+MCQ) - HSC",
+          "slug": "-ict-basiccqmcq-hsc",
+          "duration": "3 hours, 45 minutes, 42 seconds",
+          "lessonType": "video",
+          "content": "warR3iHt_Wc",
+          "completed": false,
+          "module": "database-management"
+        }
+      ],
+      "order": 5
+    }
+  ],
+  "status": "published",
+  "publishedAt": "2025-11-06T04:48:11.796Z"
+}

@@ -1,0 +1,186 @@
+{
+  "title": "Complete HSC Physics 'Express Series' (Basic + CQ + MCQ)",
+  "slug": "complete-hsc-physics-express-series-basic-cq-mcq",
+  "description": "Complete HSC Physics 'Express Series' (Basic + CQ + MCQ)",
+  "instructor": "Asir Anjum Khan",
+  "category": "hsc",
+  "price": 299,
+  "thumbnail": "https://img.youtube.com/vi/DxK6YBP3GWk/maxresdefault.jpg",
+  "body": "",
+  "id": "1762403030703",
+  "order": 1,
+  "modules": [
+    {
+      "slug": "-vector",
+      "title": "ভেক্টর | Vector",
+      "lessons": [
+        {
+          "title": "HSC Physics Express | ভেক্টর | Vector | Physics 1st Paper | HSC",
+          "slug": "hsc-physics-express-vector-physics-1st-paper-hsc",
+          "duration": "4 hours, 9 minutes, 42 seconds",
+          "lessonType": "video",
+          "content": "DxK6YBP3GWk",
+          "completed": false,
+          "module": "-vector",
+          "order": 0
+        }
+      ],
+      "order": 0
+    },
+    {
+      "slug": "-current-electricity",
+      "title": "চল তড়িৎ | Current Electricity",
+      "lessons": [
+        {
+          "title": "HSC Physics Express | চল তড়িৎ | Current Electricity | Physics 2nd Paper | HSC",
+          "slug": "hsc-physics-express-current-electricity-physics-2nd-paper-hsc",
+          "duration": "4 hours, 30 minutes, 3 seconds",
+          "lessonType": "video",
+          "content": "oDTeoyM9xDs",
+          "completed": false,
+          "module": "-current-electricity",
+          "order": 0
+        }
+      ],
+      "order": 1
+    },
+    {
+      "slug": "-periodic-motion",
+      "title": "পর্যাবৃত্ত গতি | Periodic Motion",
+      "lessons": [
+        {
+          "title": "HSC Physics Express | পর্যাবৃত্ত গতি | Periodic Motion | Physics 1st Paper | HSC",
+          "slug": "hsc-physics-express-periodic-motion-physics-1st-paper-hsc",
+          "duration": "2 hours, 43 minutes, 28 seconds",
+          "lessonType": "video",
+          "content": "DfYz96h8HU4",
+          "completed": false,
+          "module": "-periodic-motion",
+          "order": 0
+        }
+      ],
+      "order": 2
+    },
+    {
+      "slug": "-work-energy-power",
+      "title": "কাজ, শক্তি ও ক্ষমতা | Work, Energy & Power",
+      "lessons": [
+        {
+          "title": "HSC Physics Express | কাজ, শক্তি ও ক্ষমতা | Work, Energy & Power | Physics 1st Paper | HSC",
+          "slug": "hsc-physics-express-work-energy-power-physics-1st-paper-hsc",
+          "duration": "4 hours, 1 minutes, 25 seconds",
+          "lessonType": "video",
+          "content": "j1Gvt-PRu3c",
+          "completed": false,
+          "module": "-work-energy-power",
+          "order": 0
+        }
+      ],
+      "order": 3
+    },
+    {
+      "slug": "-gravitation-gravity",
+      "title": "মহাকর্ষ ও অভিকর্ষ | Gravitation & Gravity",
+      "lessons": [
+        {
+          "title": "HSC Physics Express | মহাকর্ষ ও অভিকর্ষ | Gravitation & Gravity | Physics 1st Paper | HSC",
+          "slug": "hsc-physics-express-gravitation-gravity-physics-1st-paper-hsc",
+          "duration": "2 hours, 25 minutes, 31 seconds",
+          "lessonType": "video",
+          "content": "stuRyS1ZiYI",
+          "completed": false,
+          "module": "-gravitation-gravity",
+          "order": 0
+        }
+      ],
+      "order": 4
+    },
+    {
+      "slug": "-newtonian-mechanics",
+      "title": "নিউটনিয়ান বলবিদ্যা | Newtonian Mechanics",
+      "lessons": [
+        {
+          "title": "HSC Physics Express | নিউটনিয়ান বলবিদ্যা | Newtonian Mechanics | Physics 1st Paper | HSC",
+          "slug": "hsc-physics-express-newtonian-mechanics-physics-1st-paper-hsc",
+          "duration": "4 hours, 26 minutes, 25 seconds",
+          "lessonType": "video",
+          "content": "DThcDA5IO5c",
+          "completed": false,
+          "module": "-newtonian-mechanics",
+          "order": 0
+        }
+      ],
+      "order": 5
+    },
+    {
+      "slug": "-static-electricity",
+      "title": "স্থির তড়িৎ | Static Electricity",
+      "lessons": [
+        {
+          "title": "HSC Physics Express | স্থির তড়িৎ | Static Electricity | এক ক্লাসে পুরো অধ্যায় | HSC",
+          "slug": "hsc-physics-express-static-electricity-hsc",
+          "duration": "4 hours, 17 minutes, 55 seconds",
+          "lessonType": "video",
+          "content": "n0QhdCqiVEQ",
+          "completed": false,
+          "module": "-static-electricity",
+          "order": 0
+        }
+      ],
+      "order": 6
+    },
+    {
+      "slug": "-nuclear-physics",
+      "title": "নিউক্লিয়ার পদার্থবিজ্ঞান | Nuclear Physics",
+      "lessons": [
+        {
+          "title": "HSC Physics Express | পরমাণুর মডেল এবং নিউক্লিয়ার পদার্থবিজ্ঞান | এক ক্লাসে পুরো অধ্যায় | HSC",
+          "slug": "hsc-physics-express-hsc",
+          "duration": "2 hours, 33 minutes, 40 seconds",
+          "lessonType": "video",
+          "content": "jLUw407jKJ4",
+          "completed": false,
+          "module": "-nuclear-physics",
+          "order": 0
+        }
+      ],
+      "order": 7
+    },
+    {
+      "slug": "-modern-physics",
+      "title": "আধুনিক পদার্থবিজ্ঞানের সূচনা | Modern Physics",
+      "lessons": [
+        {
+          "title": "HSC Physics Express | আধুনিক পদার্থবিজ্ঞানের সূচনা | এক ক্লাসে পুরো অধ্যায় | HSC",
+          "slug": "hsc-physics-express-hsc",
+          "duration": "2 hours, 46 minutes, 59 seconds",
+          "lessonType": "video",
+          "content": "TxuGuS07_nU",
+          "completed": false,
+          "module": "-modern-physics",
+          "order": 0
+        }
+      ],
+      "order": 8
+    },
+    {
+      "slug": "-structural-physics",
+      "title": "পদার্থের গাঠনিক ধর্ম | Structural Physics",
+      "lessons": [
+        {
+          "title": "HSC Physics Express | পদার্থের গাঠনিক ধর্ম | এক ক্লাসে পুরো অধ্যায় | HSC",
+          "slug": "hsc-physics-express-hsc",
+          "duration": "5 hours, 21 minutes, 25 seconds",
+          "lessonType": "video",
+          "content": "n6Kqv7Y3hHE",
+          "completed": false,
+          "module": "-structural-physics",
+          "order": 0
+        }
+      ],
+      "order": 9
+    }
+  ],
+  "status": "published",
+  "publishedAt": "2025-11-06T04:40:55.228Z"
+}

@@ -1,0 +1,135 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 224 71.4% 4.1%;
+    --card: 0 0% 100%;
+    --card-foreground: 224 71.4% 4.1%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 71.4% 4.1%;
+    --primary: 142.1 76.2% 36.3%;
+    --primary-foreground: 355.7 100% 97.3%;
+    --secondary: 220 14.3% 95.9%;
+    --secondary-foreground: 220.9 39.3% 11%;
+    --muted: 220 14.3% 95.9%;
+    --muted-foreground: 220 8.9% 46.1%;
+    --accent: 220 14.3% 95.9%;
+    --accent-foreground: 220.9 39.3% 11%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 142.1 76.2% 36.3%;
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 0 0% 3.9%;
+    --sidebar-primary: 142.1 76.2% 36.3%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 0 0% 94%;
+    --sidebar-accent-foreground: 0 0% 9%;
+    --sidebar-border: 0 0% 89.8%;
+    --sidebar-ring: 0 0% 3.9%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 142.1 76.2% 36.3%;
+    --primary-foreground: 355.7 100% 97.3%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 142.1 76.2% 36.3%;
+
+    --sidebar-background: 222.2 84% 4.9%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 142.1 76.2% 36.3%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 217.2 32.6% 17.5%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 217.2 32.6% 17.5%;
+    --sidebar-ring: 142.1 76.2% 36.3%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  .prose {
+    @apply text-foreground;
+  }
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4,
+  .prose h5,
+  .prose h6 {
+    @apply text-foreground;
+  }
+  .prose strong {
+    @apply text-foreground;
+  }
+  .prose blockquote {
+    @apply border-primary;
+  }
+}
+
+@layer utilities {
+  .text-gradient-gray {
+    background-image: linear-gradient(
+      205deg,
+      rgba(255, 255, 247, 1) 8.55094%,
+      rgba(114, 114, 103, 1) 107.012%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .text-gradient-green {
+    background-image: linear-gradient(to right, #03d47c, #016a3e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+@layer components {
+  .btn-3d {
+    @apply relative inline-flex items-center justify-center gap-2 rounded-lg border-2 border-black px-4 py-2 text-sm font-semibold;
+  }
+
+  .btn-3d > * {
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .btn-3d-primary {
+    @apply bg-[#03d47c] shadow-[0_4px_0_0_#016a3e] active:shadow-none;
+  }
+
+  .btn-3d-outline {
+    @apply bg-card text-card-foreground shadow-[0_4px_0_0_#a0aec0] active:shadow-none dark:shadow-[0_4px_0_0_#4a5568];
+  }
+
+  .card {
+    @apply rounded-xl border bg-card text-card-foreground p-4;
+  }
+}
